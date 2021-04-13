@@ -9,7 +9,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{091BDB93-0751-3ED0-AFF8-0496D69638C0}</ProjectGuid>
+    <ProjectGuid>{E53231BD-8B5C-134C-C704-129F76EDE3D2}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -64,10 +64,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\OutputInput.cs" />
-    <Compile Include="Assets\ShootProjectile.cs" />
-    <Compile Include="Assets\createProjectile.cs" />
-    <Compile Include="Assets\instantiate.cs" />
+    <Compile Include="Assets\Scripts\OutputInput.cs" />
+    <Compile Include="Assets\Scripts\ShootProjectile.cs" />
+    <Compile Include="Assets\Scripts\createProjectile.cs" />
+    <Compile Include="Assets\Scripts\instantiate.cs" />
     <Reference Include="UnityEngine">
       <HintPath>D:/Unity/Editors/2019.4.21f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>
@@ -597,103 +597,94 @@
       <HintPath>D:/Unity/Editors/2019.4.21f1/Editor/Data/NetStandard/compat/2.0.0/shims/netfx/System.Xml.Serialization.dll</HintPath>
     </Reference>
     <Reference Include="Unity.XR.Management">
-      <HintPath>D:/Unity/Projects/VR Template/Library/ScriptAssemblies/Unity.XR.Management.dll</HintPath>
+      <HintPath>D:/Programmieren/Github/TheArtOfPeace_Game/Library/ScriptAssemblies/Unity.XR.Management.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Timeline.Editor">
-      <HintPath>D:/Unity/Projects/VR Template/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Toolchain.Win-x86_64-Linux-x86_64">
-      <HintPath>D:/Unity/Projects/VR Template/Library/ScriptAssemblies/Unity.Toolchain.Win-x86_64-Linux-x86_64.dll</HintPath>
+      <HintPath>D:/Programmieren/Github/TheArtOfPeace_Game/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Subsystem.Registration">
-      <HintPath>D:/Unity/Projects/VR Template/Library/ScriptAssemblies/Unity.Subsystem.Registration.dll</HintPath>
+      <HintPath>D:/Programmieren/Github/TheArtOfPeace_Game/Library/ScriptAssemblies/Unity.Subsystem.Registration.dll</HintPath>
     </Reference>
     <Reference Include="Unity.XR.Interaction.Toolkit">
-      <HintPath>D:/Unity/Projects/VR Template/Library/ScriptAssemblies/Unity.XR.Interaction.Toolkit.dll</HintPath>
+      <HintPath>D:/Programmieren/Github/TheArtOfPeace_Game/Library/ScriptAssemblies/Unity.XR.Interaction.Toolkit.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VSCode.Editor">
-      <HintPath>D:/Unity/Projects/VR Template/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
+      <HintPath>D:/Programmieren/Github/TheArtOfPeace_Game/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.XR.ARSubsystems">
-      <HintPath>D:/Unity/Projects/VR Template/Library/ScriptAssemblies/Unity.XR.ARSubsystems.dll</HintPath>
+      <HintPath>D:/Programmieren/Github/TheArtOfPeace_Game/Library/ScriptAssemblies/Unity.XR.ARSubsystems.dll</HintPath>
     </Reference>
     <Reference Include="Unity.XR.ARSubsystems.Editor">
-      <HintPath>D:/Unity/Projects/VR Template/Library/ScriptAssemblies/Unity.XR.ARSubsystems.Editor.dll</HintPath>
+      <HintPath>D:/Programmieren/Github/TheArtOfPeace_Game/Library/ScriptAssemblies/Unity.XR.ARSubsystems.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.XR.Interaction.Toolkit.Editor">
-      <HintPath>D:/Unity/Projects/VR Template/Library/ScriptAssemblies/Unity.XR.Interaction.Toolkit.Editor.dll</HintPath>
+      <HintPath>D:/Programmieren/Github/TheArtOfPeace_Game/Library/ScriptAssemblies/Unity.XR.Interaction.Toolkit.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.InteractiveTutorials.Core">
-      <HintPath>D:/Unity/Projects/VR Template/Library/ScriptAssemblies/Unity.InteractiveTutorials.Core.dll</HintPath>
+      <HintPath>D:/Programmieren/Github/TheArtOfPeace_Game/Library/ScriptAssemblies/Unity.InteractiveTutorials.Core.dll</HintPath>
     </Reference>
     <Reference Include="Unity.InputSystem">
-      <HintPath>D:/Unity/Projects/VR Template/Library/ScriptAssemblies/Unity.InputSystem.dll</HintPath>
+      <HintPath>D:/Programmieren/Github/TheArtOfPeace_Game/Library/ScriptAssemblies/Unity.InputSystem.dll</HintPath>
     </Reference>
     <Reference Include="Unity.XR.InteractionSubsystems">
-      <HintPath>D:/Unity/Projects/VR Template/Library/ScriptAssemblies/Unity.XR.InteractionSubsystems.dll</HintPath>
+      <HintPath>D:/Programmieren/Github/TheArtOfPeace_Game/Library/ScriptAssemblies/Unity.XR.InteractionSubsystems.dll</HintPath>
     </Reference>
     <Reference Include="Unity.XR.Oculus">
-      <HintPath>D:/Unity/Projects/VR Template/Library/ScriptAssemblies/Unity.XR.Oculus.dll</HintPath>
+      <HintPath>D:/Programmieren/Github/TheArtOfPeace_Game/Library/ScriptAssemblies/Unity.XR.Oculus.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
-      <HintPath>D:/Unity/Projects/VR Template/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+      <HintPath>D:/Programmieren/Github/TheArtOfPeace_Game/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.XR.Oculus.Editor">
-      <HintPath>D:/Unity/Projects/VR Template/Library/ScriptAssemblies/Unity.XR.Oculus.Editor.dll</HintPath>
+      <HintPath>D:/Programmieren/Github/TheArtOfPeace_Game/Library/ScriptAssemblies/Unity.XR.Oculus.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.EditorCoroutines.Editor">
-      <HintPath>D:/Unity/Projects/VR Template/Library/ScriptAssemblies/Unity.EditorCoroutines.Editor.dll</HintPath>
+      <HintPath>D:/Programmieren/Github/TheArtOfPeace_Game/Library/ScriptAssemblies/Unity.EditorCoroutines.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UI">
-      <HintPath>D:/Unity/Projects/VR Template/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
+      <HintPath>D:/Programmieren/Github/TheArtOfPeace_Game/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Timeline">
-      <HintPath>D:/Unity/Projects/VR Template/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
+      <HintPath>D:/Programmieren/Github/TheArtOfPeace_Game/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
     </Reference>
     <Reference Include="Unity.CollabProxy.Editor">
-      <HintPath>D:/Unity/Projects/VR Template/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
+      <HintPath>D:/Programmieren/Github/TheArtOfPeace_Game/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.XR.LegacyInputHelpers">
-      <HintPath>D:/Unity/Projects/VR Template/Library/ScriptAssemblies/UnityEngine.XR.LegacyInputHelpers.dll</HintPath>
+      <HintPath>D:/Programmieren/Github/TheArtOfPeace_Game/Library/ScriptAssemblies/UnityEngine.XR.LegacyInputHelpers.dll</HintPath>
     </Reference>
     <Reference Include="Unity.InteractiveTutorials.Core.Scripts">
-      <HintPath>D:/Unity/Projects/VR Template/Library/ScriptAssemblies/Unity.InteractiveTutorials.Core.Scripts.dll</HintPath>
+      <HintPath>D:/Programmieren/Github/TheArtOfPeace_Game/Library/ScriptAssemblies/Unity.InteractiveTutorials.Core.Scripts.dll</HintPath>
     </Reference>
     <Reference Include="Unity.XR.Management.Editor">
-      <HintPath>D:/Unity/Projects/VR Template/Library/ScriptAssemblies/Unity.XR.Management.Editor.dll</HintPath>
+      <HintPath>D:/Programmieren/Github/TheArtOfPeace_Game/Library/ScriptAssemblies/Unity.XR.Management.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Rider.Editor">
-      <HintPath>D:/Unity/Projects/VR Template/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Sysroot.Linux_x86_64">
-      <HintPath>D:/Unity/Projects/VR Template/Library/ScriptAssemblies/Unity.Sysroot.Linux_x86_64.dll</HintPath>
+      <HintPath>D:/Programmieren/Github/TheArtOfPeace_Game/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.SpatialTracking">
-      <HintPath>D:/Unity/Projects/VR Template/Library/ScriptAssemblies/UnityEditor.SpatialTracking.dll</HintPath>
+      <HintPath>D:/Programmieren/Github/TheArtOfPeace_Game/Library/ScriptAssemblies/UnityEditor.SpatialTracking.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.InteractiveTutorialsFramework">
-      <HintPath>D:/Unity/Projects/VR Template/Library/ScriptAssemblies/UnityEditor.InteractiveTutorialsFramework.dll</HintPath>
+      <HintPath>D:/Programmieren/Github/TheArtOfPeace_Game/Library/ScriptAssemblies/UnityEditor.InteractiveTutorialsFramework.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.SpatialTracking">
-      <HintPath>D:/Unity/Projects/VR Template/Library/ScriptAssemblies/UnityEngine.SpatialTracking.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.SysrootPackage.Editor">
-      <HintPath>D:/Unity/Projects/VR Template/Library/ScriptAssemblies/Unity.SysrootPackage.Editor.dll</HintPath>
+      <HintPath>D:/Programmieren/Github/TheArtOfPeace_Game/Library/ScriptAssemblies/UnityEngine.SpatialTracking.dll</HintPath>
     </Reference>
     <Reference Include="Unity.XR.WindowsMixedReality.Editor">
-      <HintPath>D:/Unity/Projects/VR Template/Library/ScriptAssemblies/Unity.XR.WindowsMixedReality.Editor.dll</HintPath>
+      <HintPath>D:/Programmieren/Github/TheArtOfPeace_Game/Library/ScriptAssemblies/Unity.XR.WindowsMixedReality.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro">
-      <HintPath>D:/Unity/Projects/VR Template/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+      <HintPath>D:/Programmieren/Github/TheArtOfPeace_Game/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
     </Reference>
     <Reference Include="Unity.XR.WindowsMixedReality">
-      <HintPath>D:/Unity/Projects/VR Template/Library/ScriptAssemblies/Unity.XR.WindowsMixedReality.dll</HintPath>
+      <HintPath>D:/Programmieren/Github/TheArtOfPeace_Game/Library/ScriptAssemblies/Unity.XR.WindowsMixedReality.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.XR.LegacyInputHelpers">
-      <HintPath>D:/Unity/Projects/VR Template/Library/ScriptAssemblies/UnityEditor.XR.LegacyInputHelpers.dll</HintPath>
+      <HintPath>D:/Programmieren/Github/TheArtOfPeace_Game/Library/ScriptAssemblies/UnityEditor.XR.LegacyInputHelpers.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.UI">
-      <HintPath>D:/Unity/Projects/VR Template/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
+      <HintPath>D:/Programmieren/Github/TheArtOfPeace_Game/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup></ItemGroup>
