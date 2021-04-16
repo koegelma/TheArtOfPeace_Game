@@ -1,4 +1,4 @@
-﻿/* using System.Collections;
+﻿/*  using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR;
@@ -71,7 +71,7 @@ public class createProjectile : MonoBehaviour
         projectileInstance.AddForce(result * 10); //leftController.transform.forward * 
 
     }
-}
+} */
 
 
- */
+ 

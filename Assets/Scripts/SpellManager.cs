@@ -7,28 +7,25 @@ using UnityEngine.XR;
 
 public class SpellManager : MonoBehaviour
 {
-    public GameObject controllerLeft, controllerRight;
-    public GameObject xrRig;
     public GameObject mainCamera;
     public InputDevice leftHandDevice;
     public InputDevice rightHandDevice;
     public float triggerValueLeft;
     public float triggerValueRight;
-    public List<Vector3> vectorList;
+    //public List<Vector3> vectorList;
     public Vector3 controllerPositionLeft;
     public Vector3 controllerPositionRight;
-    public Vector3 relativeControllerPositionLeft;
-    public Vector3 relativeControllerPositionRight;
-    public Quaternion relativeControllerRotationLeft;
-    public Quaternion relativeControllerRotationRight;
     public Quaternion controllerRotationLeft;
     public Quaternion controllerRotationRight;
+    public GameObject relativeControllerTransformLeft;
+    public GameObject relativeControllerTransformRight;
+    public GameObject XRRig;
+    public Quaternion temporaryRotationLeft;
+    public Quaternion temporaryRotationRight;
 
-    public GameObject cubeLeft;
-
-    public GameObject cubeRight;
-
-
+    public GameObject spells;
+    //public GameObject cubeLeft;
+    //public GameObject cubeRight;
     void Start()
     {
 
@@ -44,7 +41,10 @@ public class SpellManager : MonoBehaviour
         
         if(checkTrigger()){
             checkStartingPoints();
+            Debug.Log("Left: " + relativeControllerTransformLeft.transform.position + "      Right: " + relativeControllerTransformRight.transform.position);
         }
+
+        
     }
     public bool checkTrigger()
     {
@@ -60,12 +60,17 @@ public class SpellManager : MonoBehaviour
     {
         updateRelativeControllerPositionAndRotation();
         float tolerance = 0.1f;
-        if(relativeControllerPositionLeft.x < Fireball.startingPointLeft.x + tolerance && relativeControllerPositionLeft.x > Fireball.startingPointLeft.x - tolerance 
-        && relativeControllerPositionLeft.y < Fireball.startingPointLeft.y + tolerance && relativeControllerPositionLeft.y > Fireball.startingPointLeft.y - tolerance
-        && relativeControllerPositionLeft.z < Fireball.startingPointLeft.z + tolerance && relativeControllerPositionLeft.z > Fireball.startingPointLeft.z - tolerance)
+        if((relativeControllerTransformLeft.transform.position.x < Fireball.startingPointLeft.x + tolerance && relativeControllerTransformLeft.transform.position.x > Fireball.startingPointLeft.x - tolerance 
+        && relativeControllerTransformLeft.transform.position.y < Fireball.startingPointLeft.y + tolerance && relativeControllerTransformLeft.transform.position.y > Fireball.startingPointLeft.y - tolerance
+        && relativeControllerTransformLeft.transform.position.z < Fireball.startingPointLeft.z + tolerance && relativeControllerTransformLeft.transform.position.z > Fireball.startingPointLeft.z - tolerance)
+        && // Relative position of the Left&Right controller have to be on startingPoint +- 0.1
+           (relativeControllerTransformRight.transform.position.x < Fireball.startingPointRight.x + tolerance && relativeControllerTransformRight.transform.position.x > Fireball.startingPointRight.x - tolerance 
+        && relativeControllerTransformRight.transform.position.y < Fireball.startingPointRight.y + tolerance && relativeControllerTransformRight.transform.position.y > Fireball.startingPointRight.y - tolerance
+        && relativeControllerTransformRight.transform.position.z < Fireball.startingPointRight.z + tolerance && relativeControllerTransformRight.transform.position.z > Fireball.startingPointRight.z - tolerance))
         {
-            Fireball fireball = new Fireball(relativeControllerPositionRight);
-        }
+            Fireball fireball = spells.AddComponent(typeof(Fireball)) as Fireball;
+            fireball.run(relativeControllerTransformRight.transform.position);
+        }  
     }
     public void registerDevices()
     {
@@ -89,19 +94,22 @@ public class SpellManager : MonoBehaviour
         leftHandDevice.TryGetFeatureValue(CommonUsages.deviceRotation, out controllerRotationLeft);
         rightHandDevice.TryGetFeatureValue(CommonUsages.deviceRotation, out controllerRotationRight);
 
-        relativeControllerPositionLeft = controllerPositionLeft - mainCamera.transform.position;
-        relativeControllerPositionRight = controllerPositionRight - mainCamera.transform.position;
-        Debug.Log("Left: " + relativeControllerPositionLeft + "      Right: " + relativeControllerPositionRight);
+        relativeControllerTransformLeft.transform.position = controllerPositionLeft - mainCamera.transform.position;
+        relativeControllerTransformRight.transform.position = controllerPositionRight - mainCamera.transform.position;
 
         Vector3 anglesLeft = controllerRotationLeft.eulerAngles - mainCamera.transform.rotation.eulerAngles;
-        relativeControllerRotationLeft = Quaternion.Euler(anglesLeft);
+        temporaryRotationLeft = Quaternion.Euler(anglesLeft);
         Vector3 anglesRight = controllerRotationRight.eulerAngles - mainCamera.transform.rotation.eulerAngles;
-        relativeControllerRotationRight = Quaternion.Euler(anglesRight);
+        temporaryRotationRight = Quaternion.Euler(anglesRight);
 
-        cubeLeft.transform.position = relativeControllerPositionLeft;
-        cubeRight.transform.position = relativeControllerPositionRight;
-        cubeLeft.transform.rotation = relativeControllerRotationLeft;
-        cubeRight.transform.rotation = relativeControllerRotationRight;
-        // The relative controller positions are not relative to the rotation of the headset. Rotation of the headset has to be part of the equation.
+        relativeControllerTransformLeft.transform.RotateAround(XRRig.transform.position, new Vector3(0,1,0), -mainCamera.transform.rotation.eulerAngles.y);
+        relativeControllerTransformRight.transform.RotateAround(XRRig.transform.position, new Vector3(0,1,0), -mainCamera.transform.rotation.eulerAngles.y);
+        relativeControllerTransformLeft.transform.rotation = temporaryRotationLeft;
+        relativeControllerTransformRight.transform.rotation = temporaryRotationRight;
+
+        /* cubeLeft.transform.position = relativeControllerTransformLeft.transform.position;
+        cubeRight.transform.position = relativeControllerTransformRight.transform.position;
+        cubeLeft.transform.rotation = relativeControllerTransformLeft.transform.rotation;
+        cubeRight.transform.rotation = relativeControllerTransformRight.transform.rotation; */
     }
 }
