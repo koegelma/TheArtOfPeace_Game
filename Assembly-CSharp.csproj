@@ -41,6 +41,7 @@
      <Compile Include="Assets\Scripts\Old Scripts\OutputInput.cs" />
      <Compile Include="Assets\Scripts\Old Scripts\ShootProjectile.cs" />
      <Compile Include="Assets\Scripts\Old Scripts\createProjectile.cs" />
+     <Compile Include="Assets\Scripts\Phase.cs" />
      <Compile Include="Assets\Scripts\SpellManager.cs" />
     <Reference Include="UnityEngine">
         <HintPath>D:/Unity/Editors/2019.4.21f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
