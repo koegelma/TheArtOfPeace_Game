@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,7 +7,21 @@ public class Fireball : MonoBehaviour, I_Spell
 {
     public static Phase[] phases = new Phase[2];
     public GameObject fireballPrefab;
-    public Fireball(){
+
+    void OnCollisionEnter(Collision other)
+    {
+        Destroy(this.fireballPrefab);
+        Destroy(this);
+        
+        if(other.gameObject.GetComponent<Enemy>()){   
+            other.gameObject.GetComponent<Enemy>().health -= 30;
+        }
+        
+        
+    }
+    public Fireball()
+    {
+        
     }
 
     public static bool checkPhase(GameObject relativeControllerTransformLeft, GameObject relativeControllerTransformRight, float tolerance, int phase){
