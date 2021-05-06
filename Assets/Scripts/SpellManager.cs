@@ -27,7 +27,7 @@ public class SpellManager : MonoBehaviour
     public Quaternion temporaryRotationLeft;
     public Quaternion temporaryRotationRight;
     public GameObject fireballPrefab;
-    public float fireballCooldownInSeconds = 2;
+    public float fireballCooldownInSeconds;
     public float fireballTimestamp = 0;
     public State state = State.IDLE;
     public float stateTimestamp;
