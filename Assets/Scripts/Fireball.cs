@@ -13,15 +13,9 @@ public class Fireball : MonoBehaviour, I_Spell
         Destroy(this.fireballPrefab);
         Destroy(this);
         
-        if(other.gameObject.GetComponent<Enemy>()){   
-            other.gameObject.GetComponent<Enemy>().health -= 30;
+        if(other.gameObject.GetComponent<Damageable>()){   
+            other.gameObject.GetComponent<Damageable>().takeDamage(30);
         }
-        
-        
-    }
-    public Fireball()
-    {
-        
     }
 
     public static bool checkPhase(GameObject relativeControllerTransformLeft, GameObject relativeControllerTransformRight, float tolerance, int phase){
