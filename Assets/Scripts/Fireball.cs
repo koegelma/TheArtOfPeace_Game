@@ -6,8 +6,8 @@ using UnityEngine;
 public class Fireball : MonoBehaviour, I_Spell
 {
     public static Phase[] phases = new Phase[2];
+    public static float manaCost = 30;
     public GameObject fireballPrefab;
-
     void OnCollisionEnter(Collision other)
     {
         Destroy(this.fireballPrefab);

@@ -36,11 +36,13 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scripts\Avatar.cs" />
      <Compile Include="Assets\Scripts\Damageable.cs" />
      <Compile Include="Assets\Scripts\Enemy.cs" />
      <Compile Include="Assets\Scripts\Fireball.cs" />
      <Compile Include="Assets\Scripts\I_Spell.cs" />
+     <Compile Include="Assets\Scripts\Mana.cs" />
+     <Compile Include="Assets\Scripts\ManaRegeneration.cs" />
+     <Compile Include="Assets\Scripts\Meditate.cs" />
      <Compile Include="Assets\Scripts\Old Scripts\OutputInput.cs" />
      <Compile Include="Assets\Scripts\Old Scripts\ShootProjectile.cs" />
      <Compile Include="Assets\Scripts\Old Scripts\createProjectile.cs" />
