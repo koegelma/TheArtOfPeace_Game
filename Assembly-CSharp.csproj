@@ -49,6 +49,7 @@
      <Compile Include="Assets\Scripts\Phase.cs" />
      <Compile Include="Assets\Scripts\PhaseChecker.cs" />
      <Compile Include="Assets\Scripts\SpellManager.cs" />
+     <None Include="Assets\Shaders\ToonComplete.shader" />
     <Reference Include="UnityEngine">
         <HintPath>D:/Unity/Editors/2019.4.21f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>
