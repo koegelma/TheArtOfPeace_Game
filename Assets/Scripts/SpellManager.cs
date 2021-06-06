@@ -34,6 +34,8 @@ public class SpellManager : MonoBehaviour
     public float stateTimestamp;
     public Vector3 controllerVelocityLeft;
     public Vector3 controllerVelocityRight;
+    public Vector3 controllerAccelerationLeft;
+    public Vector3 controllerAccelerationRight;
     public GameObject cubeLeft;
     public GameObject cubeRight;
     public GameObject manaCube;
@@ -97,11 +99,11 @@ public class SpellManager : MonoBehaviour
         {
             float velocityLeft = controllerVelocityLeft.magnitude;
             float velocityRight = controllerVelocityRight.magnitude;
-            if(Meditate.isTooFastAndTooFurious7){
+            if(Meditate.isFluid){
                 //play error sound and animation
                 currentPhase=-1;
                 state = State.IDLE;
-                Meditate.isTooFastAndTooFurious7 = false;
+                Meditate.isFluid = false;
             }
             else if (Meditate.checkPhase(relativeControllerTransformLeft, relativeControllerTransformRight, velocityLeft, velocityRight, tolerance, 0)
             || (state == State.MEDITATE && currentPhase >= 0))
@@ -165,6 +167,8 @@ public class SpellManager : MonoBehaviour
         rightHandDevice.TryGetFeatureValue(CommonUsages.deviceRotation, out controllerRotationRight);
         leftHandDevice.TryGetFeatureValue(CommonUsages.deviceVelocity, out controllerVelocityLeft);
         rightHandDevice.TryGetFeatureValue(CommonUsages.deviceVelocity, out controllerVelocityRight);
+        leftHandDevice.TryGetFeatureValue(CommonUsages.deviceAcceleration, out controllerAccelerationLeft);
+        rightHandDevice.TryGetFeatureValue(CommonUsages.deviceAcceleration, out controllerAccelerationRight);
 
         controllerRotationLeft *= Quaternion.Euler(Vector3.right * 20);
         controllerRotationRight *= Quaternion.Euler(Vector3.right * 20);

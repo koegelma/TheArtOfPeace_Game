@@ -6,7 +6,7 @@ public class Meditate : MonoBehaviour
 {    
     public static Phase[] phases = new Phase[3];
     public static float manaCost = 0;
-    public static bool isTooFastAndTooFurious7 = false;
+    public static bool isFluid = false;
 
     public static bool checkPhase(GameObject relativeControllerTransformLeft, GameObject relativeControllerTransformRight, float velocityLeft, float velocityRight, float tolerance, int phase){
         phases[0] = new Phase((new Vector3(-0.4f,-0.1f,0.4f)), (new Vector3(0.4f,-0.1f,0.4f)));
@@ -22,9 +22,10 @@ public class Meditate : MonoBehaviour
                 return true;
             }
         int maxSpeed = 1;
+        float minSpeed = 0.1f;
         Debug.Log(velocityLeft);
-        if(velocityLeft > maxSpeed || velocityRight > maxSpeed){
-            isTooFastAndTooFurious7 = true;
+        if(velocityLeft > maxSpeed || velocityRight > maxSpeed || velocityLeft < minSpeed || velocityRight < minSpeed ){
+            isFluid = true;
             Debug.Log("Not so fast champ");
         }
         return false;
