@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: e16d66f3a7423b945976ad76e484ef6f
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - rmEIcon_MasterRoot: {fileID: 2800000, guid: 688d508a89ab32548b8e1be0d030ac72, type: 3}
+  - rmEIcon_RenderSection: {fileID: 2800000, guid: 57d8672b30e8a7a4b942e802be4845f3, type: 3}
+  - rmEIcon_VisualSection: {fileID: 2800000, guid: f32b0715a332ae740ac179879de8c4c1, type: 3}
+  - rmEIcon_ShadingSection: {fileID: 2800000, guid: 40b9e37c29ad7d4409a7185f6335eb1b, type: 3}
+  - rmEIcon_Operations: {fileID: 2800000, guid: 51cf1469e2b66e247856ce3bc30d0330, type: 3}
+  - rmEIcon_ButDocs: {fileID: 2800000, guid: 1a483cc707fbb2443add59f298f899bd, type: 3}
+  - rmEIcon_ButDiscord: {fileID: 2800000, guid: e7e374c3135cd3f4aac90079806fed55, type: 3}
+  - rmEIcon_ButSupport: {fileID: 2800000, guid: 5af70272230a1fa409bb67f676544658, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

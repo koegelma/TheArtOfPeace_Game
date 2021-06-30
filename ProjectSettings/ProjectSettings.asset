@@ -755,10 +755,10 @@ PlayerSettings:
     m_VersionCode: 1
     m_VersionName: 
   apiCompatibilityLevel: 6
-  cloudProjectId: 
+  cloudProjectId: 42620182-9227-4e81-b1c8-709ac38c117d
   framebufferDepthMemorylessMode: 0
-  projectName: 
-  organizationId: 
+  projectName: VR Template
+  organizationId: koegelma
   cloudEnabled: 0
   enableNativePlatformBackendsForNewInputSystem: 1
   disableOldInputManagerSupport: 1

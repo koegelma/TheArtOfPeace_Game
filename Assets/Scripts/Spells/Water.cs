@@ -4,27 +4,38 @@ using UnityEngine;
 
 public class Water : MonoBehaviour
 {
-    public static List<Water> waterList;
     public GameObject target;
     public float smoothTime = 0.3F;
     private Vector3 velocity = Vector3.zero;
+    public Controller left;
+    public Controller right;
 
     Vector3 offset;
-    public void control(){
-        offset = target.transform.forward*3;
-        transform.position = Vector3.SmoothDamp(transform.position, target.transform.position+offset, ref velocity, smoothTime);
+    void OnEnable()
+    {
+        left = GameObject.Find("LeftController").GetComponent<Controller>();
+        right = GameObject.Find("RightController").GetComponent<Controller>();
+    }
+    public void control()
+    {
+        float distanceLeft = (left.gameObject.transform.position - this.transform.position).magnitude;
+        float distanceRight = (right.gameObject.transform.position - this.transform.position).magnitude;
+        if (distanceLeft < distanceRight)
+        {
+            target = left.gameObject;
+        }
+        else
+        {
+            target = right.gameObject;
+        }
+        offset = target.transform.forward * 2;
+        this.transform.position = Vector3.SmoothDamp(transform.position, target.transform.position + offset, ref velocity, smoothTime);
     }
     void FixedUpdate()
     {
+        if (left.isGrip && right.isGrip)
+        {
+            control();
+        }
     }
-    void OnEnable(){
-        if(waterList == null)
-            waterList = new List<Water>();
-        waterList.Add(this);
-    }
-
-    void OnDisable(){
-        waterList.Remove(this);
-    }
-
 }

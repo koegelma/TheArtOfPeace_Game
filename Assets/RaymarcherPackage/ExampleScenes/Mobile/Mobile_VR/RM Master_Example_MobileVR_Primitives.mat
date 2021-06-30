@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: RM Master_Example_MobileVR_Primitives
+  m_Shader: {fileID: 4800000, guid: ab63e4bcf0368f74d8b4d672d285afcd, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _MAScolorRamp:
+        m_Texture: {fileID: 2800000, guid: 24a7dee6a724c5346a8223c55f316230, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MASrenderMainFilter:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _MASfogDensity: 0
+    - _MASrenderColorSmoothness: 1.3
+    - _MASrenderInterations: 81.77
+    - _MASrenderMaxDistance: 5
+    - _MASrenderOutlineDens: 3
+    - _MASrenderOutlineSoft: 2
+    - _MASrenderQuality: 0.01
+    - _MASrenderQualitySetting: 1
+    - _MASrenderShadowUmbraIntens: 0.025
+    - _MASrenderSmoothness: 0.2
+    - _MASrenderSpecularIntens: 2
+    - _MASrenderSpecularSize: 9.5
+    - _MASrenderToonDens: 0.452
+    - _MASrenderToonThresh: 0.292
+    - _OPloopEnabled: 0
+    - _OPloopTwoDimens: 0
+    m_Colors:
+    - _MASfogColor: {r: 0, g: 0, b: 0, a: 1}
+    - _MASrenderLightDir: {r: 0, g: -1, b: 0, a: 0}
+    - _MASrenderMainColor: {r: 0.254717, g: 0.254717, b: 0.254717, a: 1}
+    - _MASrenderSecondColor: {r: 0, g: 0, b: 0, a: 1}
+    - _OPfragmentDirect: {r: 0, g: 0, b: 0, a: 0}
+    - _OPfragmentSize: {r: 4.02, g: 3.43, b: 3, a: 0}
+    - _OPloopTilling: {r: 10, g: 10, b: 10, a: 0}
+  m_BuildTextureStacks: []

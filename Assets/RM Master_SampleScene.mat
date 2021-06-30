@@ -1,0 +1,72 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: RM Master_SampleScene
+  m_Shader: {fileID: 4800000, guid: 32260297d4390c142bb4303aa92402f4, type: 3}
+  m_ShaderKeywords: _REFLECTCUBEMAPENABLED_ON _REFLECTENABLED_ON _SHADEENABLED_ON
+    _SHADESOFT_ON
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _MASrenderMainFilter:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MASrenderPrimaryTexture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _REFLECTcubemap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _LIGHTintens: 0.5
+    - _LIGHTjitter: 0.12
+    - _MASfogDensity: 0
+    - _MASrenderColorSmoothness: 0.76
+    - _MASrenderFresnel: 1
+    - _MASrenderFresnelMultiplier: 1
+    - _MASrenderMainEmission: 1.18
+    - _MASrenderMaxDistance: 25.01
+    - _MASrenderPrimaryTextureTile: 1
+    - _MASrenderQuality: 0.1
+    - _MASrenderQualitySetting: 1
+    - _MASrenderSmoothness: 0.48
+    - _MASrenderSpecularA: 0.036
+    - _MASrenderSpecularB: 30.4
+    - _MASrenderSpecularIntens: 0.25
+    - _MASrenderToonDens: 0.485
+    - _MASrenderToonThresh: 0.49
+    - _OPloopEnabled: 0
+    - _OPloopTwoDimens: 0
+    - _REFLECTcubemapEnabled: 1
+    - _REFLECTenabled: 1
+    - _REFLECTintensity: 0.06
+    - _REFLECTphysX: 0
+    - _REFLECTphysXSampleCount: 1
+    - _REFLECTphysXemiss: 0
+    - _REFLECTphysXintens: 1
+    - _SHADEenabled: 1
+    - _SHADEintens: 3.2
+    - _SHADEsoft: 0
+    - _SHADEsoftness: 15.2
+    m_Colors:
+    - _LIGHTdirect: {r: -0.3213938, g: -0.76604444, b: 0.5566705, a: 0}
+    - _MASfogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+    - _MASrenderMainColor: {r: 0.5613208, g: 0.8630899, b: 1, a: 1}
+    - _MASrenderSecondColor: {r: 1, g: 0.5, b: 0, a: 1}
+    - _OPloopTilling: {r: 10, g: 10, b: 10, a: 0}
+    - _SHADEdistance: {r: 0.2, g: 14.95, b: 0, a: 0}

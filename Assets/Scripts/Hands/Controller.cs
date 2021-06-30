@@ -16,6 +16,8 @@ public class Controller : MonoBehaviour
     public GameObject mainCamera;
     public float triggerValue;
     public bool isTrigger;
+    public float gripValue;
+    public bool isGrip;
 
     void Update()
     {
@@ -50,6 +52,8 @@ public class Controller : MonoBehaviour
     {
         device.TryGetFeatureValue(CommonUsages.trigger, out triggerValue);
         checkTrigger();
+        device.TryGetFeatureValue(CommonUsages.grip, out gripValue);
+        checkGrip();
         device.TryGetFeatureValue(CommonUsages.devicePosition, out controllerPosition);
         device.TryGetFeatureValue(CommonUsages.deviceRotation, out controllerRotation);
         device.TryGetFeatureValue(CommonUsages.deviceVelocity, out controllerVelocity);
@@ -74,6 +78,17 @@ public class Controller : MonoBehaviour
         else
         {
             isTrigger = false;
+        }
+    }
+    void checkGrip()
+    {
+        if (gripValue >= 0.1)
+        {
+            isGrip = true;
+        }
+        else
+        {
+            isGrip = false;
         }
     }
 }

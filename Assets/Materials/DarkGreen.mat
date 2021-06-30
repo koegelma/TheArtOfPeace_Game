@@ -9,7 +9,8 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: DarkGreen
   m_Shader: {fileID: 4800000, guid: 404ff199299c33a47b7b639a8c22f305, type: 3}
-  m_ShaderKeywords: 
+  m_ShaderKeywords: _REFLECTCUBEMAPENABLED_ON _REFLECTENABLED_ON _SHADEENABLED_ON
+    _SHADESOFT_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -39,6 +40,14 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _MASrenderMainFilter:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MASrenderPrimaryTexture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _MainTex:
         m_Texture: {fileID: 0}
         m_Scale: {x: 17.19, y: 1}
@@ -55,6 +64,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _REFLECTcubemap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     m_Floats:
     - _BumpScale: 1
     - _Cutoff: 0.5
@@ -63,12 +76,42 @@ Material:
     - _GlossMapScale: 1
     - _Glossiness: 20
     - _GlossyReflections: 1
+    - _LIGHTintens: 0.5
+    - _LIGHTjitter: 0.001
+    - _MASfogDensity: 0
+    - _MASrenderColorSmoothness: 0
+    - _MASrenderFresnel: 1
+    - _MASrenderFresnelMultiplier: 1
+    - _MASrenderMainEmission: 0
+    - _MASrenderMaxDistance: 10
+    - _MASrenderPrimaryTextureTile: 1
+    - _MASrenderQuality: 0.005
+    - _MASrenderQualitySetting: 0
+    - _MASrenderSmoothness: 0
+    - _MASrenderSpecularA: 0
+    - _MASrenderSpecularB: 0
+    - _MASrenderSpecularIntens: 0
+    - _MASrenderToonDens: 1
+    - _MASrenderToonThresh: 1
     - _Metallic: 0
     - _Mode: 0
+    - _OPloopEnabled: 0
+    - _OPloopTwoDimens: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
+    - _REFLECTcubemapEnabled: 1
+    - _REFLECTenabled: 1
+    - _REFLECTintensity: 0.6
+    - _REFLECTphysX: 0
+    - _REFLECTphysXSampleCount: 1
+    - _REFLECTphysXemiss: 0
+    - _REFLECTphysXintens: 1
     - _RimAmount: 0.518
     - _RimThreshold: 0.687
+    - _SHADEenabled: 1
+    - _SHADEintens: 1
+    - _SHADEsoft: 1
+    - _SHADEsoftness: 4
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
@@ -78,5 +121,11 @@ Material:
     - _AmbientColor: {r: 0.5754717, g: 0.5754717, b: 0.5754717, a: 1}
     - _Color: {r: 0.13046084, g: 0.3679245, b: 0, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _LIGHTdirect: {r: 0, g: 1, b: 0, a: 0}
+    - _MASfogColor: {r: 1, g: 1, b: 1, a: 1}
+    - _MASrenderMainColor: {r: 1, g: 1, b: 1, a: 1}
+    - _MASrenderSecondColor: {r: 1, g: 0.5, b: 0, a: 1}
+    - _OPloopTilling: {r: 10, g: 10, b: 10, a: 10}
     - _RimColor: {r: 1, g: 1, b: 1, a: 1}
+    - _SHADEdistance: {r: 0.02, g: 10, b: 0, a: 0}
     - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}

@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 038760705395e2548b161aefc6718a99
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - rmDirectionalLightSource: {instanceID: 0}
+  - rmMaterialSource: {instanceID: 0}
+  - SHADER_MASrenderPrimaryTexture: {instanceID: 0}
+  - SHADER_REFLECTcubemap: {instanceID: 0}
+  - SHADER_MAScolorRamp: {instanceID: 0}
+  executionOrder: 0
+  icon: {fileID: 2800000, guid: 92b59ed0291627f4c8a7a1776314b57c, type: 3}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
