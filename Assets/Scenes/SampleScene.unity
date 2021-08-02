@@ -418,7 +418,7 @@ MonoBehaviour:
   rmParamB: 0
   rmParamC: 1
   rmParamD: 0
-  rmColor: {r: 0.2688679, g: 0.76418257, b: 1, a: 1}
+  rmColor: {r: 0.28235295, g: 0.65882355, b: 0.854902, a: 1}
   rmColorVal: 0
   rmOPFragment: 0
   rmOPFragmentPar_Size: {x: 3, y: 3, z: 3}
@@ -430,7 +430,7 @@ MonoBehaviour:
   rmOPBeingOperated: 0
   rmMyBornName: obj1
   rmMappingMaster: {fileID: 963194230}
-  bornID: 15334
+  bornID: 15338
   eHist_WasFractal: 0
   eHist_FractalType: 0
   eHist_WasOperation: 0
@@ -475,7 +475,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 857140239}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.754, y: 1.55, z: 1.33}
+  m_LocalPosition: {x: -0.953, y: 1.536, z: 1.33}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -838,10 +838,10 @@ MonoBehaviour:
   SHADER_MASfog: 0
   SHADER_MASfogDensity: 0.26
   SHADER_MASfogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  SHADER_MASrenderMaxDistance: 25.01
+  SHADER_MASrenderMaxDistance: 25
   SHADER_MASrenderQualitySetting: 1
-  SHADER_MASrenderQuality: 0.1
-  SHADER_MASrenderQuality_E: 1
+  SHADER_MASrenderQuality: 0.001
+  SHADER_MASrenderQuality_E: 3
   inSHADER_Render_Lambert: 1
   inSHADER_Render_Flat: 0
   inSHADER_Render_Toon: 0
@@ -850,8 +850,8 @@ MonoBehaviour:
   SHADER_MASrenderToonDens: 0.485
   SHADER_MASrenderFresnel: 1
   SHADER_MASrenderFresnelMultiplier: 1
-  SHADER_MASrenderSmoothness: 0.48
-  SHADER_MASrenderColorSmoothness: 0.76
+  SHADER_MASrenderSmoothness: 0.55
+  SHADER_MASrenderColorSmoothness: 0.51
   SHADER_LIGHTintens: 0.5
   SHADER_LIGHTjitter: 0.12
   SHADER_SHADEenabled: 1
@@ -938,7 +938,7 @@ PrefabInstance:
     - target: {fileID: 8123616012752204899, guid: d41052e2a00c7f0448187700c9c1ca8c,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 5
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 8123616012752204899, guid: d41052e2a00c7f0448187700c9c1ca8c,
         type: 3}
@@ -1028,7 +1028,7 @@ MonoBehaviour:
   rmOPBeingOperated: 0
   rmMyBornName: obj2
   rmMappingMaster: {fileID: 963194230}
-  bornID: 15372
+  bornID: 15376
   eHist_WasFractal: 0
   eHist_FractalType: 0
   eHist_WasOperation: 0
@@ -1073,7 +1073,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1225239129}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.831, y: 1.55, z: 1.33}
+  m_LocalPosition: {x: 1.053, y: 1.569, z: 1.33}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1163,7 +1163,7 @@ MonoBehaviour:
   rmParamB: 0
   rmParamC: 1
   rmParamD: 0
-  rmColor: {r: 0.2688679, g: 0.76418257, b: 1, a: 1}
+  rmColor: {r: 0.29411766, g: 0.63529414, b: 0.8196079, a: 1}
   rmColorVal: 0
   rmOPFragment: 0
   rmOPFragmentPar_Size: {x: 3, y: 3, z: 3}
@@ -1175,7 +1175,7 @@ MonoBehaviour:
   rmOPBeingOperated: 0
   rmMyBornName: obj4
   rmMappingMaster: {fileID: 963194230}
-  bornID: 15388
+  bornID: 15392
   eHist_WasFractal: 0
   eHist_FractalType: 0
   eHist_WasOperation: 0
@@ -1188,8 +1188,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1275588367}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.561, z: 1.33}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -0.288, y: 1.547, z: 1.33}
+  m_LocalScale: {x: 1.56, y: 1.55, z: 1.53}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 13
@@ -1241,12 +1241,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rmIsFractal: 0
   rmFractalType: 0
-  rmShapeSmoothness: 0.2
+  rmShapeSmoothness: -0.58
   rmParamA: 0.1
   rmParamB: 0
   rmParamC: 1
   rmParamD: 0
-  rmColor: {r: 0.2688679, g: 0.76418257, b: 1, a: 1}
+  rmColor: {r: 0.29411766, g: 0.63529414, b: 0.8196079, a: 1}
   rmColorVal: 0
   rmOPFragment: 0
   rmOPFragmentPar_Size: {x: 3, y: 3, z: 3}
@@ -1254,15 +1254,15 @@ MonoBehaviour:
   rmOPFragmentPar_EnableAnim: 0
   rmOPFragmentPar_AnimDirection: {x: 0, y: 0, z: 0}
   rmExternalOperation: 0
-  rmOPOperator_Target: {fileID: 0}
+  rmOPOperator_Target: {fileID: 1275588370}
   rmOPBeingOperated: 0
   rmMyBornName: obj0
   rmMappingMaster: {fileID: 963194230}
-  bornID: 15396
+  bornID: 15400
   eHist_WasFractal: 0
   eHist_FractalType: 0
   eHist_WasOperation: 0
-  eHist_OPTarget: {fileID: 0}
+  eHist_OPTarget: {fileID: 1275588370}
 --- !u!4 &1299025508
 Transform:
   m_ObjectHideFlags: 0
@@ -1271,7 +1271,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1299025506}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.789, y: 1.55, z: 1.33}
+  m_LocalPosition: {x: 0.351, y: 1.556, z: 1.33}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1409,7 +1409,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1321515994}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3, y: 1, z: 5}
+  m_LocalPosition: {x: 16.76, y: 1, z: 5}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1496,7 +1496,7 @@ MonoBehaviour:
   rmOPBeingOperated: 0
   rmMyBornName: obj3
   rmMappingMaster: {fileID: 963194230}
-  bornID: 15422
+  bornID: 15426
   eHist_WasFractal: 0
   eHist_FractalType: 0
   eHist_WasOperation: 0
@@ -1541,7 +1541,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1408685376}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.893, y: 1.55, z: 1.33}
+  m_LocalPosition: {x: -1.599, y: 1.535, z: 1.33}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1633,8 +1633,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1446761844}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.0000020266, z: 20.8}
-  m_LocalScale: {x: 106.10427, y: 44.656452, z: 41.72263}
+  m_LocalPosition: {x: 0, y: 0, z: 1.02}
+  m_LocalScale: {x: 11.49958, y: 4.839866, z: 4.5218983}
   m_Children: []
   m_Father: {fileID: 963194228}
   m_RootOrder: 0
@@ -1759,7 +1759,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1565047558}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3, y: 1, z: 5}
+  m_LocalPosition: {x: -7.77, y: 1, z: 5}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1852,7 +1852,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1688259131}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 3, z: 5}
+  m_LocalPosition: {x: 0, y: 3, z: 15}
   m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2093,7 +2093,7 @@ MonoBehaviour:
   rmOPBeingOperated: 0
   rmMyBornName: obj5
   rmMappingMaster: {fileID: 963194230}
-  bornID: 15488
+  bornID: 15492
   eHist_WasFractal: 0
   eHist_FractalType: 0
   eHist_WasOperation: 0
@@ -2151,7 +2151,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1737420793}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.789, y: 2.185, z: 1.33}
+  m_LocalPosition: {x: 1.735, y: 1.6, z: 1.33}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

@@ -36,15 +36,15 @@ Material:
     - _LIGHTintens: 0.5
     - _LIGHTjitter: 0.12
     - _MASfogDensity: 0
-    - _MASrenderColorSmoothness: 0.76
+    - _MASrenderColorSmoothness: 0.51
     - _MASrenderFresnel: 1
     - _MASrenderFresnelMultiplier: 1
     - _MASrenderMainEmission: 1.18
-    - _MASrenderMaxDistance: 25.01
+    - _MASrenderMaxDistance: 25
     - _MASrenderPrimaryTextureTile: 1
-    - _MASrenderQuality: 0.1
+    - _MASrenderQuality: 0.001
     - _MASrenderQualitySetting: 1
-    - _MASrenderSmoothness: 0.48
+    - _MASrenderSmoothness: 0.55
     - _MASrenderSpecularA: 0.036
     - _MASrenderSpecularB: 30.4
     - _MASrenderSpecularIntens: 0.25

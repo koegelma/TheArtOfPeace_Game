@@ -46,15 +46,13 @@
      <Compile Include="Assets\RaymarcherPackage\ExampleScenes\SampleAssets\MoveForward.cs" />
      <Compile Include="Assets\RaymarcherPackage\ExampleScenes\SampleAssets\SimpleMusicReaction.cs" />
      <Compile Include="Assets\RaymarcherPackage\Helpers\RMInternal_SceneFilter.cs" />
-     <Compile Include="Assets\Scripts 1\MCBlob.cs" />
-     <Compile Include="Assets\Scripts 1\OnLiquidGrounded.cs" />
-     <Compile Include="Assets\Scripts 1\OriginalMCBlob.cs" />
      <Compile Include="Assets\Scripts\Components\Damageable.cs" />
      <Compile Include="Assets\Scripts\Components\Enemy.cs" />
      <Compile Include="Assets\Scripts\Components\Mana.cs" />
      <Compile Include="Assets\Scripts\Components\ManaRegeneration.cs" />
      <Compile Include="Assets\Scripts\Hands\Controller.cs" />
      <Compile Include="Assets\Scripts\Hands\HandPresence.cs" />
+     <Compile Include="Assets\Scripts\MetaballLogic.cs" />
      <Compile Include="Assets\Scripts\Old Scripts\OutputInput.cs" />
      <Compile Include="Assets\Scripts\Old Scripts\ShootProjectile.cs" />
      <Compile Include="Assets\Scripts\Old Scripts\createProjectile.cs" />
