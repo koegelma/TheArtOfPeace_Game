@@ -7,7 +7,7 @@ public class Controller : MonoBehaviour
 {
     public Vector3 controllerPosition;
     public Quaternion controllerRotation;
-    public GameObject relativeTransform;
+    public Transform relativeTransform;
     public InputDevice device;
     public GameObject XRRig;
     public Quaternion temporaryRotation;
@@ -61,13 +61,13 @@ public class Controller : MonoBehaviour
 
         controllerRotation *= Quaternion.Euler(Vector3.right * 20);
 
-        relativeTransform.transform.position = controllerPosition - mainCamera.transform.position;
+        relativeTransform.position = controllerPosition - mainCamera.transform.position;
 
         Vector3 angles = controllerRotation.eulerAngles - mainCamera.transform.rotation.eulerAngles;
         temporaryRotation = Quaternion.Euler(angles);
 
-        relativeTransform.transform.RotateAround(XRRig.transform.position, new Vector3(0, 1, 0), -mainCamera.transform.rotation.eulerAngles.y);
-        relativeTransform.transform.rotation = temporaryRotation;
+        relativeTransform.RotateAround(XRRig.transform.position, new Vector3(0, 1, 0), -mainCamera.transform.rotation.eulerAngles.y);
+        relativeTransform.rotation = temporaryRotation;
     }
     void checkTrigger()
     {
