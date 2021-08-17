@@ -15,7 +15,7 @@ public class PhaseChecker
         this.rightPhaseCoords = rightPhaseCoords;
         this.leftController = GameObject.Find("LeftController").GetComponent<Controller>();
         this.rightController = GameObject.Find("RightController").GetComponent<Controller>();
-        this.tolerance = 0.05f;
+        this.tolerance = 0.1f;
     }
 
     public bool check(int phase)
@@ -29,7 +29,7 @@ public class PhaseChecker
             && rightController.relativeTransform.position.y < rightPhaseCoords[phase].y + tolerance && rightController.relativeTransform.position.y > rightPhaseCoords[phase].y - tolerance
             && rightController.relativeTransform.position.z < rightPhaseCoords[phase].z + tolerance && rightController.relativeTransform.position.z > rightPhaseCoords[phase].z - tolerance))
             {
-                if (checkFluidity(0.1f, 1)) return false; 
+                //if (checkFluidity(0.1f, 1)) return false; 
                 return true;
             }
         }

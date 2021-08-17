@@ -25,8 +25,27 @@ public class HandPresence : MonoBehaviour
         List<InputDevice> devices = new List<InputDevice>();
 
         InputDevices.GetDevicesWithCharacteristics(controllerCharacteristics, devices);
-        spawnedHandModel = Instantiate(handModelPrefab, transform);
-        handAnimator = spawnedHandModel.GetComponent<Animator>();
+
+        foreach (var item in devices)
+        {
+            //Debug.Log(item.name + item.characteristics);
+        }
+
+        if (devices.Count > 0)
+        {
+            targetDevice = devices[0];
+            GameObject prefab = controllerPrefabs.Find(controller => controller.name == targetDevice.name);
+             if (prefab)
+            {
+                spawnedController = Instantiate(prefab, transform);
+            }
+            else
+            {
+                //Debug.Log("Did not find corresponding controller model");
+            }
+            spawnedHandModel = Instantiate(handModelPrefab, transform);
+            handAnimator = spawnedHandModel.GetComponent<Animator>();
+        }
     }
     void UpdateHandAnimation()
     {

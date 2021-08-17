@@ -21,23 +21,19 @@ public static class StateManager
         }
         return currentPhase;
     }
-
-    public static void updateStates()
-    {
-        if (stateTimestamp < Time.time - 5 && state != State.IDLE)
-        {
-            state = State.IDLE;
-            currentPhase = -1;
-        }
-    }
     public static void resetState(){
         StateManager.state = State.IDLE;
         StateManager.currentPhase = -1;
     }
     
-    public static void switchPhase(int phaseGiven, float countdownInSeconds){
-        resetCountdown(phaseGiven-1, countdownInSeconds);
-        currentPhase = assurePhase(phaseGiven);
+    public static bool switchPhase(int phaseGiven, float countdownInSeconds){
+        if(phaseGiven > currentPhase){
+            Debug.Log("switched to phase " + phaseGiven); // test
+            resetCountdown(phaseGiven-1, countdownInSeconds);
+            currentPhase = assurePhase(phaseGiven);
+            return true;
+        }
+        return false;
     }
     public static void resetCountdown(int phaseGiven, float countdownInSeconds){
         if(currentPhase == phaseGiven){

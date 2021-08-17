@@ -27,7 +27,6 @@ public class PatternTemplate : MonoBehaviour
             {
                 StateManager.state = State.PATTERN1;
                 checkPattern();
-                StateManager.updateStates();
             }
         }
     }

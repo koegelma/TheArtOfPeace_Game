@@ -36,6 +36,7 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
+     <Compile Include="Assets\DebugXR, by Tobiesen\Scripts\DebugLogPanel.cs" />
      <Compile Include="Assets\RaymarcherPackage\Core\RM_InternalEditor.cs" />
      <Compile Include="Assets\RaymarcherPackage\Core\RM_MappingMaster.cs" />
      <Compile Include="Assets\RaymarcherPackage\Core\RM_Master.cs" />
@@ -65,10 +66,13 @@
      <Compile Include="Assets\Scripts\PatternTemplate.cs" />
      <Compile Include="Assets\Scripts\PhaseChecker.cs" />
      <Compile Include="Assets\Scripts\StateManager.cs" />
+     <Compile Include="Assets\Scripts\StateVisualizer.cs" />
      <None Include="Assets\RaymarcherPackage\Core\CG\Raymarch_Master_Example_Mobile_FractalTrip.shader" />
      <None Include="Assets\RaymarcherPackage\Core\CG\ObjectBuffers\Raymarch_ObjectBuffer_Example_PCVR_Playground.cginc" />
+     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
      <None Include="Assets\Shaders\ToonComplete.shader" />
      <None Include="Assets\RaymarcherPackage\Core\CG\Includes\Mobile\Raymarch_Properties.cginc" />
+     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
      <None Include="Assets\RaymarcherPackage\Core\CG\Includes\PC\Raymarch_Properties.cginc" />
      <None Include="Assets\RaymarcherPackage\Core\CG\ObjectBuffers\Raymarch_ObjectBuffer_Example_Mobile_FractalTrip.cginc" />
      <None Include="Assets\RaymarcherPackage\Core\CG\Raymarch_Master_Example_Primitives.shader" />
@@ -81,6 +85,7 @@
      <None Include="Assets\RaymarcherPackage\Core\CG\Includes\PC\Raymarch_Frag.cginc" />
      <None Include="Assets\RaymarcherPackage\Core\CG\ShapeSources\Raymarch_ShapesSource_Example_PCVR_Planet.cginc" />
      <None Include="Assets\RaymarcherPackage\Core\CG\Includes\PC\Raymarch_FractsSource.cginc" />
+     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
      <None Include="Assets\RaymarcherPackage\Core\CG\ShapeSources\Raymarch_ShapesSource_Example_PCVR_Default.cginc" />
      <None Include="Assets\RaymarcherPackage\Core\CG\ObjectBuffers\Raymarch_ObjectBuffer_Example_PCVR_MusicReaction.cginc" />
      <None Include="Assets\RaymarcherPackage\Core\CG\Raymarch_Master_Example_MobileVR_MusicTrip.shader" />
@@ -96,7 +101,9 @@
      <None Include="Assets\RaymarcherPackage\Core\CG\Includes\PC\Raymarch_Core.cginc" />
      <None Include="Assets\RaymarcherPackage\Core\CG\ShapeSources\Raymarch_ShapesSource_Example_Fractals.cginc" />
      <None Include="Assets\RaymarcherPackage\Core\CG\Includes\PC\Raymarch_VertVR.cginc" />
+     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Mobile.cginc" />
      <None Include="Assets\RaymarcherPackage\Core\CG\Raymarch_Master_Example_Mobile_Castle.shader" />
+     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF SSD.shader" />
      <None Include="Assets\RaymarcherPackage\Core\CG\ObjectBuffers\Raymarch_ObjectBuffer_Example_PCVR_Fractals.cginc" />
      <None Include="Assets\RaymarcherPackage\Core\CG\Raymarch_Master_Example_MobileVR_Trip2.shader" />
      <None Include="Assets\RaymarcherPackage\Core\CG\Raymarch_Master_Example_LoopRepetition.shader" />
@@ -104,6 +111,7 @@
      <None Include="Assets\RaymarcherPackage\Core\CG\ObjectBuffers\Raymarch_ObjectBuffer_Example_MusicReaction.cginc" />
      <None Include="Assets\RaymarcherPackage\Core\CG\Includes\PC\Raymarch_Shading.cginc" />
      <None Include="Assets\RaymarcherPackage\Core\CG\ShapeSources\Raymarch_ShapesSource_Example_PCVR_Playground.cginc" />
+     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface-Mobile.shader" />
      <None Include="Assets\RaymarcherPackage\Core\CG\ObjectBuffers\Raymarch_ObjectBuffer_Example_MobileVR_Trip2.cginc" />
      <None Include="Assets\RaymarcherPackage\Core\CG\ObjectBuffers\Raymarch_ObjectBuffer_Example_Cartoon.cginc" />
      <None Include="Assets\RaymarcherPackage\Core\CG\ShapeSources\Raymarch_ShapesSource_Example_Mobile_FractalTrip.cginc" />
@@ -116,20 +124,30 @@
      <None Include="Assets\RaymarcherPackage\Core\CG\Includes\PC\RMMasterPatternDatabase.txt" />
      <None Include="Assets\RaymarcherPackage\Core\CG\Includes\Mobile\Raymarch_CoreVR.cginc" />
      <None Include="Assets\RaymarcherPackage\Core\CG\ObjectBuffers\Raymarch_ObjectBuffer_Example_MobileVR_Planet.cginc" />
+     <None Include="Assets\DebugXR, by Tobiesen\Sounds\Credits.txt" />
      <None Include="Assets\RaymarcherPackage\Core\CG\Raymarch_Master_Example_Model.shader" />
      <None Include="Assets\RaymarcherPackage\Core\CG\Includes\Mobile\Raymarch_Vert.cginc" />
+     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface.shader" />
      <None Include="Assets\RaymarcherPackage\Core\CG\ShapeSources\Raymarch_ShapesSource_Example_Cartoon.cginc" />
      <None Include="Assets\RaymarcherPackage\Core\CG\ShapeSources\Raymarch_ShapesSource_Example_MobileVR_Trip2.cginc" />
      <None Include="Assets\RaymarcherPackage\Core\CG\Raymarch_Master_Example_MobileVR_Planet.shader" />
+     <None Include="Assets\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />
+     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Custom-Atlas.shader" />
+     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF.shader" />
      <None Include="Assets\RaymarcherPackage\Core\CG\ObjectBuffers\Raymarch_ObjectBuffer_Example_Operations.cginc" />
      <None Include="Assets\RaymarcherPackage\Core\CG\Raymarch_Master_Example_Mobile_Centipede.shader" />
      <None Include="Assets\RaymarcherPackage\Core\CG\ObjectBuffers\Raymarch_ObjectBuffer_Example_Mobile_Centipede.cginc" />
+     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile SSD.shader" />
      <None Include="Assets\RaymarcherPackage\Core\CG\ObjectBuffers\Raymarch_ObjectBuffer_Example_Mobile_Castle.cginc" />
+     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
+     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Properties.cginc" />
      <None Include="Assets\RaymarcherPackage\Core\CG\ShapeSources\Raymarch_ShapesSource_SampleScene.cginc" />
      <None Include="Assets\RaymarcherPackage\Core\CG\Raymarch_Master_Example_PCVR_Planet.shader" />
+     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Surface.cginc" />
      <None Include="Assets\RaymarcherPackage\Core\CG\Includes\Mobile\Raymarch_Core.cginc" />
      <None Include="Assets\RaymarcherPackage\Core\CG\Includes\PC\Raymarch_CoreVR.cginc" />
      <None Include="Assets\RaymarcherPackage\Core\CG\Includes\PC\Raymarch_Vert.cginc" />
+     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
      <None Include="Assets\RaymarcherPackage\Core\CG\Includes\Mobile\Raymarch_Operators.cginc" />
      <None Include="Assets\RaymarcherPackage\Core\CG\Includes\Mobile\Raymarch_FractsSource.cginc" />
      <None Include="Assets\RaymarcherPackage\Core\CG\Raymarch_Master_Example_MobileVR_Primitives.shader" />
@@ -140,6 +158,7 @@
      <None Include="Assets\RaymarcherPackage\Core\CG\Raymarch_Master_Example_Cartoon.shader" />
      <None Include="Assets\RaymarcherPackage\Core\CG\ShapeSources\Raymarch_ShapesSource_Example_MobileVR_MusicTrip.cginc" />
      <None Include="Assets\RaymarcherPackage\Core\CG\ShapeSources\Raymarch_ShapesSource_Example_LoopRepetition.cginc" />
+     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Masking.shader" />
      <None Include="Assets\RaymarcherPackage\Core\CG\ObjectBuffers\Raymarch_ObjectBuffer_Example_MobileVR_MusicTrip.cginc" />
      <None Include="Assets\RaymarcherPackage\Core\CG\ShapeSources\Raymarch_ShapesSource_Example_FractalTrip.cginc" />
      <None Include="Assets\RaymarcherPackage\Core\CG\Includes\Mobile\Raymarch_FragVR.cginc" />
@@ -152,13 +171,19 @@
      <None Include="Assets\RaymarcherPackage\Core\CG\ObjectBuffers\Raymarch_ObjectBuffer_SampleScene.cginc" />
      <None Include="Assets\RaymarcherPackage\Core\CG\ObjectBuffers\Raymarch_ObjectBuffer_Example_LoopRepetition.cginc" />
      <None Include="Assets\RaymarcherPackage\Core\CG\Includes\PC\Raymarch_Operators.cginc" />
+     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF Overlay.shader" />
      <None Include="Assets\RaymarcherPackage\Core\CG\ShapeSources\Raymarch_ShapesSource_Example_Mobile_Castle.cginc" />
      <None Include="Assets\RaymarcherPackage\Core\CG\ShapeSources\Raymarch_ShapesSource_Example_Mobile_Centipede.cginc" />
+     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Mobile.shader" />
+     <None Include="Assets\TextMesh Pro\Fonts\LiberationSans - OFL.txt" />
      <None Include="Assets\RaymarcherPackage\Core\CG\ShapeSources\Raymarch_ShapesSource_Example_Model.cginc" />
+     <None Include="Assets\DebugXR, by Tobiesen\Icons\Credits.txt" />
      <None Include="Assets\RaymarcherPackage\Core\CG\ObjectBuffers\Raymarch_ObjectBuffer_Example_MobileVR_Primitives.cginc" />
+     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile.shader" />
      <None Include="Assets\RaymarcherPackage\Core\CG\ObjectBuffers\Raymarch_ObjectBuffer_Example_Mobile_Planet.cginc" />
      <None Include="Assets\RaymarcherPackage\Core\CG\Includes\PC\Raymarch_FragVR.cginc" />
      <None Include="Assets\RaymarcherPackage\Core\CG\Raymarch_Master_Example_PCVR_Playground.shader" />
+     <None Include="Assets\TextMesh Pro\Shaders\TMP_Sprite.shader" />
      <None Include="Assets\RaymarcherPackage\Core\CG\ShapeSources\Raymarch_ShapesSource_Example_PCVR_MusicReaction.cginc" />
     <Reference Include="UnityEngine">
         <HintPath>D:/Unity/Editors/2019.4.21f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
