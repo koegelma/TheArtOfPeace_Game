@@ -9,9 +9,10 @@ public class Pattern1 : MonoBehaviour
     public Vector3[] rightPhaseCoords;
     public GameObject leftHelper;
     public GameObject rightHelper;
-    /* public Controller leftController;
-    public Controller rightController; 
-    
+    public Controller leftController;
+    public Controller rightController;
+    public Transform cameraTransform;
+    /*
     void testPosition(){
         if (leftController.isTrigger && rightController.isTrigger){
             Debug.Log("left: "+leftController.relativeTransform.position);
@@ -32,7 +33,8 @@ public class Pattern1 : MonoBehaviour
     }
     void Update()
     {
-        if(StateManager.state == State.IDLE || StateManager.state == State.PATTERN1){
+        if (StateManager.state == State.IDLE || StateManager.state == State.PATTERN1)
+        {
             if (phaseChecker.check(0) || (StateManager.state == State.PATTERN1))
             {
                 StateManager.state = State.PATTERN1;
@@ -41,9 +43,10 @@ public class Pattern1 : MonoBehaviour
             StateManager.updateCountdown();
             updateHelper();
         }
-        else{
-            leftHelper.transform.localScale = new Vector3(0,0,0);
-            rightHelper.transform.localScale = new Vector3(0,0,0);
+        else
+        {
+            leftHelper.transform.localScale = new Vector3(0, 0, 0);
+            rightHelper.transform.localScale = new Vector3(0, 0, 0);
         }
     }
     void checkPattern()
@@ -59,12 +62,24 @@ public class Pattern1 : MonoBehaviour
             }
         }
     }
-    void updateHelper(){
-        leftHelper.transform.localScale = new Vector3(0.05f,0.05f,0.05f);
-        rightHelper.transform.localScale = new Vector3(0.05f,0.05f,0.05f);
-        leftHelper.transform.localPosition = this.leftPhaseCoords[StateManager.currentPhase+1];
-        rightHelper.transform.localPosition = this.rightPhaseCoords[StateManager.currentPhase+1];
-    }
+    void updateHelper()
+    {
+        Vector3 offset = new Vector3(0, 0, 2);
+        leftHelper.transform.localScale = new Vector3(PhaseChecker.tolerance, PhaseChecker.tolerance, PhaseChecker.tolerance);
+        rightHelper.transform.localScale = new Vector3(PhaseChecker.tolerance, PhaseChecker.tolerance, PhaseChecker.tolerance);
+        leftHelper.transform.localPosition = this.leftPhaseCoords[StateManager.currentPhase + 1] + offset + cameraTransform.position;
+        rightHelper.transform.localPosition = this.rightPhaseCoords[StateManager.currentPhase + 1] + offset + cameraTransform.position;
+        Vector3 leftBruh = leftHelper.transform.position;
+        Vector3 rightBruh = rightHelper.transform.position;
 
-    
+        leftBruh = Quaternion.Euler(0, cameraTransform.rotation.y, 0) * leftBruh;
+        rightBruh = Quaternion.Euler(0, cameraTransform.rotation.y, 0) * rightBruh;
+
+        leftHelper.transform.position = leftBruh;
+        rightHelper.transform.position = rightBruh;
+
+
+
+
+    }
 }

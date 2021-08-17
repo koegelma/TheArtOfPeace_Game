@@ -7,7 +7,7 @@ public class PhaseChecker
     public Controller rightController;
     Vector3[] leftPhaseCoords;
     Vector3[] rightPhaseCoords;
-    float tolerance;
+    public static float tolerance;
 
 
     public PhaseChecker(Vector3[] leftPhaseCoords, Vector3[] rightPhaseCoords){
@@ -15,7 +15,7 @@ public class PhaseChecker
         this.rightPhaseCoords = rightPhaseCoords;
         this.leftController = GameObject.Find("LeftController").GetComponent<Controller>();
         this.rightController = GameObject.Find("RightController").GetComponent<Controller>();
-        this.tolerance = 0.1f;
+        tolerance = 0.2f;
     }
 
     public bool check(int phase)
