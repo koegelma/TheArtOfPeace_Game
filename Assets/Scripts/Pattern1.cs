@@ -9,10 +9,13 @@ public class Pattern1 : MonoBehaviour
     public Vector3[] rightPhaseCoords;
     public GameObject leftHelper;
     public GameObject rightHelper;
+    public GameObject leftChild;
+    public GameObject rightChild;
     public Controller leftController;
     public Controller rightController;
     public Transform cameraTransform;
     private Vector3 offset = new Vector3(0, 0, 2);
+
     /*
     void testPosition(){
         if (leftController.isTrigger && rightController.isTrigger){
@@ -34,6 +37,7 @@ public class Pattern1 : MonoBehaviour
     }
     void Update()
     {
+        //TODO: updateHelper soll nicht in IDLE aufgerufen werden
         if (StateManager.state == State.IDLE || StateManager.state == State.PATTERN1)
         {
             if (phaseChecker.check(0) || (StateManager.state == State.PATTERN1))
@@ -66,20 +70,21 @@ public class Pattern1 : MonoBehaviour
 
     void updateHelper()
     {
-        Vector3 scale = new Vector3(PhaseChecker.tolerance, PhaseChecker.tolerance, PhaseChecker.tolerance);
-        if (leftHelper.transform.localScale != scale && rightHelper.transform.localScale != scale)
+        float tolerance = PhaseChecker.tolerance * 2;
+        Vector3 scale = new Vector3(tolerance,tolerance,tolerance);
+        if (leftChild.transform.localScale != scale && rightChild.transform.localScale != scale)
         {
-            leftHelper.transform.localScale = new Vector3(PhaseChecker.tolerance, PhaseChecker.tolerance, PhaseChecker.tolerance);
-            rightHelper.transform.localScale = new Vector3(PhaseChecker.tolerance, PhaseChecker.tolerance, PhaseChecker.tolerance);
-
+            leftChild.transform.localScale = new Vector3(tolerance, tolerance, tolerance);
+            rightChild.transform.localScale = new Vector3(tolerance,tolerance, tolerance);
         }
 
-        Vector3 helperPosition = cameraTransform.position + offset;
-        float angle = Vector3.Angle(helperPosition, cameraTransform.position);
-        if (angle > 0.2f) helperPosition = Quaternion.AngleAxis(angle, Vector3.up) * helperPosition;
+        leftHelper.transform.position = cameraTransform.position;
+        rightHelper.transform.position = cameraTransform.position;
 
-        leftHelper.transform.position = helperPosition + this.leftPhaseCoords[StateManager.currentPhase + 1];
-        rightHelper.transform.position = helperPosition + this.rightPhaseCoords[StateManager.currentPhase + 1];
+        leftChild.transform.localPosition = this.leftPhaseCoords[StateManager.currentPhase + 1] + offset;
+        rightChild.transform.localPosition = this.rightPhaseCoords[StateManager.currentPhase + 1] + offset;
 
+        leftHelper.transform.eulerAngles = new Vector3(leftHelper.transform.eulerAngles.x, cameraTransform.eulerAngles.y, leftHelper.transform.eulerAngles.z);
+        rightHelper.transform.eulerAngles = new Vector3(rightHelper.transform.eulerAngles.x, cameraTransform.eulerAngles.y, rightHelper.transform.eulerAngles.z);
     }
 }

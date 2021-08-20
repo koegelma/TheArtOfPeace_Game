@@ -43,7 +43,7 @@ public static class StateManager
     public static void updateCountdown(){
         countdown -= Time.deltaTime;
         if(countdown <= 0f){
-            Debug.Log("Times up.");
+            //Debug.Log("Times up.");
             resetState();
         }
     }
