@@ -12,6 +12,7 @@ public class Pattern1 : MonoBehaviour
     public Controller leftController;
     public Controller rightController;
     public Transform cameraTransform;
+    private Vector3 offset = new Vector3(0, 0, 2);
     /*
     void testPosition(){
         if (leftController.isTrigger && rightController.isTrigger){
@@ -62,24 +63,23 @@ public class Pattern1 : MonoBehaviour
             }
         }
     }
+
     void updateHelper()
     {
-        Vector3 offset = new Vector3(0, 0, 2);
-        leftHelper.transform.localScale = new Vector3(PhaseChecker.tolerance, PhaseChecker.tolerance, PhaseChecker.tolerance);
-        rightHelper.transform.localScale = new Vector3(PhaseChecker.tolerance, PhaseChecker.tolerance, PhaseChecker.tolerance);
-        leftHelper.transform.localPosition = this.leftPhaseCoords[StateManager.currentPhase + 1] + offset + cameraTransform.position;
-        rightHelper.transform.localPosition = this.rightPhaseCoords[StateManager.currentPhase + 1] + offset + cameraTransform.position;
-        Vector3 leftBruh = leftHelper.transform.position;
-        Vector3 rightBruh = rightHelper.transform.position;
+        Vector3 scale = new Vector3(PhaseChecker.tolerance, PhaseChecker.tolerance, PhaseChecker.tolerance);
+        if (leftHelper.transform.localScale != scale && rightHelper.transform.localScale != scale)
+        {
+            leftHelper.transform.localScale = new Vector3(PhaseChecker.tolerance, PhaseChecker.tolerance, PhaseChecker.tolerance);
+            rightHelper.transform.localScale = new Vector3(PhaseChecker.tolerance, PhaseChecker.tolerance, PhaseChecker.tolerance);
 
-        leftBruh = Quaternion.Euler(0, cameraTransform.rotation.y, 0) * leftBruh;
-        rightBruh = Quaternion.Euler(0, cameraTransform.rotation.y, 0) * rightBruh;
+        }
 
-        leftHelper.transform.position = leftBruh;
-        rightHelper.transform.position = rightBruh;
+        Vector3 helperPosition = cameraTransform.position + offset;
+        float angle = Vector3.Angle(helperPosition, cameraTransform.position);
+        if (angle > 0.2f) helperPosition = Quaternion.AngleAxis(angle, Vector3.up) * helperPosition;
 
-
-
+        leftHelper.transform.position = helperPosition + this.leftPhaseCoords[StateManager.currentPhase + 1];
+        rightHelper.transform.position = helperPosition + this.rightPhaseCoords[StateManager.currentPhase + 1];
 
     }
 }
