@@ -33,14 +33,14 @@ public class Controller : MonoBehaviour
             var rightHanded = new List<UnityEngine.XR.InputDevice>();
             InputDevices.GetDevicesWithCharacteristics(InputDeviceCharacteristics.Left, leftHanded);
             InputDevices.GetDevicesWithCharacteristics(InputDeviceCharacteristics.Right, rightHanded);
-            if (this.gameObject.name.Equals("LeftController"))
+            if (this.gameObject.name.Equals("Left Controller"))
             {
                 foreach (var devices in leftHanded)
                 {
                     this.device = devices;
                 }
             }
-            else if (this.gameObject.name.Equals("RightController"))
+            else if (this.gameObject.name.Equals("Right Controller"))
             {
                 foreach (var devices in rightHanded)
                 {
