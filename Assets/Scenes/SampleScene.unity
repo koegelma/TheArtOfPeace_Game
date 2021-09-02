@@ -257,7 +257,7 @@ GameObject:
   - component: {fileID: 541096547}
   - component: {fileID: 541096548}
   m_Layer: 0
-  m_Name: RightController
+  m_Name: Right Controller
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -518,7 +518,6 @@ GameObject:
   - component: {fileID: 708941125}
   - component: {fileID: 708941124}
   - component: {fileID: 708941123}
-  - component: {fileID: 708941122}
   m_Layer: 0
   m_Name: Left Rel Trans Cube
   m_TagString: Untagged
@@ -526,20 +525,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &708941122
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 708941121}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 84d79dea7421a8a418fcbc229b153e63, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  leftController: {fileID: 1728657558}
-  rightController: {fileID: 541096548}
 --- !u!65 &708941123
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -549,7 +534,7 @@ BoxCollider:
   m_GameObject: {fileID: 708941121}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -607,12 +592,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 708941121}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_Father: {fileID: 1079031284}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &792525891
 GameObject:
@@ -943,6 +928,7 @@ GameObject:
   m_Component:
   - component: {fileID: 940223137}
   - component: {fileID: 940223136}
+  - component: {fileID: 940223138}
   m_Layer: 0
   m_Name: Master of Disaster
   m_TagString: Untagged
@@ -985,6 +971,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &940223138
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 940223135}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84d79dea7421a8a418fcbc229b153e63, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  leftCube: {fileID: 708941121}
+  rightCube: {fileID: 1520293128}
+  leftController: {fileID: 1728657558}
+  rightController: {fileID: 541096548}
+  cameraTransform: {fileID: 963194228}
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -1397,6 +1400,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1585035861}
+  - {fileID: 708941126}
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1521,7 +1525,6 @@ GameObject:
   - component: {fileID: 1520293132}
   - component: {fileID: 1520293131}
   - component: {fileID: 1520293130}
-  - component: {fileID: 1520293129}
   m_Layer: 0
   m_Name: Right Rel Trans Cube
   m_TagString: Untagged
@@ -1529,20 +1532,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1520293129
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1520293128}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 84d79dea7421a8a418fcbc229b153e63, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  leftController: {fileID: 1728657558}
-  rightController: {fileID: 541096548}
 --- !u!65 &1520293130
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1552,7 +1541,7 @@ BoxCollider:
   m_GameObject: {fileID: 1520293128}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -1614,8 +1603,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_Father: {fileID: 2029242200}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1585035860
 GameObject:
@@ -1854,7 +1843,7 @@ GameObject:
   - component: {fileID: 1728657557}
   - component: {fileID: 1728657558}
   m_Layer: 0
-  m_Name: LeftController
+  m_Name: Left Controller
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2171,6 +2160,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 794701676}
+  - {fileID: 1520293133}
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

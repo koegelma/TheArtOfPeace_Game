@@ -13,8 +13,8 @@ public class PhaseChecker
     public PhaseChecker(Vector3[] leftPhaseCoords, Vector3[] rightPhaseCoords){
         this.leftPhaseCoords = leftPhaseCoords;
         this.rightPhaseCoords = rightPhaseCoords;
-        this.leftController = GameObject.Find("LeftController").GetComponent<Controller>();
-        this.rightController = GameObject.Find("RightController").GetComponent<Controller>();
+        this.leftController = GameObject.Find("Left Controller").GetComponent<Controller>();
+        this.rightController = GameObject.Find("Right Controller").GetComponent<Controller>();
         tolerance = 0.15f;
     }
 

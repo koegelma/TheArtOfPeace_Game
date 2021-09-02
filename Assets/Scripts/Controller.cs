@@ -8,7 +8,7 @@ public class Controller : MonoBehaviour
     public Vector3 controllerPosition;
     public Quaternion controllerRotation;
     public Transform relativeTransform;
-    public Transform relativeTransformNoAngles; //relative Transform before turning "back"
+    //public Transform relativeTransformNoAngles; //relative Transform before turning "back"
     public InputDevice device;
     public GameObject XRRig;
     public Quaternion temporaryRotation;
@@ -63,7 +63,7 @@ public class Controller : MonoBehaviour
         controllerRotation *= Quaternion.Euler(Vector3.right * 20);
 
         relativeTransform.position = controllerPosition - mainCamera.transform.position;
-        relativeTransformNoAngles.position = relativeTransform.position;
+        //relativeTransformNoAngles.position = relativeTransform.position;
         Vector3 angles = controllerRotation.eulerAngles - mainCamera.transform.rotation.eulerAngles;
         temporaryRotation = Quaternion.Euler(angles);
 
