@@ -10,7 +10,8 @@ public class PhaseChecker
     public static float tolerance;
 
 
-    public PhaseChecker(Vector3[] leftPhaseCoords, Vector3[] rightPhaseCoords){
+    public PhaseChecker(Vector3[] leftPhaseCoords, Vector3[] rightPhaseCoords)
+    {
         this.leftPhaseCoords = leftPhaseCoords;
         this.rightPhaseCoords = rightPhaseCoords;
         this.leftController = GameObject.Find("Left Controller").GetComponent<Controller>();
@@ -20,7 +21,8 @@ public class PhaseChecker
 
     public bool check(int phase)
     {
-        if(leftController.isTrigger && rightController.isTrigger){
+        if (leftController.isTrigger && rightController.isTrigger)
+        {
             if ((leftController.relativeTransform.position.x < leftPhaseCoords[phase].x + tolerance && leftController.relativeTransform.position.x > leftPhaseCoords[phase].x - tolerance
             && leftController.relativeTransform.position.y < leftPhaseCoords[phase].y + tolerance && leftController.relativeTransform.position.y > leftPhaseCoords[phase].y - tolerance
             && leftController.relativeTransform.position.z < leftPhaseCoords[phase].z + tolerance && leftController.relativeTransform.position.z > leftPhaseCoords[phase].z - tolerance)
@@ -30,13 +32,14 @@ public class PhaseChecker
             && rightController.relativeTransform.position.z < rightPhaseCoords[phase].z + tolerance && rightController.relativeTransform.position.z > rightPhaseCoords[phase].z - tolerance))
             {
                 //TODO: checkFluidity was da los?
-                //if (checkFluidity(0.1f, 1)) return false; 
+                //if (checkFluidity(0.1f, 1)) return false;
                 return true;
             }
         }
         return false;
-    }   
-    private bool checkFluidity(float minSpeed, float maxSpeed){
+    }
+    private bool checkFluidity(float minSpeed, float maxSpeed)
+    {
         float leftVelocityMagnitude = leftController.controllerVelocity.magnitude;
         float rightVelocityMagnitude = rightController.controllerVelocity.magnitude;
         if (leftVelocityMagnitude > maxSpeed || rightVelocityMagnitude > maxSpeed)
@@ -44,7 +47,8 @@ public class PhaseChecker
             Debug.Log("Too fast.");
             return true;
         }
-        if (leftVelocityMagnitude < minSpeed || rightVelocityMagnitude < minSpeed){
+        if (leftVelocityMagnitude < minSpeed || rightVelocityMagnitude < minSpeed)
+        {
             Debug.Log("Too slow.");
             return true;
         }
