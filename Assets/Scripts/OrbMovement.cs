@@ -10,7 +10,7 @@ public class OrbMovement : MonoBehaviour
     private Rigidbody rb;
 
     [Header("Target Setup")]
-    public Transform playerTarget;
+    private Transform playerTarget;
     private Transform[] targets;
     private Transform target;
     private int targetIndex = 0;
@@ -23,8 +23,12 @@ public class OrbMovement : MonoBehaviour
     void Start()
     {
         orbManager = OrbManager.instance;
+        gameObject.name = "Orb" + orbManager.OrbsInGame;
         orbManager.AddOrb(gameObject);
+
         rb = GetComponent<Rigidbody>();
+
+        playerTarget = GameObject.Find("Main Camera").transform;
         SetTargetArrayToPlayer();
     }
 
@@ -63,7 +67,7 @@ public class OrbMovement : MonoBehaviour
         rb.angularVelocity = -rotateAmount * rotateSpeed;
         rb.velocity = transform.up * speed;
 
-        if (GetDistanceToPlayer() <= 0.1f) GetNextTarget();
+        if (GetDistanceToTarget() <= 0.1f) GetNextTarget();
     }
 
     private void GetNextTarget()
@@ -78,7 +82,7 @@ public class OrbMovement : MonoBehaviour
         target = targets[targetIndex];
     }
 
-    public float GetDistanceToPlayer()
+    public float GetDistanceToTarget()
     {
         float distance = Vector3.Distance(rb.position, target.position);
         return distance;

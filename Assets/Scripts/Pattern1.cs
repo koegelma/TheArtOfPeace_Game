@@ -14,6 +14,7 @@ public class Pattern1 : MonoBehaviour
     public Controller leftController;
     public Controller rightController;
     public Transform cameraTransform;
+    private OrbManager orbManager;
     //private Vector3 offset = new Vector3(0, 0, 2);
 
     /*
@@ -35,10 +36,19 @@ public class Pattern1 : MonoBehaviour
         rightPhaseCoords[2] = new Vector3(0.2f, -0.1f, 0.6f);
         phaseChecker = new PhaseChecker(leftPhaseCoords, rightPhaseCoords);
     }
+
+    private void Start()
+    {
+        orbManager = OrbManager.instance;
+    }
     void Update()
     {
+        if (!orbManager.HasOrbs)
+        {
+            return;
+        }
         //TODO: updateHelper soll nicht in IDLE aufgerufen werden
-        if (StateManager.state == State.IDLE || StateManager.state == State.PATTERN1)
+        if (StateManager.state == State.IDLE && orbManager.IsAnyOrbDirectedAtPlayer() || StateManager.state == State.PATTERN1)
         {
             if (phaseChecker.check(0) || (StateManager.state == State.PATTERN1))
             {
@@ -54,6 +64,7 @@ public class Pattern1 : MonoBehaviour
             rightHelper.transform.localScale = new Vector3(0, 0, 0);
         }
     }
+
     void checkPattern()
     {
         StateManager.switchPhase(0, 5f);
@@ -71,11 +82,11 @@ public class Pattern1 : MonoBehaviour
     void updateHelper()
     {
         float tolerance = PhaseChecker.tolerance * 2;
-        Vector3 scale = new Vector3(tolerance,tolerance,tolerance);
+        Vector3 scale = new Vector3(tolerance, tolerance, tolerance);
         if (leftChild.transform.localScale != scale && rightChild.transform.localScale != scale)
         {
             leftChild.transform.localScale = new Vector3(tolerance, tolerance, tolerance);
-            rightChild.transform.localScale = new Vector3(tolerance,tolerance, tolerance);
+            rightChild.transform.localScale = new Vector3(tolerance, tolerance, tolerance);
         }
 
         leftHelper.transform.position = cameraTransform.position;

@@ -20,18 +20,13 @@ public class OrbManager : MonoBehaviour
     private OrbMovement orbMovement;
 
     public bool HasOrbs { get { return orbs.Count >= 1; } }
+    public int OrbsInGame { get { return orbs.Count; } }
 
     public void AddOrb(GameObject _orb)
     {
-        foreach (GameObject orb in orbs)
-        {
-            if (_orb.name == orb.name)
-            {
-                Debug.Log("orb already in orbs");
-                return;
-            }
-            orbs.Add(_orb);
-        }
+        orbs.Add(_orb);
+        Debug.Log("Orb added");
+        orbList();
     }
 
     public void RemoveOrb(GameObject _orb)
@@ -41,6 +36,7 @@ public class OrbManager : MonoBehaviour
             if (orb.name == _orb.name)
             {
                 orbs.Remove(orb);
+                Debug.Log("Orb removed");
                 return;
             }
         }
@@ -62,13 +58,20 @@ public class OrbManager : MonoBehaviour
         foreach (GameObject orb in orbs)
         {
             orbMovement = orb.GetComponent<OrbMovement>();
-            if (orbMovement.TargetIsPlayer && orbMovement.GetDistanceToPlayer() > distanceToPlayer)
+            if (orbMovement.TargetIsPlayer && orbMovement.GetDistanceToTarget() > distanceToPlayer)
             {
-                distanceToPlayer = orbMovement.GetDistanceToPlayer();
+                distanceToPlayer = orbMovement.GetDistanceToTarget();
                 orbDirectedAtPlayer = orb;
             }
         }
         return orbDirectedAtPlayer;
     }
 
+    public void orbList()
+    {
+        foreach (GameObject orb in orbs)
+        {
+            Debug.Log("Orb: " + orb.name);
+        }
+    }
 }
