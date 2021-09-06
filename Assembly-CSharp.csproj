@@ -61,13 +61,13 @@
      <Compile Include="Assets\Scripts\Old Scripts\ShootProjectile.cs" />
      <Compile Include="Assets\Scripts\Old Scripts\Water.cs" />
      <Compile Include="Assets\Scripts\Old Scripts\createProjectile.cs" />
+     <Compile Include="Assets\Scripts\Old Scripts\relTransScript.cs" />
      <Compile Include="Assets\Scripts\OrbMovement.cs" />
      <Compile Include="Assets\Scripts\Pattern1.cs" />
      <Compile Include="Assets\Scripts\PatternTemplate.cs" />
      <Compile Include="Assets\Scripts\PhaseChecker.cs" />
      <Compile Include="Assets\Scripts\StateManager.cs" />
      <Compile Include="Assets\Scripts\StateVisualizer.cs" />
-     <Compile Include="Assets\Scripts\relTransScript.cs" />
      <None Include="Assets\RaymarcherPackage\Core\CG\Raymarch_Master_Example_Mobile_FractalTrip.shader" />
      <None Include="Assets\RaymarcherPackage\Core\CG\ObjectBuffers\Raymarch_ObjectBuffer_Example_PCVR_Playground.cginc" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

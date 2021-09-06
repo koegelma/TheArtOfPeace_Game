@@ -14,7 +14,7 @@ public class Pattern1 : MonoBehaviour
     public Controller leftController;
     public Controller rightController;
     public Transform cameraTransform;
-    private Vector3 offset = new Vector3(0, 0, 2);
+    //private Vector3 offset = new Vector3(0, 0, 2);
 
     /*
     void testPosition(){
@@ -81,8 +81,11 @@ public class Pattern1 : MonoBehaviour
         leftHelper.transform.position = cameraTransform.position;
         rightHelper.transform.position = cameraTransform.position;
 
-        leftChild.transform.localPosition = this.leftPhaseCoords[StateManager.currentPhase + 1] + offset;
-        rightChild.transform.localPosition = this.rightPhaseCoords[StateManager.currentPhase + 1] + offset;
+        /* leftChild.transform.localPosition = this.leftPhaseCoords[StateManager.currentPhase + 1] + offset;
+        rightChild.transform.localPosition = this.rightPhaseCoords[StateManager.currentPhase + 1] + offset; */
+
+        leftChild.transform.localPosition = this.leftPhaseCoords[StateManager.currentPhase + 1];
+        rightChild.transform.localPosition = this.rightPhaseCoords[StateManager.currentPhase + 1];
 
         leftHelper.transform.eulerAngles = new Vector3(leftHelper.transform.eulerAngles.x, cameraTransform.eulerAngles.y, leftHelper.transform.eulerAngles.z);
         rightHelper.transform.eulerAngles = new Vector3(rightHelper.transform.eulerAngles.x, cameraTransform.eulerAngles.y, rightHelper.transform.eulerAngles.z);

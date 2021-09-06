@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class OrbMovement : MonoBehaviour
 {
-    public Transform target;
+    private Transform target;
+    public Transform[] targets;
     public float speed = 5f;
     public float rotateSpeed = 200f;
     private Rigidbody rb;
+
     // Start is called before the first frame update
     void Start()
     {
