@@ -4,20 +4,57 @@ using UnityEngine;
 
 public class OrbMovement : MonoBehaviour
 {
-    private Transform target;
-    public Transform[] targets;
-    public float speed = 5f;
+    [Header("Orb Setup")]
+    public float speed = 2f;
     public float rotateSpeed = 200f;
     private Rigidbody rb;
 
-    // Start is called before the first frame update
+    [Header("Target Setup")]
+    public Transform playerTarget;
+    private Transform[] targets;
+    private Transform target;
+    private int targetIndex = 0;
+
+    OrbManager orbManager;
+
+    public bool HasTarget { get { return target != null; } }
+    public bool TargetIsPlayer { get { return target == playerTarget; } }
+
     void Start()
     {
+        orbManager = OrbManager.instance;
+        orbManager.AddOrb(gameObject);
         rb = GetComponent<Rigidbody>();
+        SetTargetArrayToPlayer();
     }
 
-    // Update is called once per frame
     void FixedUpdate()
+    {
+        if (!HasTarget)
+        {
+            orbManager.RemoveOrb(gameObject);
+            //TODO: add destroy orb particle effect
+            Destroy(gameObject);
+            return;
+        }
+
+        TranslateOrb();
+    }
+
+    private void SetTargetArrayToPlayer()
+    {
+        Transform[] playerTargetArray = new Transform[] { playerTarget };
+        SetTargetArray(playerTargetArray);
+    }
+
+    public void SetTargetArray(Transform[] _targets)
+    {
+        targets = _targets;
+        targetIndex = 0;
+        target = targets[targetIndex];
+    }
+
+    private void TranslateOrb()
     {
         Vector3 direction = target.position - rb.position;
 
@@ -25,5 +62,25 @@ public class OrbMovement : MonoBehaviour
         Vector3 rotateAmount = Vector3.Cross(direction, transform.up);
         rb.angularVelocity = -rotateAmount * rotateSpeed;
         rb.velocity = transform.up * speed;
+
+        if (GetDistanceToPlayer() <= 0.1f) GetNextTarget();
+    }
+
+    private void GetNextTarget()
+    {
+        if (targetIndex >= targets.Length - 1)
+        {
+            target = null;
+            Debug.Log("last target reached!");
+            return;
+        }
+        targetIndex++;
+        target = targets[targetIndex];
+    }
+
+    public float GetDistanceToPlayer()
+    {
+        float distance = Vector3.Distance(rb.position, target.position);
+        return distance;
     }
 }
