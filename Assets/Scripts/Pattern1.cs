@@ -14,6 +14,8 @@ public class Pattern1 : MonoBehaviour
     public Controller leftController;
     public Controller rightController;
     public Transform cameraTransform;
+    public GameObject targetPrefab;
+    private Transform[] targets;
     private OrbManager orbManager;
     //private Vector3 offset = new Vector3(0, 0, 2);
 
@@ -52,6 +54,7 @@ public class Pattern1 : MonoBehaviour
         {
             if (phaseChecker.check(0) || (StateManager.state == State.PATTERN1))
             {
+                if (StateManager.state != State.PATTERN1) StartCoroutine(SpawnTargets());
                 StateManager.state = State.PATTERN1;
                 checkPattern();
             }
@@ -67,10 +70,10 @@ public class Pattern1 : MonoBehaviour
 
     void checkPattern()
     {
-        StateManager.switchPhase(0, 5f);
+        StateManager.switchPhase(0, 15f);
         if ((phaseChecker.check(1) && StateManager.currentPhase == 0) || (StateManager.state == State.PATTERN1 && StateManager.currentPhase > 0))
         {
-            StateManager.switchPhase(1, 5f);
+            StateManager.switchPhase(1, 15f);
             if (phaseChecker.check(2) && StateManager.currentPhase == 1)
             {
                 Debug.Log("success!");
@@ -100,5 +103,17 @@ public class Pattern1 : MonoBehaviour
 
         leftHelper.transform.eulerAngles = new Vector3(leftHelper.transform.eulerAngles.x, cameraTransform.eulerAngles.y, leftHelper.transform.eulerAngles.z);
         rightHelper.transform.eulerAngles = new Vector3(rightHelper.transform.eulerAngles.x, cameraTransform.eulerAngles.y, rightHelper.transform.eulerAngles.z);
+    }
+
+    private IEnumerator SpawnTargets()
+    {
+        GameObject targetsGameObject = (GameObject)Instantiate(targetPrefab, Vector3.zero, transform.rotation);
+        Target targetsScript = targetsGameObject.GetComponent<Target>();
+        yield return new WaitUntil(() => targetsScript.IsInitialized);
+
+        targets = targetsScript.targets;
+
+        GameObject orb = orbManager.GetOrbDirectedAtPlayer();
+        orb.GetComponent<OrbMovement>().SetTargetArray(targets);
     }
 }

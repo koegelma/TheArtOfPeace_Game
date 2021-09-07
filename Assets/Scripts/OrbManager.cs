@@ -15,7 +15,7 @@ public class OrbManager : MonoBehaviour
         instance = this;
     }
 
-    public List<GameObject> orbs = new List<GameObject>();
+    public List<GameObject> orbs = new List<GameObject>(); // evtl. Anzahl Orbs über int tracken und mit Schleife nach GameObject.Find("Orb"+[i]) suchen, falls es Probleme mit Liste gibt (bei mehreren Orbs gleichzeitig)
 
     private OrbMovement orbMovement;
 
@@ -26,7 +26,6 @@ public class OrbManager : MonoBehaviour
     {
         orbs.Add(_orb);
         Debug.Log("Orb added");
-        orbList();
     }
 
     public void RemoveOrb(GameObject _orb)
@@ -65,13 +64,5 @@ public class OrbManager : MonoBehaviour
             }
         }
         return orbDirectedAtPlayer;
-    }
-
-    public void orbList()
-    {
-        foreach (GameObject orb in orbs)
-        {
-            Debug.Log("Orb: " + orb.name);
-        }
     }
 }

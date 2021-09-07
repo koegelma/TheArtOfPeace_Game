@@ -12,7 +12,7 @@ public class OrbMovement : MonoBehaviour
     [Header("Target Setup")]
     private Transform playerTarget;
     private Transform[] targets;
-    private Transform target;
+    public Transform target;
     private int targetIndex = 0;
 
     OrbManager orbManager;
@@ -47,6 +47,7 @@ public class OrbMovement : MonoBehaviour
 
     private void SetTargetArrayToPlayer()
     {
+        // TODO: check if State != IDLE or if pattern exists, then set target[] to pattern
         Transform[] playerTargetArray = new Transform[] { playerTarget };
         SetTargetArray(playerTargetArray);
     }
@@ -63,7 +64,7 @@ public class OrbMovement : MonoBehaviour
         Vector3 direction = target.position - rb.position;
 
         direction.Normalize();
-        Vector3 rotateAmount = Vector3.Cross(direction, transform.up);
+        Vector3 rotateAmount = Vector3.Cross(direction, transform.up); // fix rotation
         rb.angularVelocity = -rotateAmount * rotateSpeed;
         rb.velocity = transform.up * speed;
 

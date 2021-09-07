@@ -70,6 +70,7 @@
      <Compile Include="Assets\Scripts\PhaseChecker.cs" />
      <Compile Include="Assets\Scripts\StateManager.cs" />
      <Compile Include="Assets\Scripts\StateVisualizer.cs" />
+     <Compile Include="Assets\Scripts\Target.cs" />
      <None Include="Assets\RaymarcherPackage\Core\CG\Raymarch_Master_Example_Mobile_FractalTrip.shader" />
      <None Include="Assets\RaymarcherPackage\Core\CG\ObjectBuffers\Raymarch_ObjectBuffer_Example_PCVR_Playground.cginc" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

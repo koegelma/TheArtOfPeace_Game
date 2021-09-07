@@ -264,7 +264,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &505308198
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -290,7 +290,7 @@ CapsuleCollider:
   m_GameObject: {fileID: 505308197}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   m_Radius: 0.5
   m_Height: 2
   m_Direction: 1
@@ -915,7 +915,6 @@ GameObject:
   m_Component:
   - component: {fileID: 940223137}
   - component: {fileID: 940223136}
-  - component: {fileID: 940223138}
   - component: {fileID: 940223139}
   m_Layer: 0
   m_Name: Master of Disaster
@@ -945,6 +944,8 @@ MonoBehaviour:
   leftController: {fileID: 1728657558}
   rightController: {fileID: 541096548}
   cameraTransform: {fileID: 963194228}
+  targetPrefab: {fileID: 53079524275291616, guid: b45b49504e3a84d429c4e12017242502,
+    type: 3}
 --- !u!4 &940223137
 Transform:
   m_ObjectHideFlags: 0
@@ -959,23 +960,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &940223138
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 940223135}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 84d79dea7421a8a418fcbc229b153e63, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  leftCube: {fileID: 708941121}
-  rightCube: {fileID: 1520293128}
-  leftController: {fileID: 1728657558}
-  rightController: {fileID: 541096548}
-  cameraTransform: {fileID: 963194228}
 --- !u!114 &940223139
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1423,7 +1407,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1368634428
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1449,7 +1433,7 @@ CapsuleCollider:
   m_GameObject: {fileID: 1368634427}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   m_Radius: 0.5
   m_Height: 2
   m_Direction: 1
@@ -2395,7 +2379,7 @@ CapsuleCollider:
   m_GameObject: {fileID: 2881775637871867544}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   m_Radius: 0.5
   m_Height: 2
   m_Direction: 1
