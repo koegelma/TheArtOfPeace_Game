@@ -50,14 +50,15 @@ public class OrbManager : MonoBehaviour
         }
         return false;
     }
+
     public GameObject GetOrbDirectedAtPlayer()
     {
-        float distanceToPlayer = 0;
+        float distanceToPlayer = Mathf.Infinity;
         GameObject orbDirectedAtPlayer = null;
         foreach (GameObject orb in orbs)
         {
             orbMovement = orb.GetComponent<OrbMovement>();
-            if (orbMovement.TargetIsPlayer && orbMovement.GetDistanceToTarget() > distanceToPlayer)
+            if (orbMovement.TargetIsPlayer && orbMovement.GetDistanceToTarget() < distanceToPlayer)
             {
                 distanceToPlayer = orbMovement.GetDistanceToTarget();
                 orbDirectedAtPlayer = orb;

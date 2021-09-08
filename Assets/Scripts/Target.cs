@@ -11,7 +11,7 @@ public class Target : MonoBehaviour
     {
         playerTransform = GameObject.Find("Main Camera").transform;
         SetPosition();
-        Vector3 angles = new Vector3(transform.rotation.x, playerTransform.rotation.y, transform.rotation.z);
+        Vector3 angles = new Vector3(transform.rotation.x, playerTransform.rotation.y*100, transform.rotation.z);
         transform.rotation = Quaternion.Euler(angles);
 
         SetTargets();

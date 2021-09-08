@@ -17,6 +17,8 @@ public class OrbMovement : MonoBehaviour
 
     OrbManager orbManager;
 
+    public GameObject enemyContainer;
+
     public bool HasTarget { get { return target != null; } }
     public bool TargetIsPlayer { get { return target == playerTarget; } }
 
@@ -29,6 +31,7 @@ public class OrbMovement : MonoBehaviour
         rb = GetComponent<Rigidbody>();
 
         playerTarget = GameObject.Find("Main Camera").transform;
+        enemyContainer = GameObject.Find("Enemy Container");
         SetTargetArrayToPlayer();
     }
 
@@ -41,7 +44,6 @@ public class OrbMovement : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-
         TranslateOrb();
     }
 
@@ -75,7 +77,15 @@ public class OrbMovement : MonoBehaviour
     {
         if (targetIndex >= targets.Length - 1)
         {
-            target = null;
+            if (target.name.Contains("Node"))
+            {
+                Transform[] enemyArray = new Transform[] { GetMostReachableEnemy() };
+                SetTargetArray(enemyArray);
+            }
+            else
+            {
+                target = null;
+            }
             Debug.Log("last target reached!");
             return;
         }
@@ -87,5 +97,20 @@ public class OrbMovement : MonoBehaviour
     {
         float distance = Vector3.Distance(rb.position, target.position);
         return distance;
+    }
+    public Transform GetMostReachableEnemy()
+    {
+        float scalar = -Mathf.Infinity;
+        Transform mostReachableEnemy = null;
+        for (var i = 0; i < enemyContainer.transform.childCount; i++)
+        {
+            Vector3 enemyDistanceVector = enemyContainer.transform.GetChild(i).position - transform.position;
+            if (scalar < Vector3.Dot(rb.velocity, enemyDistanceVector))
+            {
+                mostReachableEnemy = enemyContainer.transform.GetChild(i);
+                scalar = Vector3.Dot(rb.velocity, enemyDistanceVector);
+            }
+        }
+        return mostReachableEnemy;
     }
 }
