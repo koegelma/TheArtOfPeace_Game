@@ -70,10 +70,10 @@ public class Pattern1 : MonoBehaviour
 
     void checkPattern()
     {
-        StateManager.switchPhase(0, 15f);
+        StateManager.switchPhase(0, 5f);
         if ((phaseChecker.check(1) && StateManager.currentPhase == 0) || (StateManager.state == State.PATTERN1 && StateManager.currentPhase > 0))
         {
-            StateManager.switchPhase(1, 15f);
+            StateManager.switchPhase(1, 5f);
             if (phaseChecker.check(2) && StateManager.currentPhase == 1)
             {
                 Debug.Log("success!");

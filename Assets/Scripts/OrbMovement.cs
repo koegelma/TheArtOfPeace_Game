@@ -25,7 +25,7 @@ public class OrbMovement : MonoBehaviour
     void Start()
     {
         orbManager = OrbManager.instance;
-        gameObject.name = "Orb" + orbManager.OrbsInGame;
+        gameObject.name = "Orb" + orbManager.orbsCreated;
         orbManager.AddOrb(gameObject);
 
         rb = GetComponent<Rigidbody>();
