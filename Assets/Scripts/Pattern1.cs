@@ -14,9 +14,13 @@ public class Pattern1 : MonoBehaviour
     public Controller leftController;
     public Controller rightController;
     public Transform cameraTransform;
-    public GameObject targetPrefab;
+    public GameObject patternTargetPrefab;
+    private GameObject targetsGameObject;
     private Transform[] targets;
     private OrbManager orbManager;
+    private float patternTargetsCountdown;
+    private float patternTargetsCountdownLength = 7f;
+    private bool isCountdown = false;
     //private Vector3 offset = new Vector3(0, 0, 2);
 
     /*
@@ -37,24 +41,27 @@ public class Pattern1 : MonoBehaviour
         leftPhaseCoords[2] = new Vector3(-0.1f, -0.3f, 0.3f);
         rightPhaseCoords[2] = new Vector3(0.2f, -0.1f, 0.6f);
         phaseChecker = new PhaseChecker(leftPhaseCoords, rightPhaseCoords);
+
+        targetsGameObject = null;
     }
 
     private void Start()
     {
         orbManager = OrbManager.instance;
+        patternTargetsCountdown = patternTargetsCountdownLength;
     }
     void Update()
     {
-        if (!orbManager.HasOrbs)
-        {
-            return;
-        }
+        if (isCountdown) Countdown();
+        if (!orbManager.HasOrbs) return;
+
         //TODO: updateHelper soll nicht in IDLE aufgerufen werden
+        // - target array for OrbMovement: only set target[n] if phase(n) is switched?
         if (StateManager.state == State.IDLE && orbManager.IsAnyOrbDirectedAtPlayer() || StateManager.state == State.PATTERN1)
         {
             if (phaseChecker.check(0) || (StateManager.state == State.PATTERN1))
             {
-                if (StateManager.state != State.PATTERN1) StartCoroutine(SpawnTargets());
+                if (StateManager.state != State.PATTERN1 && targetsGameObject == null) StartCoroutine(SpawnPatternTargets());
                 StateManager.state = State.PATTERN1;
                 checkPattern();
             }
@@ -63,8 +70,8 @@ public class Pattern1 : MonoBehaviour
         }
         else
         {
-            leftHelper.transform.localScale = new Vector3(0, 0, 0);
-            rightHelper.transform.localScale = new Vector3(0, 0, 0);
+            leftChild.transform.localScale = new Vector3(0, 0, 0);
+            rightChild.transform.localScale = new Vector3(0, 0, 0);
         }
     }
 
@@ -95,9 +102,6 @@ public class Pattern1 : MonoBehaviour
         leftHelper.transform.position = cameraTransform.position;
         rightHelper.transform.position = cameraTransform.position;
 
-        /* leftChild.transform.localPosition = this.leftPhaseCoords[StateManager.currentPhase + 1] + offset;
-        rightChild.transform.localPosition = this.rightPhaseCoords[StateManager.currentPhase + 1] + offset; */
-
         leftChild.transform.localPosition = this.leftPhaseCoords[StateManager.currentPhase + 1];
         rightChild.transform.localPosition = this.rightPhaseCoords[StateManager.currentPhase + 1];
 
@@ -105,15 +109,38 @@ public class Pattern1 : MonoBehaviour
         rightHelper.transform.eulerAngles = new Vector3(rightHelper.transform.eulerAngles.x, cameraTransform.eulerAngles.y, rightHelper.transform.eulerAngles.z);
     }
 
-    private IEnumerator SpawnTargets()
+    private IEnumerator SpawnPatternTargets()
     {
-        GameObject targetsGameObject = (GameObject)Instantiate(targetPrefab, Vector3.zero, transform.rotation);
-        Target targetsScript = targetsGameObject.GetComponent<Target>();
-        yield return new WaitUntil(() => targetsScript.IsInitialized);
+        targetsGameObject = (GameObject)Instantiate(patternTargetPrefab, Vector3.zero, transform.rotation);
+        isCountdown = true;
+        PatternTarget targetsScript = targetsGameObject.GetComponent<PatternTarget>();
+        yield return new WaitUntil(() => targetsScript.isInitialized);
 
         targets = targetsScript.targets;
 
-        GameObject orb = orbManager.GetOrbDirectedAtPlayer();
-        orb.GetComponent<OrbMovement>().SetTargetArray(targets);
+        List<GameObject> orbsDirectedAtPlayer = orbManager.GetAllOrbsDirectedAtPlayer();
+
+        foreach (GameObject orb in orbsDirectedAtPlayer)
+        {
+            orb.GetComponent<OrbMovement>().SetTargetArray(targets);
+        }
+    }
+
+    private void Countdown()
+    {
+        if (patternTargetsCountdown <= 0f)
+        {
+            DestroyPatternTargets();
+            patternTargetsCountdown = patternTargetsCountdownLength;
+            isCountdown = false;
+            return;
+        }
+        patternTargetsCountdown -= Time.deltaTime;
+    }
+
+    private void DestroyPatternTargets()
+    {
+        Destroy(targetsGameObject);
+        targetsGameObject = null;
     }
 }

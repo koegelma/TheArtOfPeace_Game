@@ -5,17 +5,25 @@ public class Enemy : MonoBehaviour
     public GameObject orbPrefab;
     public Transform player;
     public Transform firePosition;
+    private OrbManager orbManager;
 
-    private float countdown = 3f;
-    private float timeBetweenOrbs = 10f;
+    //private float countdown = 3f;
+    //private float timeBetweenOrbs = 10f;
+    private float countdown;//remove - only for testing
+    private float timeBetweenOrbs;//remove - only for testing
 
     private void Start()
     {
+        orbManager = OrbManager.instance;
+        countdown = Random.Range(4f, 10f);//remove - only for testing
+        timeBetweenOrbs = Random.Range(8f, 12f);//remove - only for testing
         //InvokeRepeating("ShootOrb", 0f, 5f);
     }
 
     private void Update()
     {
+        
+        //if (orbManager.HasOrbs) return; //remove - only for testing
         transform.LookAt(player);
 
         if (countdown <= 0f)

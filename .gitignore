@@ -1,3 +1,9 @@
 Library/PackageCache/com.unity.toolchain.win-x86_64-linux-x86_64@0.1.20-preview/data~/payload.tar.7z
 
 Temp/UnityLockfile
+
+Assembly-CSharp.csproj
+Assembly-CSharp-Editor.csproj
+
+/Temp
+Assembly-CSharp.csproj

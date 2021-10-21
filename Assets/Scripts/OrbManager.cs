@@ -68,4 +68,15 @@ public class OrbManager : MonoBehaviour
         }
         return orbDirectedAtPlayer;
     }
+
+    public List<GameObject> GetAllOrbsDirectedAtPlayer()
+    {
+        List<GameObject> orbsDirectedAtPlayer = new List<GameObject>();
+        foreach (GameObject orb in orbs)
+        {
+            orbMovement = orb.GetComponent<OrbMovement>();
+            if (orbMovement.TargetIsPlayer) orbsDirectedAtPlayer.Add(orb);
+        }
+        return orbsDirectedAtPlayer;
+    }
 }

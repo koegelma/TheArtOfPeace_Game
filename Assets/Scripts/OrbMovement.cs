@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class OrbMovement : MonoBehaviour
 {
@@ -14,9 +12,8 @@ public class OrbMovement : MonoBehaviour
     private Transform[] targets;
     public Transform target;
     private int targetIndex = 0;
-
     OrbManager orbManager;
-
+    //GameObject patternNode;//remove - only for testing
     public GameObject enemyContainer;
 
     public bool HasTarget { get { return target != null; } }
@@ -53,6 +50,10 @@ public class OrbMovement : MonoBehaviour
         Transform[] playerTargetArray = new Transform[] { playerTarget };
         SetTargetArray(playerTargetArray);
     }
+    /* public void SetPatternNode(GameObject pattern) //remove - only for testing
+    {
+        patternNode = pattern;
+    } */
 
     public void SetTargetArray(Transform[] _targets)
     {
@@ -81,11 +82,13 @@ public class OrbMovement : MonoBehaviour
             {
                 Transform[] enemyArray = new Transform[] { GetMostReachableEnemy() };
                 SetTargetArray(enemyArray);
+                // Destroy targets (GameObject Targets) from here
+                //Destroy(patternNode);//remove - only for testing
+
+
+                return;
             }
-            else
-            {
-                target = null;
-            }
+            target = null;
             Debug.Log("last target reached!");
             return;
         }
