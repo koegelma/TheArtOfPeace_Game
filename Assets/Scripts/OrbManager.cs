@@ -48,7 +48,7 @@ public class OrbManager : MonoBehaviour
         foreach (GameObject orb in orbs)
         {
             orbMovement = orb.GetComponent<OrbMovement>();
-            if (orbMovement.TargetIsPlayer) return true;
+            if (orbMovement.targetIsPlayer) return true;
         }
         return false;
     }
@@ -60,7 +60,7 @@ public class OrbManager : MonoBehaviour
         foreach (GameObject orb in orbs)
         {
             orbMovement = orb.GetComponent<OrbMovement>();
-            if (orbMovement.TargetIsPlayer && orbMovement.GetDistanceToTarget() < distanceToPlayer)
+            if (orbMovement.targetIsPlayer && orbMovement.GetDistanceToTarget() < distanceToPlayer)
             {
                 distanceToPlayer = orbMovement.GetDistanceToTarget();
                 orbDirectedAtPlayer = orb;
@@ -75,7 +75,7 @@ public class OrbManager : MonoBehaviour
         foreach (GameObject orb in orbs)
         {
             orbMovement = orb.GetComponent<OrbMovement>();
-            if (orbMovement.TargetIsPlayer) orbsDirectedAtPlayer.Add(orb);
+            if (orbMovement.targetIsPlayer) orbsDirectedAtPlayer.Add(orb);
         }
         return orbsDirectedAtPlayer;
     }

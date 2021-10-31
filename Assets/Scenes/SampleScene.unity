@@ -933,7 +933,7 @@ MonoBehaviour:
   leftController: {fileID: 1728657558}
   rightController: {fileID: 541096548}
   cameraTransform: {fileID: 963194228}
-  patternTargetPrefab: {fileID: 53079524275291616, guid: b45b49504e3a84d429c4e12017242502,
+  patternTargetPrefab: {fileID: 41544210357274716, guid: b45b49504e3a84d429c4e12017242502,
     type: 3}
 --- !u!4 &940223137
 Transform:

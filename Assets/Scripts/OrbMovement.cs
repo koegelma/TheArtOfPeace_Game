@@ -16,8 +16,8 @@ public class OrbMovement : MonoBehaviour
     //GameObject patternNode;//remove - only for testing
     public GameObject enemyContainer;
 
-    public bool HasTarget { get { return target != null; } }
-    public bool TargetIsPlayer { get { return target == playerTarget; } }
+    public bool hasTarget { get { return target != null; } }
+    public bool targetIsPlayer { get { return target == playerTarget; } }
 
     void Start()
     {
@@ -34,7 +34,7 @@ public class OrbMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (!HasTarget)
+        if (!hasTarget)
         {
             orbManager.RemoveOrb(gameObject);
             //TODO: add destroy orb particle effect
@@ -76,6 +76,18 @@ public class OrbMovement : MonoBehaviour
 
     private void GetNextTarget()
     {
+        //check if target is PatternTarget
+        if (targets[targetIndex].parent.gameObject.tag == "PatternTarget")
+        {
+            //check if pattern phase for next target has already been checked successfully
+            if (targetIndex > StateManager.currentPhase)
+            {
+                Debug.Log("phase does not match targetIndex");
+                target = null;
+                return;
+            }
+        }
+
         if (targetIndex >= targets.Length - 1)
         {
             if (target.name.Contains("Node"))
@@ -84,8 +96,6 @@ public class OrbMovement : MonoBehaviour
                 SetTargetArray(enemyArray);
                 // Destroy targets (GameObject Targets) from here
                 //Destroy(patternNode);//remove - only for testing
-
-
                 return;
             }
             target = null;
@@ -95,6 +105,13 @@ public class OrbMovement : MonoBehaviour
         targetIndex++;
         target = targets[targetIndex];
     }
+
+    /*  private void HndPlayerTargeting()
+     {
+         //StateManager.state != State.IDLE
+         // if (transform.parent.gameObject.name.Equals("Left Controller")) this.controller = GameObject.Find("Left Controller").GetComponent<Controller>();
+         // if (transform.parent.gameObject.tag == "PatternTarget"
+     } */
 
     public float GetDistanceToTarget()
     {
