@@ -55,7 +55,6 @@ public class Pattern1 : MonoBehaviour
         if (isCountdown) Countdown();
         if (!orbManager.HasOrbs) return;
 
-        // - target array for OrbMovement: only set target[n] if phase(n) is switched?
         if (StateManager.state == State.IDLE && orbManager.IsAnyOrbDirectedAtPlayer() || StateManager.state == State.PATTERN1)
         {
             if (phaseChecker.check(0) || (StateManager.state == State.PATTERN1))

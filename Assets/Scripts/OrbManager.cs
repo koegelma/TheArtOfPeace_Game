@@ -15,7 +15,7 @@ public class OrbManager : MonoBehaviour
         instance = this;
     }
 
-    public List<GameObject> orbs = new List<GameObject>(); // evtl. Anzahl Orbs über int tracken und mit Schleife nach GameObject.Find("Orb"+[i]) suchen, falls es Probleme mit Liste gibt (bei mehreren Orbs gleichzeitig)
+    public List<GameObject> orbs = new List<GameObject>();
 
     private OrbMovement orbMovement;
     public int orbsCreated = 0;

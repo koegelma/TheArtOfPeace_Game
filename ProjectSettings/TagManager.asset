@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Ground
   - PatternTarget
+  - Enemy
   layers:
   - Default
   - TransparentFX

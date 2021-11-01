@@ -22,7 +22,7 @@ public class Enemy : MonoBehaviour
 
     private void Update()
     {
-        
+
         //if (orbManager.HasOrbs) return; //remove - only for testing
         transform.LookAt(player);
 
@@ -38,5 +38,13 @@ public class Enemy : MonoBehaviour
     private void ShootOrb()
     {
         Instantiate(orbPrefab, firePosition.position, transform.rotation);
+    }
+
+    public void ReceiveOrb(GameObject orb)
+    {
+        OrbMovement orbScript = orb.GetComponent<OrbMovement>();
+        // PatternNodes instantiaten
+        // TargetArray dem OrbMovement übergeben
+        // OrbMovement checkt im GetNextTarget() ob Enemy und ändert Target zu player
     }
 }
