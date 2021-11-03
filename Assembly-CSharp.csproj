@@ -37,6 +37,9 @@
   </PropertyGroup>
   <ItemGroup>
      <Compile Include="Assets\DebugXR, by Tobiesen\Scripts\DebugLogPanel.cs" />
+     <Compile Include="Assets\ImportForToonWater\Scripts\CameraDepthTextureMode.cs" />
+     <Compile Include="Assets\ImportForToonWater\Scripts\NormalsReplacementShader.cs" />
+     <Compile Include="Assets\ImportForToonWater\Scripts\WaterBob.cs" />
      <Compile Include="Assets\RaymarcherPackage\Core\RM_InternalEditor.cs" />
      <Compile Include="Assets\RaymarcherPackage\Core\RM_MappingMaster.cs" />
      <Compile Include="Assets\RaymarcherPackage\Core\RM_Master.cs" />
@@ -70,9 +73,14 @@
      <Compile Include="Assets\Scripts\PatternTarget.cs" />
      <Compile Include="Assets\Scripts\PatternTemplate.cs" />
      <Compile Include="Assets\Scripts\PhaseChecker.cs" />
+     <Compile Include="Assets\Scripts\PlayerStats.cs" />
      <Compile Include="Assets\Scripts\StateManager.cs" />
      <Compile Include="Assets\Scripts\StateVisualizer.cs" />
+     <Compile Include="Assets\Scripts\UI\GameManager.cs" />
+     <Compile Include="Assets\Scripts\UI\GameOver.cs" />
+     <Compile Include="Assets\Scripts\UI\Menu.cs" />
      <None Include="Assets\RaymarcherPackage\Core\CG\Raymarch_Master_Example_Mobile_FractalTrip.shader" />
+     <None Include="Assets\Samples\Terrain Tools\0.1.0-preview\Terrain Assets\ThirdPartyNotices.txt" />
      <None Include="Assets\RaymarcherPackage\Core\CG\ObjectBuffers\Raymarch_ObjectBuffer_Example_PCVR_Playground.cginc" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
      <None Include="Assets\Shaders\ToonComplete.shader" />
@@ -101,6 +109,7 @@
      <None Include="Assets\RaymarcherPackage\Core\CG\ObjectBuffers\Raymarch_ObjectBuffer_Example_FractalTrip.cginc" />
      <None Include="Assets\RaymarcherPackage\Core\CG\ObjectBuffers\Raymarch_ObjectBuffer_Example_PCVR_Planet.cginc" />
      <None Include="Assets\RaymarcherPackage\Core\CG\Raymarch_Master_SampleScene.shader" />
+     <None Include="Assets\ImportForToonWater\Shaders\ToonWater.shader" />
      <None Include="Assets\RaymarcherPackage\Core\CG\ShapeSources\Raymarch_ShapesSource_Example_Mobile_Planet.cginc" />
      <None Include="Assets\RaymarcherPackage\Core\CG\Includes\Mobile\Raymarch_Shading.cginc" />
      <None Include="Assets\RaymarcherPackage\Core\CG\Includes\PC\Raymarch_Core.cginc" />
@@ -111,6 +120,7 @@
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF SSD.shader" />
      <None Include="Assets\RaymarcherPackage\Core\CG\ObjectBuffers\Raymarch_ObjectBuffer_Example_PCVR_Fractals.cginc" />
      <None Include="Assets\RaymarcherPackage\Core\CG\Raymarch_Master_Example_MobileVR_Trip2.shader" />
+     <None Include="Assets\ImportForToonWater\Shaders\UnlitShadowCaster.shader" />
      <None Include="Assets\RaymarcherPackage\Core\CG\Raymarch_Master_Example_LoopRepetition.shader" />
      <None Include="Assets\RaymarcherPackage\Core\CG\Includes\Mobile\RMMasterPatternDatabase.txt" />
      <None Include="Assets\RaymarcherPackage\Core\CG\ObjectBuffers\Raymarch_ObjectBuffer_Example_MusicReaction.cginc" />
@@ -123,6 +133,7 @@
      <None Include="Assets\RaymarcherPackage\Core\CG\Includes\Mobile\Raymarch_Frag.cginc" />
      <None Include="Assets\RaymarcherPackage\Core\CG\Raymarch_Master_Example_PCVR_Fractals.shader" />
      <None Include="Assets\RaymarcherPackage\Core\CG\ShapeSources\Raymarch_ShapesSource_Example_Mobile_OrganicCity.cginc" />
+     <None Include="Assets\ImportForToonWater\Shaders\ToonLit.shader" />
      <None Include="Assets\RaymarcherPackage\Core\CG\Raymarch_Master_Example_PCVR_Default.shader" />
      <None Include="Assets\RaymarcherPackage\Core\CG\Includes\PC\RMShapesPatternDatabase.txt" />
      <None Include="Assets\RaymarcherPackage\Core\CG\Raymarch_Master_Example_Operations.shader" />
@@ -136,6 +147,7 @@
      <None Include="Assets\RaymarcherPackage\Core\CG\ShapeSources\Raymarch_ShapesSource_Example_Cartoon.cginc" />
      <None Include="Assets\RaymarcherPackage\Core\CG\ShapeSources\Raymarch_ShapesSource_Example_MobileVR_Trip2.cginc" />
      <None Include="Assets\RaymarcherPackage\Core\CG\Raymarch_Master_Example_MobileVR_Planet.shader" />
+     <None Include="Assets\ImportForToonWater\Shaders\HiddenNormalsTexture.shader" />
      <None Include="Assets\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Custom-Atlas.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF.shader" />
@@ -724,6 +736,9 @@
     <Reference Include="Unity.Timeline.Editor">
         <HintPath>D:\Uni\GitHub\TheArtOfPeace_Game\Library\ScriptAssemblies\Unity.Timeline.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.TerrainTools">
+        <HintPath>D:\Uni\GitHub\TheArtOfPeace_Game\Library\ScriptAssemblies\Unity.TerrainTools.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.Toolchain.Win-x86_64-Linux-x86_64">
         <HintPath>D:\Uni\GitHub\TheArtOfPeace_Game\Library\ScriptAssemblies\Unity.Toolchain.Win-x86_64-Linux-x86_64.dll</HintPath>
     </Reference>
@@ -810,6 +825,9 @@
     </Reference>
     <Reference Include="Unity.XR.WindowsMixedReality">
         <HintPath>D:\Uni\GitHub\TheArtOfPeace_Game\Library\ScriptAssemblies\Unity.XR.WindowsMixedReality.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.TerrainTools.Editor">
+        <HintPath>D:\Uni\GitHub\TheArtOfPeace_Game\Library\ScriptAssemblies\Unity.TerrainTools.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.XR.LegacyInputHelpers">
         <HintPath>D:\Uni\GitHub\TheArtOfPeace_Game\Library\ScriptAssemblies\UnityEditor.XR.LegacyInputHelpers.dll</HintPath>

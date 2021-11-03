@@ -18,9 +18,9 @@ public class Pattern1 : MonoBehaviour
     private GameObject targetsGameObject;
     private Transform[] targets;
     private OrbManager orbManager;
-    private float patternTargetsCountdown;
+    public static float patternTargetsCountdown;
     private float patternTargetsCountdownLength = 7f;
-    private bool isCountdown = false;
+    public static bool isCountdown;
     //private Vector3 offset = new Vector3(0, 0, 2);
 
     /*
@@ -49,11 +49,13 @@ public class Pattern1 : MonoBehaviour
     {
         orbManager = OrbManager.instance;
         patternTargetsCountdown = patternTargetsCountdownLength;
+        isCountdown = false;
     }
     void Update()
     {
         if (isCountdown) Countdown();
         if (!orbManager.HasOrbs) return;
+        if (targetsGameObject == null && StateManager.state == State.PATTERN1 && StateManager.currentPhase == 2) StateManager.resetState();
 
         if (StateManager.state == State.IDLE && orbManager.IsAnyOrbDirectedAtPlayer() || StateManager.state == State.PATTERN1)
         {
@@ -82,13 +84,22 @@ public class Pattern1 : MonoBehaviour
             if (phaseChecker.check(2) && StateManager.currentPhase == 1)
             {
                 Debug.Log("success!");
-                StateManager.resetState();
+                StateManager.switchPhase(2, 5f);
+                //StateManager.resetState();
+                // helper updaten
             }
         }
     }
 
     void updateHelper()
     {
+        if (StateManager.state == State.PATTERN1 && StateManager.currentPhase == 2)
+        {
+            leftChild.transform.localScale = Vector3.zero;
+            rightChild.transform.localScale = Vector3.zero;
+            return;
+        }
+
         float tolerance = PhaseChecker.tolerance * 2;
         Vector3 scale = new Vector3(tolerance, tolerance, tolerance);
         if (leftChild.transform.localScale != scale && rightChild.transform.localScale != scale)

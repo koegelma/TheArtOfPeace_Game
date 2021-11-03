@@ -16,15 +16,16 @@ public class Enemy : MonoBehaviour
     {
         orbManager = OrbManager.instance;
         countdown = Random.Range(4f, 10f);//remove - only for testing
-        timeBetweenOrbs = Random.Range(8f, 12f);//remove - only for testing
+        timeBetweenOrbs = Random.Range(8f, 15f);//remove - only for testing
         //InvokeRepeating("ShootOrb", 0f, 5f);
     }
 
     private void Update()
     {
+        transform.LookAt(player);
 
         //if (orbManager.HasOrbs) return; //remove - only for testing
-        transform.LookAt(player);
+        if (Pattern1.isCountdown && Pattern1.patternTargetsCountdown > 2) return;
 
         if (countdown <= 0f)
         {

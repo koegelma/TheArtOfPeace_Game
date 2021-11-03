@@ -5,13 +5,14 @@ public class OrbMovement : MonoBehaviour
     [Header("Orb Setup")]
     public float speed = 2f;
     public float rotateSpeed = 200f;
+    private int orbDamage = 20;
     private Rigidbody rb;
 
     [Header("Target Setup")]
     private Transform playerTarget;
     private Transform[] targets;
     public Transform target;
-    private int targetIndex = 0;
+    public int targetIndex = 0;
     OrbManager orbManager;
     public GameObject enemyContainer;
 
@@ -35,6 +36,7 @@ public class OrbMovement : MonoBehaviour
     {
         if (!hasTarget)
         {
+            PlayerStats.life -= orbDamage;
             orbManager.RemoveOrb(gameObject);
             //TODO: add destroy orb particle effect
             Destroy(gameObject);

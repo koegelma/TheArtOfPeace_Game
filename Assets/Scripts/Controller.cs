@@ -18,7 +18,8 @@ public class Controller : MonoBehaviour
     public bool isTrigger;
     public float gripValue;
     public bool isGrip;
-    
+    public bool isMenuButton;
+
     void Update()
     {
         registerDevice();
@@ -58,11 +59,12 @@ public class Controller : MonoBehaviour
         device.TryGetFeatureValue(CommonUsages.deviceRotation, out controllerRotation);
         device.TryGetFeatureValue(CommonUsages.deviceVelocity, out controllerVelocity);
         device.TryGetFeatureValue(CommonUsages.deviceAcceleration, out controllerAcceleration);
+        device.TryGetFeatureValue(CommonUsages.menuButton, out isMenuButton);
 
         controllerRotation *= Quaternion.Euler(Vector3.right * 20);
 
         relativeTransform.position = controllerPosition - mainCamera.transform.position;
-       
+
         Vector3 angles = controllerRotation.eulerAngles - mainCamera.transform.rotation.eulerAngles;
         temporaryRotation = Quaternion.Euler(angles);
 
