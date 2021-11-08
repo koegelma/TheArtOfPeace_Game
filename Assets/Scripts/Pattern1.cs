@@ -15,6 +15,7 @@ public class Pattern1 : MonoBehaviour
     public Controller rightController;
     public Transform cameraTransform;
     public GameObject patternTargetPrefab;
+    public StateManager stateManager;
     private GameObject targetsGameObject;
     private Transform[] targets;
     private OrbManager orbManager;
@@ -48,24 +49,25 @@ public class Pattern1 : MonoBehaviour
     private void Start()
     {
         orbManager = OrbManager.instance;
+        stateManager = StateManager.instance;
         patternTargetsCountdown = patternTargetsCountdownLength;
         isCountdown = false;
     }
     void Update()
     {
-        if (isCountdown) Countdown();
+        if (isCountdown) DestroyCountdown();
         if (!orbManager.HasOrbs) return;
-        if (targetsGameObject == null && StateManager.state == State.PATTERN1 && StateManager.currentPhase == 2) StateManager.resetState();
+        if (targetsGameObject == null && stateManager.state == State.PATTERN1 && stateManager.currentPhase == 2) stateManager.resetState();
 
-        if (StateManager.state == State.IDLE && orbManager.IsAnyOrbDirectedAtPlayer() || StateManager.state == State.PATTERN1)
+        if (stateManager.state == State.IDLE && orbManager.IsAnyOrbDirectedAtPlayer() || stateManager.state == State.PATTERN1)
         {
-            if (phaseChecker.check(0) || (StateManager.state == State.PATTERN1))
+            if (phaseChecker.check(0) || (stateManager.state == State.PATTERN1))
             {
-                if (StateManager.state != State.PATTERN1 && targetsGameObject == null) StartCoroutine(SpawnPatternTargets());
-                StateManager.state = State.PATTERN1;
+                if (stateManager.state != State.PATTERN1 && targetsGameObject == null) StartCoroutine(SpawnPatternTargets());
+                stateManager.state = State.PATTERN1;
                 checkPattern();
             }
-            StateManager.updateCountdown();
+            //stateManager.updateCountdown();
             updateHelper();
         }
         else
@@ -77,14 +79,15 @@ public class Pattern1 : MonoBehaviour
 
     void checkPattern()
     {
-        StateManager.switchPhase(0, 5f);
-        if ((phaseChecker.check(1) && StateManager.currentPhase == 0) || (StateManager.state == State.PATTERN1 && StateManager.currentPhase > 0))
+        stateManager.switchPhase(0, 5f);
+        if ((phaseChecker.check(1) && stateManager.currentPhase == 0) || (stateManager.state == State.PATTERN1 && stateManager.currentPhase > 0))
         {
-            StateManager.switchPhase(1, 5f);
-            if (phaseChecker.check(2) && StateManager.currentPhase == 1)
+            stateManager.switchPhase(1, 5f);
+            if (phaseChecker.check(2) && stateManager.currentPhase == 1)
             {
                 Debug.Log("success!");
-                StateManager.switchPhase(2, 5f);
+                stateManager.switchPhase(2, 5f);
+                stateManager.isFinalPhase = true;
                 //StateManager.resetState();
                 // helper updaten
             }
@@ -93,7 +96,7 @@ public class Pattern1 : MonoBehaviour
 
     void updateHelper()
     {
-        if (StateManager.state == State.PATTERN1 && StateManager.currentPhase == 2)
+        if (stateManager.state == State.PATTERN1 && stateManager.currentPhase == 2)
         {
             leftChild.transform.localScale = Vector3.zero;
             rightChild.transform.localScale = Vector3.zero;
@@ -111,8 +114,8 @@ public class Pattern1 : MonoBehaviour
         leftHelper.transform.position = cameraTransform.position;
         rightHelper.transform.position = cameraTransform.position;
 
-        leftChild.transform.localPosition = this.leftPhaseCoords[StateManager.currentPhase + 1];
-        rightChild.transform.localPosition = this.rightPhaseCoords[StateManager.currentPhase + 1];
+        leftChild.transform.localPosition = this.leftPhaseCoords[stateManager.currentPhase + 1];
+        rightChild.transform.localPosition = this.rightPhaseCoords[stateManager.currentPhase + 1];
 
         leftHelper.transform.eulerAngles = new Vector3(leftHelper.transform.eulerAngles.x, cameraTransform.eulerAngles.y, leftHelper.transform.eulerAngles.z);
         rightHelper.transform.eulerAngles = new Vector3(rightHelper.transform.eulerAngles.x, cameraTransform.eulerAngles.y, rightHelper.transform.eulerAngles.z);
@@ -135,7 +138,7 @@ public class Pattern1 : MonoBehaviour
         }
     }
 
-    private void Countdown()
+    private void DestroyCountdown()
     {
         if (patternTargetsCountdown <= 0f)
         {

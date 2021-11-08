@@ -76,10 +76,19 @@ public class OrbMovement : MonoBehaviour
         if (targets[targetIndex].parent.gameObject.tag == "PatternTarget")
         {
             //check if pattern phase for next target has already been checked successfully
-            if (targetIndex > StateManager.currentPhase)
+            if (targetIndex > StateManager.instance.currentPhase)
             {
                 Debug.Log("phase does not match targetIndex");
                 target = null;
+                return;
+            }
+        }
+
+        if (targets[targetIndex].parent.gameObject.tag == "Enemy")
+        {
+            if (targetIndex >= targets.Length - 1)
+            {
+                SetTargetArrayToPlayer();
                 return;
             }
         }
@@ -90,8 +99,8 @@ public class OrbMovement : MonoBehaviour
             {
                 Transform mostReachableEnemy = GetMostReachableEnemy();
                 Transform[] enemyArray = new Transform[] { mostReachableEnemy };
-                mostReachableEnemy.GetComponent<Enemy>().ReceiveOrb(this.gameObject);
                 SetTargetArray(enemyArray);
+                StartCoroutine(mostReachableEnemy.GetComponent<Enemy>().ReceiveOrb(this.gameObject));
                 return;
             }
             target = null;

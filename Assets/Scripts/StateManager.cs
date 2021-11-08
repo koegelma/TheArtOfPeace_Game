@@ -5,15 +5,37 @@ public enum State
 {
     IDLE, PATTERN1, PATTERN2
 }
-public static class StateManager
+public class StateManager : MonoBehaviour
 {
-    public static State state = State.IDLE;
-    public static float stateTimestamp;
-    public static int currentPhase = -1;
-    public static float countdown;
-    
+    public static StateManager instance;
+    public State state;
+    public float stateTimestamp;
+    public int currentPhase = -1;
+    public float countdown;
+    public bool isFinalPhase;
 
-    public static int assurePhase(int phaseGiven)
+    private void Awake()
+    {
+        if (instance != null)
+        {
+            Debug.LogError("More than one StateManager in scene!");
+            return;
+        }
+        instance = this;
+    }
+
+    private void Start()
+    {
+        state = State.IDLE;
+        isFinalPhase = false;
+    }
+
+    private void Update()
+    {
+        if (state != State.IDLE) updateCountdown();
+    }
+
+    public int assurePhase(int phaseGiven)
     {
         if (phaseGiven > currentPhase)
         {
@@ -21,30 +43,39 @@ public static class StateManager
         }
         return currentPhase;
     }
-    public static void resetState(){
-        StateManager.state = State.IDLE;
-        StateManager.currentPhase = -1;
+    public void resetState()
+    {
+        Debug.Log("phase reset to -1");
+        state = State.IDLE;
+        currentPhase = -1;
+        isFinalPhase = false;
     }
-    
-    public static bool switchPhase(int phaseGiven, float countdownInSeconds){
-        if(phaseGiven > currentPhase){
+
+    public bool switchPhase(int phaseGiven, float countdownInSeconds)
+    {
+        if (phaseGiven > currentPhase)
+        {
             Debug.Log("switched to phase " + phaseGiven); // test
-            resetCountdown(phaseGiven-1, countdownInSeconds);
+            resetCountdown(phaseGiven - 1, countdownInSeconds);
             currentPhase = assurePhase(phaseGiven);
             return true;
         }
         return false;
     }
-    public static void resetCountdown(int phaseGiven, float countdownInSeconds){
-        if(currentPhase == phaseGiven){
+    public void resetCountdown(int phaseGiven, float countdownInSeconds)
+    {
+        if (currentPhase == phaseGiven)
+        {
             countdown = countdownInSeconds;
-        }        
+        }
     }
-    public static void updateCountdown(){
+    public void updateCountdown()
+    {
         countdown -= Time.deltaTime;
-        if(countdown <= 0f){
+        if (countdown <= 0f)
+        {
             //Debug.Log("Times up.");
             resetState();
         }
     }
-} 
+}

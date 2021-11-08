@@ -38,7 +38,7 @@ public class PlayerStats : MonoBehaviour
     {
         lifeText.text = life.ToString();
 
-        phase = StateManager.currentPhase;
+        phase = StateManager.instance.currentPhase;
         phaseText.text = phase.ToString();
 
         if (!OrbManager.instance.IsAnyOrbDirectedAtPlayer())

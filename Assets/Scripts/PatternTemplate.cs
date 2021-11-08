@@ -20,7 +20,7 @@ public class PatternTemplate : MonoBehaviour
         rightPhaseCoords[2] = new Vector3(1, 1, 1);
         phaseChecker = new PhaseChecker(leftPhaseCoords, rightPhaseCoords);
     }
-    void Update()
+  /*   void Update()
     {
         if(StateManager.state == State.IDLE || StateManager.state == State.PATTERN1){
             if (phaseChecker.check(0) || (StateManager.state == State.PATTERN1 && StateManager.currentPhase >= 0))
@@ -29,8 +29,8 @@ public class PatternTemplate : MonoBehaviour
                 checkPattern();
             }
         }
-    }
-    void checkPattern()
+    } */
+   /*  void checkPattern()
     {
         StateManager.switchPhase(0, 5f);
         if ((phaseChecker.check(1) && StateManager.currentPhase == 0) || (StateManager.state == State.PATTERN1 && StateManager.currentPhase > 0))
@@ -41,7 +41,7 @@ public class PatternTemplate : MonoBehaviour
                 StateManager.resetState();
             }
         }
-    }
+    } */
 
     
 }

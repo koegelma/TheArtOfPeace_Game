@@ -9,7 +9,7 @@ public class StateVisualizer : MonoBehaviour
 
     void Update()
     {
-        switch (StateManager.state)
+        switch (StateManager.instance.state)
         {
             case State.IDLE:
                 this.GetComponent<Renderer>().material.SetColor("_Color", Color.grey);
@@ -21,7 +21,7 @@ public class StateVisualizer : MonoBehaviour
                 this.GetComponent<Renderer>().material.SetColor("_Color", Color.yellow);
                 break;
         }
-        switch (StateManager.currentPhase)
+        switch (StateManager.instance.currentPhase)
         {
             case -1:
                 smallCube.transform.localScale = new Vector3(0.1f,0.1f,0.1f);
