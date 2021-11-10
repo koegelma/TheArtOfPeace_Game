@@ -12,20 +12,18 @@ public class PatternTarget : MonoBehaviour
     {
         if (gameObject.tag == "PatternTarget")
         {
-            // TODO: change parenting when instantiatet in pattern script
+            // TODO: change parenting when instantiated in pattern script
             // change transform to parent transform
             playerTransform = GameObject.Find("Main Camera").transform;
             SetPosition(playerTransform, true);
             Vector3 angles = new Vector3(transform.rotation.x, playerTransform.rotation.eulerAngles.y, transform.rotation.z);
             transform.rotation = Quaternion.Euler(angles);
         }
-
         if (gameObject.tag == "Enemy")
         {
             enemyTransform = gameObject.transform.parent.transform;
             SetPosition(enemyTransform, false);
         }
-
         SetTargets();
         isInitialized = true;
     }

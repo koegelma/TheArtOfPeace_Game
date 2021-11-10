@@ -20,7 +20,8 @@ public class Pattern1 : MonoBehaviour
     private Transform[] targets;
     private OrbManager orbManager;
     public static float patternTargetsCountdown;
-    private float patternTargetsCountdownLength = 7f;
+    private float patternTargetsCountdownLength = 5f;
+    private List<GameObject> orbsDirectedAtPlayer;
     public static bool isCountdown;
     //private Vector3 offset = new Vector3(0, 0, 2);
 
@@ -104,8 +105,8 @@ public class Pattern1 : MonoBehaviour
         }
 
         float tolerance = PhaseChecker.tolerance * 2;
-        Vector3 scale = new Vector3(tolerance, tolerance, tolerance);
-        if (leftChild.transform.localScale != scale && rightChild.transform.localScale != scale)
+        Vector3 newScale = new Vector3(tolerance, tolerance, tolerance);
+        if (leftChild.transform.localScale != newScale && rightChild.transform.localScale != newScale)
         {
             leftChild.transform.localScale = new Vector3(tolerance, tolerance, tolerance);
             rightChild.transform.localScale = new Vector3(tolerance, tolerance, tolerance);
@@ -124,27 +125,47 @@ public class Pattern1 : MonoBehaviour
     private IEnumerator SpawnPatternTargets()
     {
         targetsGameObject = (GameObject)Instantiate(patternTargetPrefab, Vector3.zero, transform.rotation);
-        isCountdown = true;
         PatternTarget targetsScript = targetsGameObject.GetComponent<PatternTarget>();
         yield return new WaitUntil(() => targetsScript.isInitialized);
 
         targets = targetsScript.targets;
 
-        List<GameObject> orbsDirectedAtPlayer = orbManager.GetAllOrbsDirectedAtPlayer();
-
+        orbsDirectedAtPlayer = orbManager.GetAllOrbsDirectedAtPlayer();
+        isCountdown = true;
         foreach (GameObject orb in orbsDirectedAtPlayer)
         {
             orb.GetComponent<OrbMovement>().SetTargetArray(targets);
         }
     }
 
+    private bool CheckPatternTargetStatus()
+    {
+        bool allPassed = true;
+        foreach (GameObject orb in orbsDirectedAtPlayer)
+        {
+            if (!orb.GetComponent<OrbMovement>().isFinalPlayerTargetPassed)
+            {
+                allPassed = false;
+            }
+        }
+        if (allPassed)
+        {
+            foreach (GameObject orb in orbsDirectedAtPlayer)
+            {
+                orb.GetComponent<OrbMovement>().isFinalPlayerTargetPassed = false;
+            }
+            DestroyPatternTargets();
+            return true;
+        }
+        return false;
+    }
+
     private void DestroyCountdown()
     {
+        if (CheckPatternTargetStatus()) return;
         if (patternTargetsCountdown <= 0f)
         {
             DestroyPatternTargets();
-            patternTargetsCountdown = patternTargetsCountdownLength;
-            isCountdown = false;
             return;
         }
         patternTargetsCountdown -= Time.deltaTime;
@@ -152,6 +173,8 @@ public class Pattern1 : MonoBehaviour
 
     private void DestroyPatternTargets()
     {
+        patternTargetsCountdown = patternTargetsCountdownLength;
+        isCountdown = false;
         Destroy(targetsGameObject);
         targetsGameObject = null;
     }

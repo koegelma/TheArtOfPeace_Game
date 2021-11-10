@@ -3,8 +3,14 @@
 public class OrbMovement : MonoBehaviour
 {
     [Header("Orb Setup")]
-    public float speed = 2f;
-    public float rotateSpeed = 200f;
+    private float speed = 2f;
+
+    private float newSpeed;
+    private float t;
+    private float slowSpeed = 3.5f;
+    private float mediumSpeed = 4.5f;
+    private float fastSpeed = 8f;
+    private float rotateSpeed = 200f;
     private int orbDamage = 20;
     private Rigidbody rb;
 
@@ -15,6 +21,8 @@ public class OrbMovement : MonoBehaviour
     public int targetIndex = 0;
     OrbManager orbManager;
     public GameObject enemyContainer;
+    public bool isFinalEnemyTargetPassed = false;
+    public bool isFinalPlayerTargetPassed = false;
 
     public bool hasTarget { get { return target != null; } }
     public bool targetIsPlayer { get { return target == playerTarget; } }
@@ -42,6 +50,8 @@ public class OrbMovement : MonoBehaviour
             Destroy(gameObject);
             return;
         }
+        CheckSpeed();
+        UpdateSpeed();
         TranslateOrb();
     }
 
@@ -63,9 +73,9 @@ public class OrbMovement : MonoBehaviour
         Vector3 direction = target.position - rb.position;
 
         direction.Normalize();
-        Vector3 rotateAmount = Vector3.Cross(direction, transform.up); // fix rotation
+        Vector3 rotateAmount = Vector3.Cross(direction, transform.forward);
         rb.angularVelocity = -rotateAmount * rotateSpeed;
-        rb.velocity = transform.up * speed;
+        rb.velocity = transform.forward * speed;
 
         if (GetDistanceToTarget() <= 0.1f) GetNextTarget();
     }
@@ -89,6 +99,7 @@ public class OrbMovement : MonoBehaviour
             if (targetIndex >= targets.Length - 1)
             {
                 SetTargetArrayToPlayer();
+                isFinalEnemyTargetPassed = true;
                 return;
             }
         }
@@ -101,6 +112,7 @@ public class OrbMovement : MonoBehaviour
                 Transform[] enemyArray = new Transform[] { mostReachableEnemy };
                 SetTargetArray(enemyArray);
                 StartCoroutine(mostReachableEnemy.GetComponent<Enemy>().ReceiveOrb(this.gameObject));
+                isFinalPlayerTargetPassed = true;
                 return;
             }
             target = null;
@@ -109,6 +121,37 @@ public class OrbMovement : MonoBehaviour
         }
         targetIndex++;
         target = targets[targetIndex];
+    }
+
+
+    private void CheckSpeed()
+    {
+        // case 1: target is player/camera
+        if (targetIsPlayer && newSpeed != mediumSpeed)
+        {
+            newSpeed = mediumSpeed;
+            t = 0;
+        }
+
+        // case 2: target is first target in PatternTarget[]
+        if ((target.parent.gameObject.tag == "PatternTarget" && targetIndex == 0 || target.parent.gameObject.tag == "Enemy" && targetIndex == 0) && newSpeed != fastSpeed)
+        {
+            newSpeed = fastSpeed;
+            t = 0;
+        }
+
+        // case 3: target is second, or higher target in PatternTarget[]
+        if ((target.parent.gameObject.tag == "PatternTarget" && targetIndex > 0 || target.parent.gameObject.tag == "Enemy" && targetIndex > 0) && newSpeed != slowSpeed)
+        {
+            newSpeed = slowSpeed;
+            t = 0;
+        }
+    }
+
+    private void UpdateSpeed()
+    {
+        speed = Mathf.Lerp(speed, newSpeed, t);
+        t += 0.5f;
     }
 
     public float GetDistanceToTarget()

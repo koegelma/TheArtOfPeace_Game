@@ -32,7 +32,7 @@ public class StateManager : MonoBehaviour
 
     private void Update()
     {
-        if (state != State.IDLE) updateCountdown();
+        if (state != State.IDLE && !isFinalPhase) updateCountdown();
     }
 
     public int assurePhase(int phaseGiven)
