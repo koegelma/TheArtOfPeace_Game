@@ -24,24 +24,47 @@ public class Pattern1 : MonoBehaviour
     private List<GameObject> orbsDirectedAtPlayer;
     public static bool isCountdown;
     //private Vector3 offset = new Vector3(0, 0, 2);
+    public bool isTriggerReady = true;
 
-    /*
-    void testPosition(){
-        if (leftController.isTrigger && rightController.isTrigger){
-            Debug.Log("left: "+leftController.relativeTransform.position);
-            Debug.Log("right: "+rightController.relativeTransform.position);
+
+    void testPosition()
+    {
+        if (leftController.isTrigger && rightController.isTrigger && isTriggerReady)
+        {
+            isTriggerReady = false;
+            Debug.Log("left: " + leftController.relativeTransform.position);
+            Debug.Log("right: " + rightController.relativeTransform.position);
         }
-    } */
+        if (!isTriggerReady && !leftController.isTrigger && !rightController.isTrigger) isTriggerReady = true;
+    }
+
+
+    //left 0 = (-0.1f, -0.2f, 0.6)
+    //right 0 = (0.0f, -0.3f, 0.1f)
+
+    //left 1 = (0.0f, -0.2f, 0.5f)
+    //right 1 =(0.1f, -0.2f, 0.4f)
+
+    //left 2 = (-0.1, -0.3, 0.2)
+    //right 2 = (0.2, -0.1, 0.6)
+
+    /*   old phaseCoord:
+        leftPhaseCoords[0] = new Vector3(-0.2f, -0.1f, 0.6f);
+          rightPhaseCoords[0] = new Vector3(0.1f, -0.3f, 0.3f);
+          leftPhaseCoords[1] = new Vector3(-0.1f, -0.2f, 0.2f);
+          rightPhaseCoords[1] = new Vector3(0.1f, -0.2f, 0.2f);
+          leftPhaseCoords[2] = new Vector3(-0.1f, -0.3f, 0.3f);
+          rightPhaseCoords[2] = new Vector3(0.2f, -0.1f, 0.6f); */
     void Awake()
     {
         leftPhaseCoords = new Vector3[3];
         rightPhaseCoords = new Vector3[3];
-        leftPhaseCoords[0] = new Vector3(-0.2f, -0.1f, 0.6f);
-        rightPhaseCoords[0] = new Vector3(0.1f, -0.3f, 0.3f);
-        leftPhaseCoords[1] = new Vector3(-0.1f, -0.2f, 0.2f);
-        rightPhaseCoords[1] = new Vector3(0.1f, -0.2f, 0.2f);
-        leftPhaseCoords[2] = new Vector3(-0.1f, -0.3f, 0.3f);
-        rightPhaseCoords[2] = new Vector3(0.2f, -0.1f, 0.6f);
+        leftPhaseCoords[0] = new Vector3(-0.1f, -0.2f, 0.6f);
+        rightPhaseCoords[0] = new Vector3(0.1f, -0.3f, 0.2f);
+        leftPhaseCoords[1] = new Vector3(-0.1f, -0.25f, 0.4f);
+        rightPhaseCoords[1] = new Vector3(0.1f, -0.25f, 0.4f);
+        leftPhaseCoords[2] = new Vector3(-0.1f, -0.3f, 0.2f);
+        rightPhaseCoords[2] = new Vector3(0.1f, -0.2f, 0.6f);
         phaseChecker = new PhaseChecker(leftPhaseCoords, rightPhaseCoords);
 
         targetsGameObject = null;
@@ -56,6 +79,7 @@ public class Pattern1 : MonoBehaviour
     }
     void Update()
     {
+        testPosition();
         if (isCountdown) DestroyCountdown();
         if (!orbManager.HasOrbs) return;
         if (targetsGameObject == null && stateManager.state == State.PATTERN1 && stateManager.currentPhase == 2) stateManager.resetState();

@@ -598,6 +598,9 @@
     <Reference Include="Unity.Timeline.Editor">
         <HintPath>D:\Uni\GitHub\TheArtOfPeace_Game\Library\ScriptAssemblies\Unity.Timeline.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.TerrainTools">
+        <HintPath>D:\Uni\GitHub\TheArtOfPeace_Game\Library\ScriptAssemblies\Unity.TerrainTools.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.Toolchain.Win-x86_64-Linux-x86_64">
         <HintPath>D:\Uni\GitHub\TheArtOfPeace_Game\Library\ScriptAssemblies\Unity.Toolchain.Win-x86_64-Linux-x86_64.dll</HintPath>
     </Reference>
@@ -684,6 +687,9 @@
     </Reference>
     <Reference Include="Unity.XR.WindowsMixedReality">
         <HintPath>D:\Uni\GitHub\TheArtOfPeace_Game\Library\ScriptAssemblies\Unity.XR.WindowsMixedReality.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.TerrainTools.Editor">
+        <HintPath>D:\Uni\GitHub\TheArtOfPeace_Game\Library\ScriptAssemblies\Unity.TerrainTools.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.XR.LegacyInputHelpers">
         <HintPath>D:\Uni\GitHub\TheArtOfPeace_Game\Library\ScriptAssemblies\UnityEditor.XR.LegacyInputHelpers.dll</HintPath>
