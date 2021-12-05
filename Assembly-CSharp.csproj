@@ -53,6 +53,7 @@
      <Compile Include="Assets\Scripts\Controller.cs" />
      <Compile Include="Assets\Scripts\Enemy.cs" />
      <Compile Include="Assets\Scripts\EnemySpawner.cs" />
+     <Compile Include="Assets\Scripts\GameData.cs" />
      <Compile Include="Assets\Scripts\Hands\HandPresence.cs" />
      <Compile Include="Assets\Scripts\Old Scripts\Damageable.cs" />
      <Compile Include="Assets\Scripts\Old Scripts\Enemy_old.cs" />
@@ -73,7 +74,10 @@
      <Compile Include="Assets\Scripts\PatternTarget.cs" />
      <Compile Include="Assets\Scripts\PatternTemplate.cs" />
      <Compile Include="Assets\Scripts\PhaseChecker.cs" />
+     <Compile Include="Assets\Scripts\PlayerSettings.cs" />
      <Compile Include="Assets\Scripts\PlayerStats.cs" />
+     <Compile Include="Assets\Scripts\StartMenu\PlayerCalibration.cs" />
+     <Compile Include="Assets\Scripts\StartMenu\PlayerSettings.cs" />
      <Compile Include="Assets\Scripts\StateManager.cs" />
      <Compile Include="Assets\Scripts\StateVisualizer.cs" />
      <Compile Include="Assets\Scripts\UI\GameManager.cs" />

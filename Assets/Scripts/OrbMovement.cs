@@ -71,7 +71,6 @@ public class OrbMovement : MonoBehaviour
     private void TranslateOrb()
     {
         Vector3 direction = target.position - rb.position;
-
         direction.Normalize();
         Vector3 rotateAmount = Vector3.Cross(direction, transform.forward);
         rb.angularVelocity = -rotateAmount * rotateSpeed;

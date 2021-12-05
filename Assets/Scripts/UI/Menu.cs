@@ -5,6 +5,7 @@ public class Menu : MonoBehaviour
 {
     private Controller leftController;
     private Controller rightController;
+    public bool isSettings = false;
     public string sceneToLoad = "Testing Scene";
     private void Start()
     {
@@ -15,6 +16,7 @@ public class Menu : MonoBehaviour
 
     private void Update()
     {
+        if (isSettings) return;
         if (leftController.isTrigger) Options();
         if (rightController.isTrigger) NewGame();
     }
