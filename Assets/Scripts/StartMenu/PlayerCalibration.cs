@@ -9,7 +9,7 @@ public class PlayerCalibration : MonoBehaviour
     private Controller leftController;
     private Controller rightController;
     private bool isCalibrationInputs = true;
-    public PlayerSettings playerSettingsScript;
+    public Menu menuScript;
     private void Start()
     {
         leftController = GameObject.Find("Left Controller").GetComponent<Controller>();
@@ -30,8 +30,9 @@ public class PlayerCalibration : MonoBehaviour
     {
         playerArmLength = Vector3.Distance(leftController.controllerPosition, rightController.controllerPosition);
         Debug.Log(playerArmLength);
-        GameData.playerArmLength = playerArmLength;
+        GameData.armLengthFactor = playerArmLength / standardArmLength;
         GameData.isPlayerInitialized = true;
-        playerSettingsScript.ToggleCalibration();
+        menuScript.ToggleCalibration();
+        menuScript.ToggleMenu();
     }
 }

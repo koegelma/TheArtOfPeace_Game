@@ -5,7 +5,14 @@ public class Menu : MonoBehaviour
 {
     private Controller leftController;
     private Controller rightController;
-    public bool isSettings = false;
+    public GameObject menuUI;
+    public GameObject optionsUI;
+    public GameObject calibrationUI;
+    public GameObject playerCalibration;
+    public bool isOptions = false;
+    public bool isCalibration = false;
+    private bool isLeftTriggerReady = true;
+    private bool isRightTriggerReady = true;
     public string sceneToLoad = "Testing Scene";
     private void Start()
     {
@@ -16,8 +23,31 @@ public class Menu : MonoBehaviour
 
     private void Update()
     {
-        if (isSettings) return;
-        if (leftController.isTrigger) Options();
+        if (isCalibration) return;
+        if (!isLeftTriggerReady && !leftController.isTrigger) isLeftTriggerReady = true;
+        if (!isRightTriggerReady && !rightController.isTrigger) isRightTriggerReady = true;
+        if (isOptions)
+        {
+            if (leftController.isTrigger && isLeftTriggerReady)
+            {
+                ToggleOptions();
+                ToggleMenu();
+                isLeftTriggerReady = false;
+            }
+            if (rightController.isTrigger && isRightTriggerReady)
+            {
+                ToggleOptions();
+                ToggleCalibration();
+                isRightTriggerReady = false;
+            }
+            return;
+        }
+        if (leftController.isTrigger && isLeftTriggerReady)
+        {
+            ToggleMenu();
+            ToggleOptions();
+            isLeftTriggerReady = false;
+        }
         if (rightController.isTrigger) NewGame();
     }
 
@@ -26,8 +56,21 @@ public class Menu : MonoBehaviour
         SceneManager.LoadScene(sceneToLoad);
     }
 
-    private void Options()
+    private void ToggleOptions()
     {
-        Debug.Log("Options");
+        isOptions = !isOptions;
+        optionsUI.SetActive(!optionsUI.activeSelf);
+    }
+
+    public void ToggleMenu()
+    {
+        menuUI.SetActive(!menuUI.activeSelf);
+    }
+
+    public void ToggleCalibration()
+    {
+        isCalibration = !isCalibration;
+        playerCalibration.SetActive(!playerCalibration.activeSelf);
+        calibrationUI.SetActive(!calibrationUI.activeSelf);
     }
 }

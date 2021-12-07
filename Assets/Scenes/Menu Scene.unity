@@ -224,7 +224,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &183260907
 RectTransform:
   m_ObjectHideFlags: 0
@@ -276,7 +276,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Options:'
+  m_Text: 'Back:'
 --- !u!222 &183260909
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -302,7 +302,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &255841266
 RectTransform:
   m_ObjectHideFlags: 0
@@ -354,7 +354,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Coming soon :D
+  m_Text: Left Trigger
 --- !u!222 &255841268
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -510,7 +510,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Coming soon :D
+  m_Text: Left Trigger
 --- !u!222 &429791022
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -548,9 +548,9 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1840423789}
-  - {fileID: 1979677614}
   - {fileID: 1006574413}
   - {fileID: 1846286876}
+  - {fileID: 1979677614}
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -566,7 +566,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6ba267c6237723489679bf661d765a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isSettings: 0
+  menuUI: {fileID: 1840423784}
+  optionsUI: {fileID: 1006574412}
+  calibrationUI: {fileID: 1846286875}
+  playerCalibration: {fileID: 1925648630}
+  isOptions: 0
+  isCalibration: 0
   sceneToLoad: Testing Scene
 --- !u!1 &496225094
 GameObject:
@@ -948,7 +953,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &689589984
 RectTransform:
   m_ObjectHideFlags: 0
@@ -965,7 +970,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -30.89, y: 2.42}
+  m_AnchoredPosition: {x: -30.885, y: 6.17}
   m_SizeDelta: {x: 47.554886, y: -39.41728}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &689589985
@@ -1381,7 +1386,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &933535423
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1398,8 +1403,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -77.83, y: 2.42}
-  m_SizeDelta: {x: 37.701515, y: -39.41728}
+  m_AnchoredPosition: {x: -77.83, y: 6.17}
+  m_SizeDelta: {x: 37.701515, y: -31.912008}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &933535424
 MonoBehaviour:
@@ -1433,7 +1438,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'New Game: '
+  m_Text: 'Recalibrate Armlength: '
 --- !u!222 &933535425
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1731,7 +1736,7 @@ GameObject:
   - component: {fileID: 1006574415}
   - component: {fileID: 1006574414}
   m_Layer: 0
-  m_Name: Settings Canvas
+  m_Name: Options Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1754,7 +1759,7 @@ RectTransform:
   - {fileID: 183260907}
   - {fileID: 255841266}
   m_Father: {fileID: 450136820}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2085,9 +2090,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 227261e62fefa0e4588902be2ec2effb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerCalibration: {fileID: 1925648630}
-  calibrationUI: {fileID: 1846286875}
-  mainMenuUI: {fileID: 1840423784}
   menuScript: {fileID: 450136821}
 --- !u!4 &1410953286
 Transform:
@@ -2640,7 +2642,7 @@ RectTransform:
   - {fileID: 748261951}
   - {fileID: 2102139475}
   m_Father: {fileID: 450136820}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2754,7 +2756,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7366586ce940ee4ea92146ea6219b94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerSettingsScript: {fileID: 1410953285}
+  menuScript: {fileID: 450136821}
 --- !u!4 &1925648632
 Transform:
   m_ObjectHideFlags: 0
@@ -2802,7 +2804,7 @@ RectTransform:
   m_Children:
   - {fileID: 894677313}
   m_Father: {fileID: 450136820}
-  m_RootOrder: 1
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}

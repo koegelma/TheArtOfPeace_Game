@@ -5,6 +5,7 @@ using UnityEngine;
 public class Pattern1 : MonoBehaviour
 {
     public PhaseChecker phaseChecker;
+    public Vector3[][] phaseCoords;
     public Vector3[] leftPhaseCoords;
     public Vector3[] rightPhaseCoords;
     public GameObject leftHelper;
@@ -38,23 +39,6 @@ public class Pattern1 : MonoBehaviour
         if (!isTriggerReady && !leftController.isTrigger && !rightController.isTrigger) isTriggerReady = true;
     }
 
-
-    //left 0 = (-0.1f, -0.2f, 0.6)
-    //right 0 = (0.0f, -0.3f, 0.1f)
-
-    //left 1 = (0.0f, -0.2f, 0.5f)
-    //right 1 =(0.1f, -0.2f, 0.4f)
-
-    //left 2 = (-0.1, -0.3, 0.2)
-    //right 2 = (0.2, -0.1, 0.6)
-
-    /*   old phaseCoord:
-        leftPhaseCoords[0] = new Vector3(-0.2f, -0.1f, 0.6f);
-          rightPhaseCoords[0] = new Vector3(0.1f, -0.3f, 0.3f);
-          leftPhaseCoords[1] = new Vector3(-0.1f, -0.2f, 0.2f);
-          rightPhaseCoords[1] = new Vector3(0.1f, -0.2f, 0.2f);
-          leftPhaseCoords[2] = new Vector3(-0.1f, -0.3f, 0.3f);
-          rightPhaseCoords[2] = new Vector3(0.2f, -0.1f, 0.6f); */
     void Awake()
     {
         leftPhaseCoords = new Vector3[3];
@@ -65,6 +49,10 @@ public class Pattern1 : MonoBehaviour
         rightPhaseCoords[1] = new Vector3(0.1f, -0.25f, 0.4f);
         leftPhaseCoords[2] = new Vector3(-0.1f, -0.3f, 0.2f);
         rightPhaseCoords[2] = new Vector3(0.1f, -0.2f, 0.6f);
+
+        leftPhaseCoords = GameData.CalcPlayerPhaseCoords(leftPhaseCoords);
+        rightPhaseCoords = GameData.CalcPlayerPhaseCoords(rightPhaseCoords);
+
         phaseChecker = new PhaseChecker(leftPhaseCoords, rightPhaseCoords);
 
         targetsGameObject = null;
