@@ -82,7 +82,7 @@ public class OrbMovement : MonoBehaviour
     private void GetNextTarget()
     {
         //check if target is PatternTarget
-        if (targets[targetIndex].parent.gameObject.tag == "PatternTarget")
+        if (!targets[targetIndex].parent.gameObject.GetComponent<PatternTarget>().isEnemyPattern)
         {
             //check if pattern phase for next target has already been checked successfully
             if (targetIndex > StateManager.instance.currentPhase)
@@ -93,7 +93,7 @@ public class OrbMovement : MonoBehaviour
             }
         }
 
-        if (targets[targetIndex].parent.gameObject.tag == "Enemy")
+        if (targets[targetIndex].parent.gameObject.GetComponent<PatternTarget>().isEnemyPattern)
         {
             if (targetIndex >= targets.Length - 1)
             {
@@ -105,7 +105,7 @@ public class OrbMovement : MonoBehaviour
 
         if (targetIndex >= targets.Length - 1)
         {
-            if (targets[targetIndex].parent.gameObject.tag == "PatternTarget")
+            if (!targets[targetIndex].parent.gameObject.GetComponent<PatternTarget>().isEnemyPattern)
             {
                 Transform mostReachableEnemy = GetMostReachableEnemy();
                 Transform[] enemyArray = new Transform[] { mostReachableEnemy };
@@ -133,14 +133,14 @@ public class OrbMovement : MonoBehaviour
         }
 
         // case 2: target is first target in PatternTarget[]
-        if ((target.parent.gameObject.tag == "PatternTarget" && targetIndex == 0 || target.parent.gameObject.tag == "Enemy" && targetIndex == 0) && newSpeed != fastSpeed)
+        if ((!targets[targetIndex].parent.gameObject.GetComponent<PatternTarget>().isEnemyPattern && targetIndex == 0 || targets[targetIndex].parent.gameObject.GetComponent<PatternTarget>().isEnemyPattern && targetIndex == 0) && newSpeed != fastSpeed)
         {
             newSpeed = fastSpeed;
             t = 0;
         }
 
         // case 3: target is second, or higher target in PatternTarget[]
-        if ((target.parent.gameObject.tag == "PatternTarget" && targetIndex > 0 || target.parent.gameObject.tag == "Enemy" && targetIndex > 0) && newSpeed != slowSpeed)
+        if ((!targets[targetIndex].parent.gameObject.GetComponent<PatternTarget>().isEnemyPattern && targetIndex > 0 || targets[targetIndex].parent.gameObject.GetComponent<PatternTarget>().isEnemyPattern && targetIndex > 0) && newSpeed != slowSpeed)
         {
             newSpeed = slowSpeed;
             t = 0;

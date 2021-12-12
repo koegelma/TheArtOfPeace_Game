@@ -7,10 +7,11 @@ public class PatternTarget : MonoBehaviour
     public Transform[] targets;
     //public Transform[] GetTargets { get { return targets; } }
     public bool isInitialized = false;
+    public bool isEnemyPattern;
 
     private void Start()
     {
-        if (gameObject.tag == "PatternTarget")
+        if (!isEnemyPattern)
         {
             // TODO: change parenting when instantiated in pattern script
             // change transform to parent transform
@@ -19,7 +20,7 @@ public class PatternTarget : MonoBehaviour
             Vector3 angles = new Vector3(transform.rotation.x, playerTransform.rotation.eulerAngles.y, transform.rotation.z);
             transform.rotation = Quaternion.Euler(angles);
         }
-        if (gameObject.tag == "Enemy")
+        if (isEnemyPattern)
         {
             enemyTransform = gameObject.transform.parent.transform;
             SetPosition(enemyTransform, false);
@@ -30,8 +31,8 @@ public class PatternTarget : MonoBehaviour
 
     private void Update()
     {
-        if (gameObject.tag == "PatternTarget") SetPosition(playerTransform, true);
-        if (gameObject.tag == "Enemy") SetPosition(enemyTransform, false);
+        if (!isEnemyPattern) SetPosition(playerTransform, true);
+        if (isEnemyPattern) SetPosition(enemyTransform, false);
     }
 
     private void SetPosition(Transform givenTransform, bool parentIsPlayer)

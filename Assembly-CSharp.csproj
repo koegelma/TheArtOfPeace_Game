@@ -77,7 +77,6 @@
      <Compile Include="Assets\Scripts\PlayerSettings.cs" />
      <Compile Include="Assets\Scripts\PlayerStats.cs" />
      <Compile Include="Assets\Scripts\StartMenu\PlayerCalibration.cs" />
-     <Compile Include="Assets\Scripts\StartMenu\PlayerSettings.cs" />
      <Compile Include="Assets\Scripts\StateManager.cs" />
      <Compile Include="Assets\Scripts\StateVisualizer.cs" />
      <Compile Include="Assets\Scripts\UI\GameManager.cs" />

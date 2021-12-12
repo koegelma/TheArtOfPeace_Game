@@ -50,6 +50,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targets: []
   isInitialized: 0
+  isEnemyPattern: 1
 --- !u!1 &879590824826627774
 GameObject:
   m_ObjectHideFlags: 0
