@@ -130,6 +130,14 @@ public class OrbMovement : MonoBehaviour
         {
             newSpeed = mediumSpeed;
             t = 0;
+            return;
+        }
+
+        // This is for debugging purposes - remove on build
+        if (!targets[targetIndex].parent.GetComponent<PatternTarget>())
+        {
+            Debug.Log("Targets Parent has no PatternTarget script!");
+            return;
         }
 
         // case 2: target is first target in PatternTarget[]
@@ -160,15 +168,17 @@ public class OrbMovement : MonoBehaviour
     }
     public Transform GetMostReachableEnemy()
     {
-        float scalar = -Mathf.Infinity;
+        float maxAngle = Mathf.Infinity;
         Transform mostReachableEnemy = null;
         for (var i = 0; i < enemyContainer.transform.childCount; i++)
         {
-            Vector3 enemyDistanceVector = enemyContainer.transform.GetChild(i).position - transform.position;
-            if (scalar < Vector3.Dot(rb.velocity, enemyDistanceVector))
+            Vector3 targetDirection = enemyContainer.transform.GetChild(i).position - playerTarget.position;
+            float enemyAngle = Vector3.Angle(targetDirection, playerTarget.forward);
+            //Debug.Log("Enemy: " + enemyContainer.transform.GetChild(i).GetSiblingIndex() + ", Angle: " + enemyAngle);
+            if (maxAngle > enemyAngle) // could implement something like  - && enemyAngle < x - to only assist aim if enemy is within x-degrees
             {
                 mostReachableEnemy = enemyContainer.transform.GetChild(i);
-                scalar = Vector3.Dot(rb.velocity, enemyDistanceVector);
+                maxAngle = enemyAngle;
             }
         }
         return mostReachableEnemy;

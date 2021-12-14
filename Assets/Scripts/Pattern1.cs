@@ -67,7 +67,7 @@ public class Pattern1 : MonoBehaviour
     }
     void Update()
     {
-        testPosition();
+        //testPosition();
         if (isCountdown) DestroyCountdown();
         if (!orbManager.HasOrbs) return;
         if (targetsGameObject == null && stateManager.state == State.PATTERN1 && stateManager.currentPhase == 2) stateManager.resetState();
@@ -98,7 +98,7 @@ public class Pattern1 : MonoBehaviour
             stateManager.switchPhase(1, 5f);
             if (phaseChecker.check(2) && stateManager.currentPhase == 1)
             {
-                Debug.Log("success!");
+                //Debug.Log("success!");
                 stateManager.switchPhase(2, 5f);
                 stateManager.isFinalPhase = true;
                 //StateManager.resetState();
@@ -139,6 +139,7 @@ public class Pattern1 : MonoBehaviour
         targetsGameObject = (GameObject)Instantiate(patternTargetPrefab, Vector3.zero, transform.rotation);
         PatternTarget targetsScript = targetsGameObject.GetComponent<PatternTarget>();
         yield return new WaitUntil(() => targetsScript.isInitialized);
+
 
         targets = targetsScript.targets;
 
