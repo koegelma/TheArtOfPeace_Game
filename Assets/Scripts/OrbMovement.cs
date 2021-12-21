@@ -82,6 +82,9 @@ public class OrbMovement : MonoBehaviour
     private void GetNextTarget()
     {
         //check if target is PatternTarget
+        Debug.Log("1 "+targets[targetIndex].parent.gameObject.GetComponent<PatternTarget>());
+        Debug.Log("2 "+targets[targetIndex].parent);
+        Debug.Log("3 "+targets[targetIndex]);
         if (!targets[targetIndex].parent.gameObject.GetComponent<PatternTarget>().isEnemyPattern)
         {
             //check if pattern phase for next target has already been checked successfully
@@ -184,3 +187,4 @@ public class OrbMovement : MonoBehaviour
         return mostReachableEnemy;
     }
 }
+

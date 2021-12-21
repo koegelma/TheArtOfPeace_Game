@@ -3,7 +3,12 @@ guid: 0d6ceddee7c8fc94a99784cef7da28a6
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - orbPrefab: {fileID: 1013341067802257184, guid: ab60e5ee186d6d946adcf25a2099b5b8,
+      type: 3}
+  - firePosition: {instanceID: 0}
+  - targetNodesPrefab: {fileID: 466970301128756730, guid: 44977bdfe9a632840a30562e82e8c68e,
+      type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
