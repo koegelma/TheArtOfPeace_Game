@@ -82,41 +82,49 @@ public class OrbMovement : MonoBehaviour
     private void GetNextTarget()
     {
         //check if target is PatternTarget
-        Debug.Log("1 "+targets[targetIndex].parent.gameObject.GetComponent<PatternTarget>());
-        Debug.Log("2 "+targets[targetIndex].parent);
-        Debug.Log("3 "+targets[targetIndex]);
-        if (!targets[targetIndex].parent.gameObject.GetComponent<PatternTarget>().isEnemyPattern)
-        {
-            //check if pattern phase for next target has already been checked successfully
-            if (targetIndex > StateManager.instance.currentPhase)
-            {
-                Debug.Log("phase does not match targetIndex");
-                target = null;
-                return;
-            }
-        }
-
-        if (targets[targetIndex].parent.gameObject.GetComponent<PatternTarget>().isEnemyPattern)
-        {
-            if (targetIndex >= targets.Length - 1)
-            {
-                SetTargetArrayToPlayer();
-                isFinalEnemyTargetPassed = true;
-                return;
-            }
-        }
-
-        if (targetIndex >= targets.Length - 1)
+        Debug.Log("1 " + targets[targetIndex].parent.gameObject.GetComponent<PatternTarget>());
+        Debug.Log("2 " + targets[targetIndex].parent);
+        Debug.Log("3 " + targets[targetIndex]);
+        if (targets[targetIndex].parent.gameObject.GetComponent<PatternTarget>())
         {
             if (!targets[targetIndex].parent.gameObject.GetComponent<PatternTarget>().isEnemyPattern)
             {
-                Transform mostReachableEnemy = GetMostReachableEnemy();
-                Transform[] enemyArray = new Transform[] { mostReachableEnemy };
-                SetTargetArray(enemyArray);
-                StartCoroutine(mostReachableEnemy.GetComponent<Enemy>().ReceiveOrb(this.gameObject));
-                isFinalPlayerTargetPassed = true;
-                return;
+                //check if pattern phase for next target has already been checked successfully
+                if (targetIndex > StateManager.instance.currentPhase)
+                {
+                    Debug.Log("phase does not match targetIndex");
+                    target = null;
+                    return;
+                }
             }
+
+            if (targets[targetIndex].parent.gameObject.GetComponent<PatternTarget>().isEnemyPattern)
+            {
+                if (targetIndex >= targets.Length - 1)
+                {
+                    SetTargetArrayToPlayer();
+                    isFinalEnemyTargetPassed = true;
+                    return;
+                }
+            }
+        }
+
+
+        if (targetIndex >= targets.Length - 1)
+        {
+            if (targets[targetIndex].parent.gameObject.GetComponent<PatternTarget>())
+            {
+                if (!targets[targetIndex].parent.gameObject.GetComponent<PatternTarget>().isEnemyPattern)
+                {
+                    Transform mostReachableEnemy = GetMostReachableEnemy();
+                    Transform[] enemyArray = new Transform[] { mostReachableEnemy };
+                    SetTargetArray(enemyArray);
+                    StartCoroutine(mostReachableEnemy.GetComponent<Enemy>().ReceiveOrb(this.gameObject));
+                    isFinalPlayerTargetPassed = true;
+                    return;
+                }
+            }
+
             target = null;
             Debug.Log("last target reached!");
             return;
