@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -38,7 +38,7 @@ public class Enemy : MonoBehaviour
 
 
         if (orbManager.HasOrbs) return; //remove - only for testing
-        if (Pattern1.isCountdown && Pattern1.patternTargetsCountdown > 2) return;
+        if (Pattern.isCountdown && Pattern.patternTargetsCountdown > 2) return; // adjust for multiple patterns
 
         if (spawnOrbCountdown <= 0f)
         {

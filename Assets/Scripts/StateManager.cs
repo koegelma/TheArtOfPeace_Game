@@ -45,7 +45,7 @@ public class StateManager : MonoBehaviour
     }
     public void resetState()
     {
-        Debug.Log("phase reset to -1");
+        //Debug.Log("phase reset to -1");
         state = State.IDLE;
         currentPhase = -1;
         isFinalPhase = false;
@@ -55,7 +55,7 @@ public class StateManager : MonoBehaviour
     {
         if (phaseGiven > currentPhase)
         {
-            Debug.Log("switched to phase " + phaseGiven); // test
+            //Debug.Log("switched to phase " + phaseGiven); // test
             resetCountdown(phaseGiven - 1, countdownInSeconds);
             currentPhase = assurePhase(phaseGiven);
             return true;

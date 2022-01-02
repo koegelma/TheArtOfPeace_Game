@@ -82,9 +82,6 @@ public class OrbMovement : MonoBehaviour
     private void GetNextTarget()
     {
         //check if target is PatternTarget
-        Debug.Log("1 " + targets[targetIndex].parent.gameObject.GetComponent<PatternTarget>());
-        Debug.Log("2 " + targets[targetIndex].parent);
-        Debug.Log("3 " + targets[targetIndex]);
         if (targets[targetIndex].parent.gameObject.GetComponent<PatternTarget>())
         {
             if (!targets[targetIndex].parent.gameObject.GetComponent<PatternTarget>().isEnemyPattern)
@@ -147,7 +144,7 @@ public class OrbMovement : MonoBehaviour
         // This is for debugging purposes - remove on build
         if (!targets[targetIndex].parent.GetComponent<PatternTarget>())
         {
-            Debug.Log("Targets Parent has no PatternTarget script!");
+            //Debug.Log("Targets Parent has no PatternTarget script!");
             return;
         }
 

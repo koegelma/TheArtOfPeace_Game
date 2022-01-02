@@ -359,6 +359,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 189818294}
+  - component: {fileID: 189818296}
+  - component: {fileID: 189818295}
   m_Layer: 0
   m_Name: Pattern Container
   m_TagString: Untagged
@@ -382,6 +384,56 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &189818295
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 189818293}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 172541bac164f6b46849de550ccb9df3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pattern: 1
+  leftPhaseCoords:
+  - {x: -0.1, y: -0.2, z: 0.6}
+  - {x: -0.1, y: -0.25, z: 0.4}
+  - {x: -0.1, y: -0.3, z: 0.2}
+  rightPhaseCoords:
+  - {x: 0.1, y: -0.3, z: 0.2}
+  - {x: 0.1, y: -0.25, z: 0.4}
+  - {x: 0.1, y: -0.2, z: 0.6}
+  patternTargetPrefab: {fileID: 41544210357274716, guid: b45b49504e3a84d429c4e12017242502,
+    type: 3}
+  patternTargetsCountdownLength: 5
+  leftHelper: {fileID: 1079031280}
+  rightHelper: {fileID: 2029242196}
+  leftChild: {fileID: 1585035860}
+  rightChild: {fileID: 794701675}
+  leftController: {fileID: 1728657558}
+  rightController: {fileID: 541096548}
+  cameraTransform: {fileID: 963194228}
+--- !u!114 &189818296
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 189818293}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51b2de80964823e4dbb780b6b504d641, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  leftHelper: {fileID: 1079031280}
+  rightHelper: {fileID: 2029242196}
+  leftChild: {fileID: 1585035860}
+  rightChild: {fileID: 794701675}
+  leftController: {fileID: 1728657558}
+  rightController: {fileID: 541096548}
+  cameraTransform: {fileID: 963194228}
 --- !u!1 &193280811
 GameObject:
   m_ObjectHideFlags: 0
@@ -1745,13 +1797,23 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 940223135}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 172541bac164f6b46849de550ccb9df3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  leftPhaseCoords: []
-  rightPhaseCoords: []
+  pattern: 1
+  leftPhaseCoords:
+  - {x: -0.1, y: -0.2, z: 0.6}
+  - {x: -0.1, y: -0.25, z: 0.4}
+  - {x: -0.1, y: -0.3, z: 0.2}
+  rightPhaseCoords:
+  - {x: 0.1, y: -0.3, z: 0.2}
+  - {x: 0.1, y: -0.25, z: 0.4}
+  - {x: 0.1, y: -0.2, z: 0.6}
+  patternTargetPrefab: {fileID: 41544210357274716, guid: b45b49504e3a84d429c4e12017242502,
+    type: 3}
+  patternTargetsCountdownLength: 5
   leftHelper: {fileID: 1079031280}
   rightHelper: {fileID: 2029242196}
   leftChild: {fileID: 1585035860}
@@ -1759,10 +1821,6 @@ MonoBehaviour:
   leftController: {fileID: 1728657558}
   rightController: {fileID: 541096548}
   cameraTransform: {fileID: 963194228}
-  patternTargetPrefab: {fileID: 41544210357274716, guid: b45b49504e3a84d429c4e12017242502,
-    type: 3}
-  stateManager: {fileID: 940223136}
-  isTriggerReady: 1
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
