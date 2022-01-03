@@ -191,17 +191,15 @@ public class Pattern : MonoBehaviour
                 break;
             }
         }
-        if (allPassed)
+        if (allPassed || allNull)
         {
-            foreach (GameObject orb in orbsDirectedAtPlayer)
+            if (allPassed)
             {
-                if (orb != null) orb.GetComponent<OrbMovement>().isFinalPlayerTargetPassed = false;
+                foreach (GameObject orb in orbsDirectedAtPlayer)
+                {
+                    if (orb != null) orb.GetComponent<OrbMovement>().isFinalPlayerTargetPassed = false;
+                }
             }
-            DestroyPatternTargets();
-            return true;
-        }
-        if (allNull)
-        {
             DestroyPatternTargets();
             return true;
         }
