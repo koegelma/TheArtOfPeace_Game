@@ -14,14 +14,15 @@ public class Enemy : MonoBehaviour
     private GameObject targetNodes;
     private GameObject recievedOrb;
     private float destroyCountdown;
+    public GameObject currentCooldownBar;
     //private float timeToDestroy = 10f;
     //private bool isDestroyCountdown = false;
 
     private void Start()
     {
         orbManager = OrbManager.instance;
-        spawnOrbCountdown = Random.Range(4f, 10f);//remove - only for testing
         timeBetweenOrbs = Random.Range(8f, 15f);//remove - only for testing
+        spawnOrbCountdown = timeBetweenOrbs;//remove - only for testing
         //destroyCountdown = timeToDestroy;
         player = GameObject.Find("Main Camera").transform;
         recievedOrb = null;
@@ -31,13 +32,14 @@ public class Enemy : MonoBehaviour
     private void Update()
     {
         transform.LookAt(player);
+        currentCooldownBar.transform.localScale = new Vector3(spawnOrbCountdown/timeBetweenOrbs,currentCooldownBar.transform.localScale.y,currentCooldownBar.transform.localScale.z);
 
         if (recievedOrb != null) CheckRecievedOrbStatus();
 
         //if (isDestroyCountdown) DestroyCountdown();
 
-
         if (orbManager.HasOrbs) return; //remove - only for testing
+        
         if (Pattern.isCountdown && Pattern.patternTargetsCountdown > 2) return; // adjust for multiple patterns
 
         if (spawnOrbCountdown <= 0f)
