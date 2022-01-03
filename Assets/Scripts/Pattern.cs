@@ -28,9 +28,9 @@ public class Pattern : MonoBehaviour
     private PatternReference patternReference;
     private GameObject targetsGameObject;
     private Transform[] targets;
-    public static float patternTargetsCountdown;
+    private float patternTargetsCountdown;
     private List<GameObject> orbsDirectedAtPlayer;
-    public static bool isCountdown;
+    private bool isCountdown;
     private bool isTriggerReady = true;
     private bool isInPattern = false;
     private int nextPhaseIndex = 0;
@@ -69,6 +69,7 @@ public class Pattern : MonoBehaviour
         if (!orbManager.HasOrbs) return;
         if (targetsGameObject == null && stateManager.state == pattern && stateManager.currentPhase == leftPhaseCoords.Length - 1)
         {
+            SetHelperScaleToZero();
             stateManager.resetState();
             isInPattern = false;
             nextPhaseIndex = 0;
@@ -115,18 +116,15 @@ public class Pattern : MonoBehaviour
             }
             return;
         }
-
         // final phase
         stateManager.isFinalPhase = true;
-
     }
 
-    void UpdateHelper()
+    private void UpdateHelper()
     {
         if (stateManager.state == pattern && stateManager.currentPhase == leftPhaseCoords.Length - 1)
         {
-            leftChild.transform.localScale = Vector3.zero;
-            rightChild.transform.localScale = Vector3.zero;
+            SetHelperScaleToZero();
             return;
         }
 
@@ -148,6 +146,12 @@ public class Pattern : MonoBehaviour
         rightHelper.transform.eulerAngles = new Vector3(rightHelper.transform.eulerAngles.x, cameraTransform.eulerAngles.y, rightHelper.transform.eulerAngles.z);
     }
 
+    private void SetHelperScaleToZero()
+    {
+        leftChild.transform.localScale = Vector3.zero;
+        rightChild.transform.localScale = Vector3.zero;
+    }
+
     private IEnumerator SpawnPatternTargets()
     {
         targetsGameObject = (GameObject)Instantiate(patternTargetPrefab, Vector3.zero, transform.rotation);
@@ -167,20 +171,37 @@ public class Pattern : MonoBehaviour
 
     private bool CheckPatternTargetStatus()
     {
+        //check if all orbs have passed last target in array
         bool allPassed = true;
         foreach (GameObject orb in orbsDirectedAtPlayer)
         {
-            if (!orb.GetComponent<OrbMovement>().isFinalPlayerTargetPassed)
+            if (orb != null && !orb.GetComponent<OrbMovement>().isFinalPlayerTargetPassed)
             {
                 allPassed = false;
+                break;
+            }
+        }
+        //check if all orbs == null
+        bool allNull = true;
+        foreach (GameObject orb in orbsDirectedAtPlayer)
+        {
+            if (orb != null)
+            {
+                allNull = false;
+                break;
             }
         }
         if (allPassed)
         {
             foreach (GameObject orb in orbsDirectedAtPlayer)
             {
-                orb.GetComponent<OrbMovement>().isFinalPlayerTargetPassed = false;
+                if (orb != null) orb.GetComponent<OrbMovement>().isFinalPlayerTargetPassed = false;
             }
+            DestroyPatternTargets();
+            return true;
+        }
+        if (allNull)
+        {
             DestroyPatternTargets();
             return true;
         }
@@ -200,9 +221,14 @@ public class Pattern : MonoBehaviour
 
     private void DestroyPatternTargets()
     {
+        SetHelperScaleToZero();
         patternTargetsCountdown = patternTargetsCountdownLength;
         isCountdown = false;
         Destroy(targetsGameObject);
         targetsGameObject = null;
+
+        stateManager.resetState();
+        isInPattern = false;
+        nextPhaseIndex = 0;
     }
 }

@@ -21,7 +21,7 @@ public class Enemy : MonoBehaviour
     private void Start()
     {
         orbManager = OrbManager.instance;
-        timeBetweenOrbs = Random.Range(8f, 15f);//remove - only for testing
+        timeBetweenOrbs = Random.Range(8f, 20f);//remove - only for testing
         spawnOrbCountdown = timeBetweenOrbs;//remove - only for testing
         //destroyCountdown = timeToDestroy;
         player = GameObject.Find("Main Camera").transform;
@@ -32,23 +32,29 @@ public class Enemy : MonoBehaviour
     private void Update()
     {
         transform.LookAt(player);
-        currentCooldownBar.transform.localScale = new Vector3(spawnOrbCountdown/timeBetweenOrbs,currentCooldownBar.transform.localScale.y,currentCooldownBar.transform.localScale.z);
+        currentCooldownBar.transform.localScale = new Vector3(spawnOrbCountdown / timeBetweenOrbs, currentCooldownBar.transform.localScale.y, currentCooldownBar.transform.localScale.z);
 
         if (recievedOrb != null) CheckRecievedOrbStatus();
 
         //if (isDestroyCountdown) DestroyCountdown();
 
         if (orbManager.HasOrbs) return; //remove - only for testing
-        
-        if (Pattern.isCountdown && Pattern.patternTargetsCountdown > 2) return; // adjust for multiple patterns
+
+        //if (Pattern.isCountdown && Pattern.patternTargetsCountdown > 2) return; // adjust for multiple patterns
 
         if (spawnOrbCountdown <= 0f)
         {
             ShootOrb();
-            spawnOrbCountdown = timeBetweenOrbs;
+            spawnOrbCountdown = GetTimeBetweenOrbs();
             return;
         }
         spawnOrbCountdown -= Time.deltaTime;
+    }
+
+    private float GetTimeBetweenOrbs()
+    {
+        timeBetweenOrbs = Random.Range(10f, 20f);
+        return timeBetweenOrbs;
     }
 
     private void ShootOrb()
