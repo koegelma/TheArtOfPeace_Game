@@ -171,6 +171,8 @@ public class Pattern : MonoBehaviour
 
     private bool CheckPatternTargetStatus()
     {
+        //check individually if orb==null then remove from this.orbsDirectedAtPlayer
+
         //check if all orbs have passed last target in array
         bool allPassed = true;
         foreach (GameObject orb in orbsDirectedAtPlayer)

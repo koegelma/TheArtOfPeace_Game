@@ -38,7 +38,7 @@ public class Enemy : MonoBehaviour
 
         //if (isDestroyCountdown) DestroyCountdown();
 
-        if (orbManager.HasOrbs) return; //remove - only for testing
+        //if (orbManager.HasOrbs) return; //remove - only for testing
 
         //if (Pattern.isCountdown && Pattern.patternTargetsCountdown > 2) return; // adjust for multiple patterns
 
