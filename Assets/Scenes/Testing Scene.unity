@@ -408,6 +408,7 @@ MonoBehaviour:
   patternTargetPrefab: {fileID: 41544210357274716, guid: b45b49504e3a84d429c4e12017242502,
     type: 3}
   patternTargetsCountdownLength: 5
+  movementSpeed: 0.5
   leftHelper: {fileID: 1079031280}
   rightHelper: {fileID: 2029242196}
   leftChild: {fileID: 1585035860}
@@ -1720,7 +1721,6 @@ GameObject:
   - component: {fileID: 940223137}
   - component: {fileID: 940223140}
   - component: {fileID: 940223138}
-  - component: {fileID: 940223141}
   - component: {fileID: 940223136}
   - component: {fileID: 940223139}
   m_Layer: 0
@@ -1805,37 +1805,6 @@ MonoBehaviour:
   gameOverUI: {fileID: 1840423784}
   isGameOver: 0
   pauseMenuUI: {fileID: 134484891}
---- !u!114 &940223141
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 940223135}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 172541bac164f6b46849de550ccb9df3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pattern: 1
-  leftPhaseCoords:
-  - {x: -0.1, y: -0.2, z: 0.6}
-  - {x: -0.1, y: -0.25, z: 0.4}
-  - {x: -0.1, y: -0.3, z: 0.2}
-  rightPhaseCoords:
-  - {x: 0.1, y: -0.3, z: 0.2}
-  - {x: 0.1, y: -0.25, z: 0.4}
-  - {x: 0.1, y: -0.2, z: 0.6}
-  patternTargetPrefab: {fileID: 41544210357274716, guid: b45b49504e3a84d429c4e12017242502,
-    type: 3}
-  patternTargetsCountdownLength: 5
-  leftHelper: {fileID: 1079031280}
-  rightHelper: {fileID: 2029242196}
-  leftChild: {fileID: 1585035860}
-  rightChild: {fileID: 794701675}
-  leftController: {fileID: 1728657558}
-  rightController: {fileID: 541096548}
-  cameraTransform: {fileID: 963194228}
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -4436,6 +4405,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3959021027605703956, guid: f41e1971ea4c60b45afedc96491d59b5,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: de8e8caa18987f144a8d4bfa1e22b510, type: 2}
     - target: {fileID: 3959021028517119265, guid: f41e1971ea4c60b45afedc96491d59b5,
         type: 3}
       propertyPath: m_RootOrder

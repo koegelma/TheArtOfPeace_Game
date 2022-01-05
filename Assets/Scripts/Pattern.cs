@@ -11,7 +11,7 @@ public class Pattern : MonoBehaviour
     public Vector3[] rightPhaseCoords;
     public GameObject patternTargetPrefab;
     public float patternTargetsCountdownLength;
-
+    public float movementSpeed;
 
     [Header("Scene variables")]
     // same references for every pattern - get scene references through PatternReference
@@ -34,6 +34,7 @@ public class Pattern : MonoBehaviour
     private bool isTriggerReady = true;
     private bool isInPattern = false;
     private int nextPhaseIndex = 0;
+    private bool helperScaleIsZero = true;
 
     void testPosition()
     {
@@ -65,7 +66,7 @@ public class Pattern : MonoBehaviour
     }
     private void Update()
     {
-        if (isCountdown) DestroyCountdown();
+        if (isCountdown) HndDestroyCountdown();
         if (!orbManager.HasOrbs) return;
         if (targetsGameObject == null && stateManager.state == pattern && stateManager.currentPhase == leftPhaseCoords.Length - 1)
         {
@@ -92,7 +93,7 @@ public class Pattern : MonoBehaviour
 
     private void CheckForPattern()
     {
-        UpdateHelper();
+        UpdateHelper(); // update behaviour for multiple patterns
         if (phaseChecker.check(0))
         {
             StartCoroutine(SpawnPatternTargets());
@@ -128,28 +129,48 @@ public class Pattern : MonoBehaviour
             return;
         }
 
+        leftHelper.transform.position = cameraTransform.position;
+        rightHelper.transform.position = cameraTransform.position;
+
+        if (helperScaleIsZero)
+        {
+            leftChild.transform.localPosition = this.leftPhaseCoords[stateManager.currentPhase + 1];
+            rightChild.transform.localPosition = this.rightPhaseCoords[stateManager.currentPhase + 1];
+        }
+        else
+        {
+            MoveChildToTarget(leftChild.transform, this.leftPhaseCoords[stateManager.currentPhase + 1]);
+            MoveChildToTarget(rightChild.transform, this.rightPhaseCoords[stateManager.currentPhase + 1]);
+        }
+
+        leftHelper.transform.eulerAngles = new Vector3(leftHelper.transform.eulerAngles.x, cameraTransform.eulerAngles.y, leftHelper.transform.eulerAngles.z);
+        rightHelper.transform.eulerAngles = new Vector3(rightHelper.transform.eulerAngles.x, cameraTransform.eulerAngles.y, rightHelper.transform.eulerAngles.z);
+
         float tolerance = PhaseChecker.tolerance * 2;
         Vector3 newScale = new Vector3(tolerance, tolerance, tolerance);
         if (leftChild.transform.localScale != newScale && rightChild.transform.localScale != newScale)
         {
             leftChild.transform.localScale = new Vector3(tolerance, tolerance, tolerance);
             rightChild.transform.localScale = new Vector3(tolerance, tolerance, tolerance);
+            helperScaleIsZero = false;
         }
+    }
 
-        leftHelper.transform.position = cameraTransform.position;
-        rightHelper.transform.position = cameraTransform.position;
-
-        leftChild.transform.localPosition = this.leftPhaseCoords[stateManager.currentPhase + 1];
-        rightChild.transform.localPosition = this.rightPhaseCoords[stateManager.currentPhase + 1];
-
-        leftHelper.transform.eulerAngles = new Vector3(leftHelper.transform.eulerAngles.x, cameraTransform.eulerAngles.y, leftHelper.transform.eulerAngles.z);
-        rightHelper.transform.eulerAngles = new Vector3(rightHelper.transform.eulerAngles.x, cameraTransform.eulerAngles.y, rightHelper.transform.eulerAngles.z);
+    private void MoveChildToTarget(Transform childTransform, Vector3 phaseCoordPosition)
+    {
+        if (Vector3.Distance(childTransform.localPosition, phaseCoordPosition) > 0.05f)
+        {
+            childTransform.localPosition = Vector3.MoveTowards(childTransform.localPosition, phaseCoordPosition, Time.deltaTime * movementSpeed);
+            return;
+        }
+        childTransform.localPosition = phaseCoordPosition;
     }
 
     private void SetHelperScaleToZero()
     {
         leftChild.transform.localScale = Vector3.zero;
         rightChild.transform.localScale = Vector3.zero;
+        helperScaleIsZero = true;
     }
 
     private IEnumerator SpawnPatternTargets()
@@ -157,7 +178,6 @@ public class Pattern : MonoBehaviour
         targetsGameObject = (GameObject)Instantiate(patternTargetPrefab, Vector3.zero, transform.rotation);
         PatternTarget targetsScript = targetsGameObject.GetComponent<PatternTarget>();
         yield return new WaitUntil(() => targetsScript.isInitialized);
-
 
         targets = targetsScript.targets;
 
@@ -208,7 +228,7 @@ public class Pattern : MonoBehaviour
         return false;
     }
 
-    private void DestroyCountdown()
+    private void HndDestroyCountdown()
     {
         if (CheckPatternTargetStatus()) return;
         if (patternTargetsCountdown <= 0f)
