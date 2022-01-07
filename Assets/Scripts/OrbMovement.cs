@@ -32,6 +32,7 @@ public class OrbMovement : MonoBehaviour
         orbManager = OrbManager.instance;
         gameObject.name = "Orb" + orbManager.orbsCreated;
         orbManager.AddOrb(gameObject);
+        
 
         rb = GetComponent<Rigidbody>();
 
@@ -42,6 +43,14 @@ public class OrbMovement : MonoBehaviour
 
     void FixedUpdate()
     {
+
+        if(this.transform.parent!=null){
+            this.GetComponent<Renderer>().material.color = new Color(200, 0, 0);
+        }
+        else{
+            this.GetComponent<Renderer>().material.color = new Color(0, 0, 0);
+        }
+        
         if (!hasTarget)
         {
             PlayerStats.life -= orbDamage;
@@ -130,7 +139,6 @@ public class OrbMovement : MonoBehaviour
         target = targets[targetIndex];
     }
 
-
     private void CheckSpeed()
     {
         // case 1: target is player/camera
@@ -174,6 +182,7 @@ public class OrbMovement : MonoBehaviour
         float distance = Vector3.Distance(rb.position, target.position);
         return distance;
     }
+
     public Transform GetMostReachableEnemy()
     {
         float maxAngle = Mathf.Infinity;
