@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum Difficulty
+{
+    EASY, MEDIUM, HARD
+}
 public class OrbManager : MonoBehaviour
 {
     public static OrbManager instance;

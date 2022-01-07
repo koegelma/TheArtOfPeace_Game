@@ -32,7 +32,7 @@ public class OrbMovement : MonoBehaviour
         orbManager = OrbManager.instance;
         gameObject.name = "Orb" + orbManager.orbsCreated;
         orbManager.AddOrb(gameObject);
-        
+
 
         rb = GetComponent<Rigidbody>();
 
@@ -44,13 +44,15 @@ public class OrbMovement : MonoBehaviour
     void FixedUpdate()
     {
 
-        if(this.transform.parent!=null){
+        if (this.transform.parent != null)
+        {
             this.GetComponent<Renderer>().material.color = new Color(200, 0, 0);
         }
-        else{
+        else
+        {
             this.GetComponent<Renderer>().material.color = new Color(0, 0, 0);
         }
-        
+
         if (!hasTarget)
         {
             PlayerStats.life -= orbDamage;
@@ -96,6 +98,7 @@ public class OrbMovement : MonoBehaviour
             if (!targets[targetIndex].parent.gameObject.GetComponent<PatternTarget>().isEnemyPattern)
             {
                 //check if pattern phase for next target has already been checked successfully
+                // TODO: check if Difficulty of Pattern and Orb match via AssertDifficulty()
                 if (targetIndex > StateManager.instance.currentPhase)
                 {
                     Debug.Log("phase does not match targetIndex");
@@ -199,6 +202,26 @@ public class OrbMovement : MonoBehaviour
             }
         }
         return mostReachableEnemy;
+    }
+
+    private bool AssertDifficulty()
+    {
+        //1. TODO: check difficulty of Orb
+        //2. compare difficulties:
+        Difficulty patternDifficulty = targets[targetIndex].parent.gameObject.GetComponent<PatternTarget>().difficulty;
+        switch (patternDifficulty)
+        {
+            case Difficulty.EASY:
+                //if(this.difficulty == Difficulty.EASY) return true;
+                break;
+            case Difficulty.MEDIUM:
+                //if(this.difficulty == Difficulty.EASY || this.difficulty == Difficulty.MEDIUM) return true;
+                break;
+            case Difficulty.HARD:
+                //if (this.difficulty == Difficulty.EASY || this.difficulty == Difficulty.MEDIUM || this.difficulty == Difficulty.HARD) return true;
+                break;
+        }
+        return false;
     }
 }
 

@@ -8,6 +8,7 @@ public class PatternTarget : MonoBehaviour
     //public Transform[] GetTargets { get { return targets; } }
     public bool isInitialized = false;
     public bool isEnemyPattern;
+    public Difficulty difficulty;
 
     private void Start()
     {
