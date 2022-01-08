@@ -22,6 +22,7 @@ public class Pattern : MonoBehaviour
     [HideInInspector] public Controller leftController;
     [HideInInspector] public Controller rightController;
     [HideInInspector] public Transform cameraTransform;
+    [HideInInspector] public bool isSelected = false;
     private StateManager stateManager;
     private PhaseChecker phaseChecker;
     private OrbManager orbManager;
@@ -35,6 +36,7 @@ public class Pattern : MonoBehaviour
     private bool isInPattern = false;
     private int nextPhaseIndex = 0;
     private bool helperScaleIsZero = true;
+
 
     void testPosition()
     {
@@ -56,8 +58,7 @@ public class Pattern : MonoBehaviour
 
     private void Start()
     {
-        patternReference = PatternReference.instance;
-        patternReference.GetSceneReferences(this);
+        PatternReference.instance.GetSceneReferences(this);
         orbManager = OrbManager.instance;
         stateManager = StateManager.instance;
         patternTargetsCountdown = patternTargetsCountdownLength;
@@ -66,6 +67,7 @@ public class Pattern : MonoBehaviour
     }
     private void Update()
     {
+        //if (!isSelected) return;
         if (isCountdown) HndDestroyCountdown();
         if (!orbManager.HasOrbs) return;
         if (targetsGameObject == null && stateManager.state == pattern && stateManager.currentPhase == leftPhaseCoords.Length - 1)
