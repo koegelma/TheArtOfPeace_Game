@@ -48,7 +48,7 @@ public class Enemy : MonoBehaviour
             spawnOrbCountdown = GetTimeBetweenOrbs();
             return;
         }
-        spawnOrbCountdown -= Time.deltaTime;
+        spawnOrbCountdown -= Time.deltaTime/(OrbManager.instance.OrbsInGame+1);
     }
 
     private float GetTimeBetweenOrbs()

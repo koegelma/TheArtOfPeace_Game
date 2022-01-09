@@ -13,17 +13,17 @@ public class OrbMovement : MonoBehaviour
     private float rotateSpeed = 200f;
     private int orbDamage = 20;
     private Rigidbody rb;
+    public Difficulty tier;
 
     [Header("Target Setup")]
     private Transform playerTarget;
-    private Transform[] targets;
+    public Transform[] targets;
     public Transform target;
     public int targetIndex = 0;
     OrbManager orbManager;
     public GameObject enemyContainer;
     public bool isFinalEnemyTargetPassed = false;
     public bool isFinalPlayerTargetPassed = false;
-
     public bool hasTarget { get { return target != null; } }
     public bool targetIsPlayer { get { return target == playerTarget; } }
 
@@ -35,24 +35,16 @@ public class OrbMovement : MonoBehaviour
 
 
         rb = GetComponent<Rigidbody>();
-
+        
         playerTarget = GameObject.Find("Main Camera").transform;
         enemyContainer = GameObject.Find("Enemy Container");
-        SetTargetArrayToPlayer();
+        if(tier == Difficulty.EASY){
+            SetTargetArrayToPlayer(); //temporary fix - ideal would be to have this in Enemy imo
+        }
     }
 
     void FixedUpdate()
     {
-
-        if (this.transform.parent != null)
-        {
-            this.GetComponent<Renderer>().material.color = new Color(200, 0, 0);
-        }
-        else
-        {
-            this.GetComponent<Renderer>().material.color = new Color(0, 0, 0);
-        }
-
         if (!hasTarget)
         {
             PlayerStats.life -= orbDamage;
@@ -66,7 +58,7 @@ public class OrbMovement : MonoBehaviour
         TranslateOrb();
     }
 
-    private void SetTargetArrayToPlayer()
+    public void SetTargetArrayToPlayer()
     {
         Transform[] playerTargetArray = new Transform[] { playerTarget };
         SetTargetArray(playerTargetArray);
