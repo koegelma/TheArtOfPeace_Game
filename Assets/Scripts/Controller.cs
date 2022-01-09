@@ -19,6 +19,7 @@ public class Controller : MonoBehaviour
     public float gripValue;
     public bool isGrip;
     public bool isMenuButton;
+    public bool isPrimaryButton;
 
     void Update()
     {
@@ -60,6 +61,7 @@ public class Controller : MonoBehaviour
         device.TryGetFeatureValue(CommonUsages.deviceVelocity, out controllerVelocity);
         device.TryGetFeatureValue(CommonUsages.deviceAcceleration, out controllerAcceleration);
         device.TryGetFeatureValue(CommonUsages.menuButton, out isMenuButton);
+        device.TryGetFeatureValue(CommonUsages.primaryButton, out isPrimaryButton);
 
         controllerRotation *= Quaternion.Euler(Vector3.right * 20);
 

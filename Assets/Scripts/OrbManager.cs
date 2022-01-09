@@ -31,7 +31,7 @@ public class OrbManager : MonoBehaviour
     {
         orbs.Add(_orb);
         orbsCreated++;
-        Debug.Log("Orb added");
+        //Debug.Log("Orb added");
     }
 
     public void RemoveOrb(GameObject _orb)
@@ -41,7 +41,7 @@ public class OrbManager : MonoBehaviour
             if (orb.name == _orb.name)
             {
                 orbs.Remove(orb);
-                Debug.Log("Orb removed");
+                //Debug.Log("Orb removed");
                 return;
             }
         }

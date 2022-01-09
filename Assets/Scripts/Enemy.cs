@@ -48,7 +48,7 @@ public class Enemy : MonoBehaviour
             spawnOrbCountdown = GetTimeBetweenOrbs();
             return;
         }
-        spawnOrbCountdown -= Time.deltaTime/(OrbManager.instance.OrbsInGame+1);
+        spawnOrbCountdown -= Time.deltaTime / (OrbManager.instance.OrbsInGame + 1);
     }
 
     private float GetTimeBetweenOrbs()
@@ -67,6 +67,7 @@ public class Enemy : MonoBehaviour
         recievedOrb = _orb;
         OrbMovement orbScript = _orb.GetComponent<OrbMovement>();
         targetNodes = (GameObject)Instantiate(targetNodesPrefab, transform.position, transform.rotation);
+        Debug.Log("Enemy Target Nodes Spawned!");
         targetNodes.transform.parent = transform;
         //isDestroyCountdown = true;
         PatternTarget targetsScript = targetNodes.GetComponent<PatternTarget>();
@@ -99,7 +100,7 @@ public class Enemy : MonoBehaviour
     {
         //isDestroyCountdown = false;
         Destroy(targetNodes);
-        Debug.Log("Enemy Target Nodes destroyed");
+        //Debug.Log("Enemy Target Nodes destroyed");
         //destroyCountdown = timeToDestroy;
         recievedOrb = null;
     }

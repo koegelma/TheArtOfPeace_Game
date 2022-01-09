@@ -366,7 +366,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &172711975
 Transform:
   m_ObjectHideFlags: 0
@@ -395,16 +395,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pattern: 2
   leftPhaseCoords:
-  - {x: 0.1, y: -0.3, z: 0.2}
-  - {x: 0.1, y: -0.25, z: 0.4}
-  - {x: 0.1, y: -0.2, z: 0.6}
-  rightPhaseCoords:
-  - {x: -0.1, y: -0.2, z: 0.6}
+  - {x: -0.1, y: -0.25, z: 0.2}
   - {x: -0.1, y: -0.25, z: 0.4}
-  - {x: -0.1, y: -0.3, z: 0.2}
-  patternTargetPrefab: {fileID: 41544210357274716, guid: b45b49504e3a84d429c4e12017242502,
+  - {x: -0.1, y: -0.25, z: 0.6}
+  rightPhaseCoords:
+  - {x: 0.1, y: -0.2, z: 0.6}
+  - {x: 0.1, y: -0.25, z: 0.4}
+  - {x: 0.1, y: -0.3, z: 0.2}
+  patternTargetPrefab: {fileID: 8994177345932533138, guid: c1b85af640b0c06478213ae08d87a262,
     type: 3}
-  patternTargetsCountdownLength: 5
+  patternTargetsCountdownLength: 10
   movementSpeed: 0.5
   leftHelper: {fileID: 1079031280}
   rightHelper: {fileID: 2029242196}
@@ -414,6 +414,9 @@ MonoBehaviour:
   rightController: {fileID: 541096548}
   cameraTransform: {fileID: 963194228}
   isSelected: 0
+  helperScaleIsZero: 1
+  orbsDirectedAtPlayer: []
+  helperPrefabs: []
 --- !u!1 &189818293
 GameObject:
   m_ObjectHideFlags: 0
@@ -445,6 +448,7 @@ Transform:
   m_Children:
   - {fileID: 1847056144}
   - {fileID: 172711975}
+  - {fileID: 1430750393}
   m_Father: {fileID: 0}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -481,6 +485,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   leftController: {fileID: 1728657558}
   rightController: {fileID: 541096548}
+  activePattern: {fileID: 0}
 --- !u!1 &193280811
 GameObject:
   m_ObjectHideFlags: 0
@@ -1167,6 +1172,7 @@ MonoBehaviour:
   gripValue: 0
   isGrip: 0
   isMenuButton: 0
+  isPrimaryButton: 0
 --- !u!1 &623590472
 GameObject:
   m_ObjectHideFlags: 0
@@ -2688,6 +2694,109 @@ Transform:
   m_Father: {fileID: 1725982594}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1430750392
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1430750393}
+  - component: {fileID: 1430750394}
+  m_Layer: 0
+  m_Name: Waves
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1430750393
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1430750392}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 189818294}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1430750394
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1430750392}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 172541bac164f6b46849de550ccb9df3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pattern: 3
+  leftPhaseCoords:
+  - {x: -0.1, y: -0.4, z: 0.4}
+  - {x: -0.2, y: -0.5, z: 0.4}
+  - {x: -0.1, y: -0.4, z: 0.5}
+  - {x: -0.2, y: -0.5, z: 0.4}
+  - {x: 0.1, y: -0.6, z: 0.1}
+  - {x: 0.1, y: -0.5, z: 0.2}
+  - {x: 0.2, y: -0.4, z: 0.2}
+  - {x: 0.1, y: -0.5, z: 0.2}
+  - {x: 0.1, y: -0.6, z: 0.1}
+  - {x: -0.1, y: -0.7, z: 0.1}
+  - {x: -0.2, y: -0.7, z: 0.1}
+  - {x: -0.3, y: -0.7, z: 0.1}
+  - {x: -0.5, y: -0.6, z: 0.2}
+  - {x: -0.5, y: -0.4, z: 0.4}
+  - {x: -0.5, y: -0.1, z: 0.5}
+  - {x: -0.6, y: -0.2, z: 0.4}
+  - {x: -0.6, y: -0.4, z: 0.3}
+  - {x: -0.5, y: -0.6, z: 0.2}
+  - {x: -0.3, y: -0.7, z: 0.1}
+  - {x: -0.1, y: -0.6, z: 0.4}
+  - {x: -0.1, y: -0.4, z: 0.5}
+  rightPhaseCoords:
+  - {x: 0.1, y: -0.4, z: 0.4}
+  - {x: 0.1, y: -0.5, z: 0.4}
+  - {x: 0.1, y: -0.4, z: 0.4}
+  - {x: 0.1, y: -0.5, z: 0.3}
+  - {x: 0.3, y: -0.6, z: 0.3}
+  - {x: 0.4, y: -0.4, z: 0.4}
+  - {x: 0.4, y: -0.2, z: 0.4}
+  - {x: 0.4, y: -0.4, z: 0.4}
+  - {x: 0.4, y: -0.5, z: 0.3}
+  - {x: 0.3, y: -0.7, z: 0.2}
+  - {x: 0.1, y: -0.7, z: 0.2}
+  - {x: 0, y: -0.7, z: 0.1}
+  - {x: -0.1, y: -0.6, z: 0.2}
+  - {x: -0.2, y: -0.4, z: 0.3}
+  - {x: -0.2, y: -0.2, z: 0.3}
+  - {x: -0.2, y: -0.4, z: 0.3}
+  - {x: -0.2, y: -0.5, z: 0.2}
+  - {x: -0.1, y: -0.6, z: 0.2}
+  - {x: 0, y: -0.6, z: 0.2}
+  - {x: 0.1, y: -0.5, z: 0.4}
+  - {x: 0.2, y: -0.4, z: 0.5}
+  patternTargetPrefab: {fileID: 5093675512830751724, guid: 26046e7b2ce7c1c4a987de558ecd7123,
+    type: 3}
+  patternTargetsCountdownLength: 10
+  movementSpeed: 0.5
+  leftHelper: {fileID: 0}
+  rightHelper: {fileID: 0}
+  leftChild: {fileID: 0}
+  rightChild: {fileID: 0}
+  leftController: {fileID: 0}
+  rightController: {fileID: 0}
+  cameraTransform: {fileID: 0}
+  isSelected: 0
+  helperScaleIsZero: 1
+  orbsDirectedAtPlayer: []
+  helperPrefabs: []
 --- !u!1 &1446761844
 GameObject:
   m_ObjectHideFlags: 0
@@ -3560,6 +3669,7 @@ MonoBehaviour:
   gripValue: 0
   isGrip: 0
   isMenuButton: 0
+  isPrimaryButton: 0
 --- !u!1 &1814350767
 GameObject:
   m_ObjectHideFlags: 0
@@ -3920,7 +4030,7 @@ MonoBehaviour:
   - {x: 0.1, y: -0.2, z: 0.6}
   patternTargetPrefab: {fileID: 41544210357274716, guid: b45b49504e3a84d429c4e12017242502,
     type: 3}
-  patternTargetsCountdownLength: 5
+  patternTargetsCountdownLength: 10
   movementSpeed: 0.5
   leftHelper: {fileID: 1079031280}
   rightHelper: {fileID: 2029242196}
@@ -3930,6 +4040,11 @@ MonoBehaviour:
   rightController: {fileID: 541096548}
   cameraTransform: {fileID: 963194228}
   isSelected: 0
+  helperScaleIsZero: 1
+  orbsDirectedAtPlayer: []
+  helperPrefabs:
+  - {fileID: 8251866741688810290, guid: 30ec30ecc783cd244a6e11278dcee402, type: 3}
+  - {fileID: 3959021028517119277, guid: f41e1971ea4c60b45afedc96491d59b5, type: 3}
 --- !u!1 &1921458976
 GameObject:
   m_ObjectHideFlags: 0

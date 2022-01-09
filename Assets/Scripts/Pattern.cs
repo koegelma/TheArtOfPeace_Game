@@ -23,6 +23,8 @@ public class Pattern : MonoBehaviour
     [HideInInspector] public Controller rightController;
     [HideInInspector] public Transform cameraTransform;
     [HideInInspector] public bool isSelected = false;
+    [HideInInspector] public bool helperScaleIsZero = true;
+    [HideInInspector] public List<GameObject> orbsDirectedAtPlayer;
     private StateManager stateManager;
     private PhaseChecker phaseChecker;
     private OrbManager orbManager;
@@ -30,23 +32,32 @@ public class Pattern : MonoBehaviour
     private GameObject targetsGameObject;
     private Transform[] targets;
     private float patternTargetsCountdown;
-    private List<GameObject> orbsDirectedAtPlayer;
     private bool isCountdown;
     private bool isTriggerReady = true;
     private bool isInPattern = false;
     private int nextPhaseIndex = 0;
-    private bool helperScaleIsZero = true;
+    public GameObject[] helperPrefabs;
+    GameObject tempLeft = null;
+    GameObject tempRight = null;
 
 
-    void testPosition()
+    private void TestPosition()
     {
         if (leftController.isTrigger && rightController.isTrigger && isTriggerReady)
         {
             isTriggerReady = false;
             Debug.Log("left: " + leftController.relativeTransform.position);
+            tempLeft = (GameObject)Instantiate(helperPrefabs[0], leftController.controllerPosition, Quaternion.identity);
             Debug.Log("right: " + rightController.relativeTransform.position);
+            tempRight = (GameObject)Instantiate(helperPrefabs[1], rightController.controllerPosition, Quaternion.identity);
         }
         if (!isTriggerReady && !leftController.isTrigger && !rightController.isTrigger) isTriggerReady = true;
+        if (rightController.isPrimaryButton)
+        {
+            Destroy(tempLeft);
+            Destroy(tempRight);
+            Debug.Log("Destroyed");
+        }
     }
 
     private void Awake()
@@ -67,7 +78,8 @@ public class Pattern : MonoBehaviour
     }
     private void Update()
     {
-        //if (!isSelected) return;
+        if (!isSelected) return;
+        //TestPosition();
         if (isCountdown) HndDestroyCountdown();
         if (!orbManager.HasOrbs) return;
         if (targetsGameObject == null && stateManager.state == pattern && stateManager.currentPhase == leftPhaseCoords.Length - 1)
@@ -121,6 +133,13 @@ public class Pattern : MonoBehaviour
         }
         // final phase
         stateManager.isFinalPhase = true;
+    }
+
+    public void TogglePattern()
+    {
+        isSelected = !isSelected;
+        if (isSelected) PatternManager.instance.activePattern = this;
+        helperScaleIsZero = false;
     }
 
     private void UpdateHelper()

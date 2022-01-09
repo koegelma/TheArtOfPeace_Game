@@ -5,6 +5,7 @@ public class PatternManager : MonoBehaviour
     public static PatternManager instance;
     public Controller leftController;
     public Controller rightController;
+    [HideInInspector] public Pattern activePattern;
     private Pattern[] patterns;
     private int currentPatternIndex;
     private bool isLeftGripReady = true;
@@ -26,9 +27,10 @@ public class PatternManager : MonoBehaviour
         foreach (Transform child in transform)
         {
             patterns[child.GetSiblingIndex()] = child.GetComponent<Pattern>();
-            Debug.Log(patterns[child.GetSiblingIndex()].pattern);
+            //Debug.Log(patterns[child.GetSiblingIndex()].pattern);
         }
         patterns[0].isSelected = true;
+        activePattern = patterns[0];
         currentPatternIndex = 0;
     }
 
@@ -40,9 +42,12 @@ public class PatternManager : MonoBehaviour
         {
             if (currentPatternIndex > 0)
             {
-                patterns[currentPatternIndex].isSelected = false;
+                patterns[currentPatternIndex].TogglePattern();
+                //patterns[currentPatternIndex].isSelected = false;
                 currentPatternIndex--;
-                patterns[currentPatternIndex].isSelected = true;
+                patterns[currentPatternIndex].TogglePattern();
+                //patterns[currentPatternIndex].helperScaleIsZero = true;
+                //patterns[currentPatternIndex].isSelected = true;
             }
             isLeftGripReady = false;
         }
@@ -50,9 +55,11 @@ public class PatternManager : MonoBehaviour
         {
             if (currentPatternIndex < patterns.Length - 1)
             {
-                patterns[currentPatternIndex].isSelected = false;
+                //patterns[currentPatternIndex].isSelected = false;
+                patterns[currentPatternIndex].TogglePattern();
                 currentPatternIndex++;
-                patterns[currentPatternIndex].isSelected = true;
+                patterns[currentPatternIndex].TogglePattern();
+                //patterns[currentPatternIndex].isSelected = true;
             }
             isRightGripReady = false;
         }

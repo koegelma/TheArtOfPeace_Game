@@ -4,16 +4,16 @@ public class OrbMovement : MonoBehaviour
 {
     [Header("Orb Setup")]
     private float speed = 2f;
-
     private float newSpeed;
     private float t;
-    private float slowSpeed = 3.5f;
-    private float mediumSpeed = 4.5f;
-    private float fastSpeed = 8f;
+    private float slowSpeed = 1f; // was 3.5
+    private float mediumSpeed = 2f; // was 4.5
+    private float fastSpeed = 4f; // was 8
     private float rotateSpeed = 200f;
     private int orbDamage = 20;
     private Rigidbody rb;
     public Difficulty tier;
+    [HideInInspector] public bool isMerged = false;
 
     [Header("Target Setup")]
     private Transform playerTarget;
@@ -26,6 +26,7 @@ public class OrbMovement : MonoBehaviour
     public bool isFinalPlayerTargetPassed = false;
     public bool hasTarget { get { return target != null; } }
     public bool targetIsPlayer { get { return target == playerTarget; } }
+    private float targetIsNullTimer = 0.1f;
 
     void Start()
     {
@@ -33,29 +34,40 @@ public class OrbMovement : MonoBehaviour
         gameObject.name = "Orb" + orbManager.orbsCreated;
         orbManager.AddOrb(gameObject);
 
-
         rb = GetComponent<Rigidbody>();
-        
+
         playerTarget = GameObject.Find("Main Camera").transform;
         enemyContainer = GameObject.Find("Enemy Container");
-        if(tier == Difficulty.EASY){
+        if (tier == Difficulty.EASY)
+        {
             SetTargetArrayToPlayer(); //temporary fix - ideal would be to have this in Enemy imo
         }
     }
 
     void FixedUpdate()
     {
+        if (!isMerged && (tier == Difficulty.MEDIUM || tier == Difficulty.HARD)) return;
         if (!hasTarget)
         {
-            PlayerStats.life -= orbDamage;
-            orbManager.RemoveOrb(gameObject);
-            //TODO: add destroy orb particle effect
-            Destroy(gameObject);
-            return;
+            if (targetIsNullTimer <= 0)
+            {
+                DestroyOrb();
+                return;
+            }
+            targetIsNullTimer -= Time.deltaTime;
         }
         CheckSpeed();
         UpdateSpeed();
         TranslateOrb();
+    }
+
+    private void DestroyOrb()
+    {
+        PlayerStats.life -= orbDamage;
+        orbManager.RemoveOrb(gameObject);
+        //TODO: add destroy orb particle effect
+        Destroy(gameObject);
+        Debug.Log("Orb has no target!");
     }
 
     public void SetTargetArrayToPlayer()
@@ -91,9 +103,9 @@ public class OrbMovement : MonoBehaviour
             {
                 //check if pattern phase for next target has already been checked successfully
                 // TODO: check if Difficulty of Pattern and Orb match via AssertDifficulty()
-                if (targetIndex > StateManager.instance.currentPhase)
+                if (targetIndex > StateManager.instance.currentPhase || !AssertDifficulty())
                 {
-                    Debug.Log("phase does not match targetIndex");
+                    Debug.Log("phase does not match targetIndex or difficulty does not match");
                     target = null;
                     return;
                 }
@@ -109,7 +121,6 @@ public class OrbMovement : MonoBehaviour
                 }
             }
         }
-
 
         if (targetIndex >= targets.Length - 1)
         {
@@ -198,21 +209,20 @@ public class OrbMovement : MonoBehaviour
 
     private bool AssertDifficulty()
     {
-        //1. TODO: check difficulty of Orb
-        //2. compare difficulties:
         Difficulty patternDifficulty = targets[targetIndex].parent.gameObject.GetComponent<PatternTarget>().difficulty;
         switch (patternDifficulty)
         {
             case Difficulty.EASY:
-                //if(this.difficulty == Difficulty.EASY) return true;
+                if (this.tier == Difficulty.EASY) return true;
                 break;
             case Difficulty.MEDIUM:
-                //if(this.difficulty == Difficulty.EASY || this.difficulty == Difficulty.MEDIUM) return true;
+                if (this.tier == Difficulty.EASY || this.tier == Difficulty.MEDIUM) return true;
                 break;
             case Difficulty.HARD:
-                //if (this.difficulty == Difficulty.EASY || this.difficulty == Difficulty.MEDIUM || this.difficulty == Difficulty.HARD) return true;
+                if (this.tier == Difficulty.EASY || this.tier == Difficulty.MEDIUM || this.tier == Difficulty.HARD) return true;
                 break;
         }
+        Debug.Log("Difficulty does not match");
         return false;
     }
 }

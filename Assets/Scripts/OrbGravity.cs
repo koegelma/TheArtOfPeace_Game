@@ -12,27 +12,29 @@ public class OrbGravity : MonoBehaviour
     public GameObject easyOrbPrefab;
     public GameObject mediumOrbPrefab;
     public GameObject hardOrbPrefab;
+    private OrbMovement orbMovement;
     // Start is called before the first frame update
     void Start()
     {
         orbManager = OrbManager.instance;
+        orbMovement = GetComponent<OrbMovement>();
     }
 
     // Update is called once per frame
     void Update()
     {
         ApplyGravity();
-
     }
     public void ApplyGravity()
     {
-        if (GetComponent<OrbMovement>().tier != Difficulty.HARD)
+        if (orbMovement.tier != Difficulty.HARD)
         {
             List<GameObject> tempOrbList = new List<GameObject>();
             foreach (GameObject orb in orbManager.orbs)
             {
-                Vector3 vectorFromiOrbToOrb = orb.transform.position - transform.position;
-                if ((name != orb.name && vectorFromiOrbToOrb.magnitude < range) && vectorFromiOrbToOrb.magnitude > 0.6)
+                Vector3 vectorFromOrbToThis = orb.transform.position - transform.position;
+                if ((name != orb.name && vectorFromOrbToThis.magnitude < range) && orb.GetComponent<OrbMovement>().target == orbMovement.target && (orbMovement.targets.Length <= 1 || orbMovement.target.parent.GetComponent<PatternTarget>().isEnemyPattern))
+                //&& vectorFromOrbToThis.magnitude > 0.6)
                 {
                     tempOrbList.Add(orb);
                 }
@@ -61,7 +63,7 @@ public class OrbGravity : MonoBehaviour
 
     public void CheckGroups(List<GameObject> tempOrbList)
     {
-        if (GetComponent<OrbMovement>().tier != Difficulty.HARD)
+        if (orbMovement.tier != Difficulty.HARD)
         {
             List<GameObject> groupList = new List<GameObject>();
             foreach (GameObject orb in tempOrbList)
@@ -81,8 +83,8 @@ public class OrbGravity : MonoBehaviour
                     orbManager.RemoveOrb(groupList[0]);
                     Destroy(groupList[0]);
 
-                    if (GetComponent<OrbMovement>().tier == Difficulty.EASY)
-                    { 
+                    if (orbMovement.tier == Difficulty.EASY)
+                    {
                         newOrb = Instantiate(mediumOrbPrefab, transform.position, transform.rotation);
                     }
                     else
@@ -92,39 +94,56 @@ public class OrbGravity : MonoBehaviour
                 }
                 else
                 {
-                    if (GetComponent<OrbMovement>().tier == Difficulty.EASY)
+                    if (orbMovement.tier == Difficulty.EASY)
                     {
+                        newOrb = Instantiate(hardOrbPrefab, transform.position, transform.rotation);
                         orbManager.RemoveOrb(gameObject);
                         Destroy(gameObject);
                         orbManager.RemoveOrb(groupList[0]);
                         Destroy(groupList[0]);
                         orbManager.RemoveOrb(groupList[1]);
+                        //UpdatePatternOrbList(groupList, newOrb);
                         Destroy(groupList[1]);
-                        newOrb = Instantiate(hardOrbPrefab, transform.position, transform.rotation);
                     }
-                    else if (GetComponent<OrbMovement>().tier == Difficulty.MEDIUM)
+                    else if (orbMovement.tier == Difficulty.MEDIUM)
                     {
+                        newOrb = Instantiate(hardOrbPrefab, transform.position, transform.rotation);
                         orbManager.RemoveOrb(gameObject);
                         Destroy(gameObject);
                         orbManager.RemoveOrb(groupList[0]);
+                        //UpdatePatternOrbList(groupList, newOrb);
                         Destroy(groupList[0]);
-                        newOrb = Instantiate(hardOrbPrefab, transform.position, transform.rotation);
                     }
                 }
-                MergeMovement(GetComponent<OrbMovement>(), newOrb.GetComponent<OrbMovement>());
+
+                MergeMovement(orbMovement, newOrb.GetComponent<OrbMovement>());
             }
         }
     }
+
+    /*    private void UpdatePatternOrbList(List<GameObject> oldOrbs, GameObject newOrb)
+       {
+           oldOrbs.Add(gameObject);
+
+           List<GameObject> orbs = PatternManager.instance.activePattern.orbsDirectedAtPlayer;
+           foreach (GameObject orb in oldOrbs)
+           {
+               if (orbs.Contains(orb)) orbs.Remove(orb);
+           }
+           orbs.Add(newOrb);
+       } */
+
     private void MergeMovement(OrbMovement original, OrbMovement merged)
     {
         if (merged != null)
         {
-            Debug.Log("merged!");
+            //Debug.Log("merged!");
             merged.targets = original.targets;
             merged.target = original.target;
             merged.targetIndex = original.targetIndex;
             merged.isFinalEnemyTargetPassed = original.isFinalEnemyTargetPassed;
             merged.isFinalPlayerTargetPassed = original.isFinalPlayerTargetPassed;
+            merged.isMerged = true;
         }
     }
 }
