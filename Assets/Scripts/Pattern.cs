@@ -40,6 +40,9 @@ public class Pattern : MonoBehaviour
     GameObject tempLeft = null;
     GameObject tempRight = null;
 
+    public GameObject leftPhaseObject;
+    public GameObject rightPhaseObject;
+
 
     private void TestPosition()
     {
@@ -107,8 +110,8 @@ public class Pattern : MonoBehaviour
 
     private void CheckForPattern()
     {
-        UpdateHelper(); // update behaviour for multiple patterns
-        if (phaseChecker.check(0))
+        UpdateFirstHelper(); // update behaviour for multiple patterns
+        if (phaseChecker.FirstCheck(0))
         {
             StartCoroutine(SpawnPatternTargets());
             stateManager.state = pattern;
@@ -120,11 +123,11 @@ public class Pattern : MonoBehaviour
 
     private void CheckForPhase()
     {
-        UpdateHelper();
+        UpdateNextHelper();
         // check if not final phase
         if (stateManager.currentPhase < leftPhaseCoords.Length - 1)
         {
-            if (phaseChecker.check(nextPhaseIndex))
+            if (phaseChecker.NextCheck(nextPhaseIndex))
             {
                 stateManager.switchPhase(nextPhaseIndex, 5f);
                 nextPhaseIndex++;
@@ -142,27 +145,18 @@ public class Pattern : MonoBehaviour
         helperScaleIsZero = false;
     }
 
-    private void UpdateHelper()
+    private void UpdateFirstHelper()
     {
         if (stateManager.state == pattern && stateManager.currentPhase == leftPhaseCoords.Length - 1)
         {
             SetHelperScaleToZero();
             return;
         }
-
         leftHelper.transform.position = cameraTransform.position;
         rightHelper.transform.position = cameraTransform.position;
 
-        if (helperScaleIsZero)
-        {
-            leftChild.transform.localPosition = this.leftPhaseCoords[stateManager.currentPhase + 1];
-            rightChild.transform.localPosition = this.rightPhaseCoords[stateManager.currentPhase + 1];
-        }
-        else
-        {
-            MoveChildToTarget(leftChild.transform, this.leftPhaseCoords[stateManager.currentPhase + 1]);
-            MoveChildToTarget(rightChild.transform, this.rightPhaseCoords[stateManager.currentPhase + 1]);
-        }
+        leftChild.transform.localPosition = this.leftPhaseCoords[stateManager.currentPhase + 1];
+        rightChild.transform.localPosition = this.rightPhaseCoords[stateManager.currentPhase + 1];
 
         leftHelper.transform.eulerAngles = new Vector3(leftHelper.transform.eulerAngles.x, cameraTransform.eulerAngles.y, leftHelper.transform.eulerAngles.z);
         rightHelper.transform.eulerAngles = new Vector3(rightHelper.transform.eulerAngles.x, cameraTransform.eulerAngles.y, rightHelper.transform.eulerAngles.z);
@@ -175,6 +169,22 @@ public class Pattern : MonoBehaviour
             rightChild.transform.localScale = new Vector3(tolerance, tolerance, tolerance);
             helperScaleIsZero = false;
         }
+    }
+    private void UpdateNextHelper()
+    {
+        if (stateManager.state == pattern && stateManager.currentPhase == leftPhaseCoords.Length - 1)
+        {
+            SetHelperScaleToZero();
+            return;
+        }
+        leftHelper.transform.position = cameraTransform.position;
+        rightHelper.transform.position = cameraTransform.position;
+
+        MoveChildToTarget(leftChild.transform, this.leftPhaseCoords[stateManager.currentPhase + 1]);
+        MoveChildToTarget(rightChild.transform, this.rightPhaseCoords[stateManager.currentPhase + 1]);
+
+        leftPhaseObject.transform.position = phaseChecker.tempLeftPosition + leftController.GetMainCamera().transform.position;
+        rightPhaseObject.transform.position = phaseChecker.tempRightPosition + leftController.GetMainCamera().transform.position;
     }
 
     private void MoveChildToTarget(Transform childTransform, Vector3 phaseCoordPosition)

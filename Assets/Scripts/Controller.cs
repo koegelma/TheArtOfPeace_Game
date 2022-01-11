@@ -20,11 +20,15 @@ public class Controller : MonoBehaviour
     public bool isGrip;
     public bool isMenuButton;
     public bool isPrimaryButton;
+    public Transform nextRelativeTransform;
+    //public GameObject nextRelativeTransformGO;
 
     void Update()
     {
         registerDevice();
-        updateRelativeControllerPositionAndRotation();
+        CheckControllerInput();
+        UpdateFirstRelativeControllerTransform();
+        UpdateNextRelativeControllerTransform();
     }
     public void registerDevice()
     {
@@ -50,19 +54,22 @@ public class Controller : MonoBehaviour
             }
         }
     }
-    public void updateRelativeControllerPositionAndRotation()
+
+    private void CheckControllerInput()
     {
         device.TryGetFeatureValue(CommonUsages.trigger, out triggerValue);
-        checkTrigger();
+        CheckTrigger();
         device.TryGetFeatureValue(CommonUsages.grip, out gripValue);
-        checkGrip();
+        CheckGrip();
         device.TryGetFeatureValue(CommonUsages.devicePosition, out controllerPosition);
         device.TryGetFeatureValue(CommonUsages.deviceRotation, out controllerRotation);
         device.TryGetFeatureValue(CommonUsages.deviceVelocity, out controllerVelocity);
         device.TryGetFeatureValue(CommonUsages.deviceAcceleration, out controllerAcceleration);
         device.TryGetFeatureValue(CommonUsages.menuButton, out isMenuButton);
         device.TryGetFeatureValue(CommonUsages.primaryButton, out isPrimaryButton);
-
+    }
+    public void UpdateFirstRelativeControllerTransform()
+    {
         controllerRotation *= Quaternion.Euler(Vector3.right * 20);
 
         relativeTransform.position = controllerPosition - mainCamera.transform.position;
@@ -73,12 +80,30 @@ public class Controller : MonoBehaviour
         relativeTransform.RotateAround(XRRig.transform.position, new Vector3(0, 1, 0), -mainCamera.transform.rotation.eulerAngles.y);
         relativeTransform.rotation = temporaryRotation;
     }
-    void checkTrigger()
+
+    public GameObject GetMainCamera()
+    {
+        return mainCamera;
+    }
+
+    public void UpdateNextRelativeControllerTransform()
+    {
+        nextRelativeTransform.position = controllerPosition - mainCamera.transform.position;
+
+        //Vector3 relativeAddedHeight = nextRelativeTransform.position + mainCamera.transform.position;
+
+        //nextRelativeTransformGO.transform.position = relativeAddedHeight;
+
+        //nextRelativeTransformGO.transform.position = new Vector3(nextRelativeTransformGO.transform.position.x, nextRelativeTransformGO.transform.position.y + mainCamera.transform.position.y, nextRelativeTransformGO.transform.position.z);
+
+    }
+
+    void CheckTrigger()
     {
         if (triggerValue >= 0.1) isTrigger = true;
         else isTrigger = false;
     }
-    void checkGrip()
+    void CheckGrip()
     {
         if (gripValue >= 0.1) isGrip = true;
         else isGrip = false;

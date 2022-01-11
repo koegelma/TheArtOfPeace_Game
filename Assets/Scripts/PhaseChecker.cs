@@ -9,6 +9,9 @@ public class PhaseChecker
     Vector3[] rightPhaseCoords;
     public static float tolerance;
 
+    public Vector3 tempRightPosition;
+    public Vector3 tempLeftPosition;
+
 
     public PhaseChecker(Vector3[] leftPhaseCoords, Vector3[] rightPhaseCoords)
     {
@@ -19,7 +22,7 @@ public class PhaseChecker
         tolerance = 0.07f;
     }
 
-    public bool check(int phase)
+    public bool FirstCheck(int phase)
     {
         if (leftController.isTrigger && rightController.isTrigger)
         {
@@ -38,6 +41,45 @@ public class PhaseChecker
         }
         return false;
     }
+
+    public bool NextCheck(int phase)
+    {
+        if (leftController.isTrigger && rightController.isTrigger)
+        {
+            GameObject tempLeftPhaseCoord = new GameObject("tempLeftPhaseCoord");
+            GameObject tempRightPhaseCoord = new GameObject("tempRightPhaseCoord");
+
+            tempLeftPhaseCoord.transform.position = leftPhaseCoords[phase];
+            tempRightPhaseCoord.transform.position = rightPhaseCoords[phase];
+
+
+            // point rotates around itself, not around camera, why? --> offset on xrrig and camera in z direction, but why this?
+            tempLeftPhaseCoord.transform.RotateAround(leftController.GetMainCamera().transform.position, Vector3.up, 180);
+            //leftController.GetMainCamera().transform.eulerAngles.y);
+            tempRightPhaseCoord.transform.RotateAround(leftController.GetMainCamera().transform.position, Vector3.up, 180);
+            //leftController.GetMainCamera().transform.eulerAngles.y);
+
+            tempLeftPosition = tempRightPhaseCoord.transform.position;
+            tempRightPosition = tempLeftPhaseCoord.transform.position;
+
+            if ((leftController.nextRelativeTransform.position.x < tempLeftPhaseCoord.transform.position.x + tolerance && leftController.nextRelativeTransform.position.x > tempLeftPhaseCoord.transform.position.x - tolerance
+            && leftController.nextRelativeTransform.position.y < tempLeftPhaseCoord.transform.position.y + tolerance && leftController.nextRelativeTransform.position.y > tempLeftPhaseCoord.transform.position.y - tolerance
+            && leftController.nextRelativeTransform.position.z < tempLeftPhaseCoord.transform.position.z + tolerance && leftController.nextRelativeTransform.position.z > tempLeftPhaseCoord.transform.position.z - tolerance)
+            &&
+               (rightController.nextRelativeTransform.position.x < tempRightPhaseCoord.transform.position.x + tolerance && rightController.nextRelativeTransform.position.x > tempRightPhaseCoord.transform.position.x - tolerance
+            && rightController.nextRelativeTransform.position.y < tempRightPhaseCoord.transform.position.y + tolerance && rightController.nextRelativeTransform.position.y > tempRightPhaseCoord.transform.position.y - tolerance
+            && rightController.nextRelativeTransform.position.z < tempRightPhaseCoord.transform.position.z + tolerance && rightController.nextRelativeTransform.position.z > tempRightPhaseCoord.transform.position.z - tolerance))
+            {
+                GameObject.Destroy(tempLeftPhaseCoord);
+                GameObject.Destroy(tempRightPhaseCoord);
+                return true;
+            }
+            GameObject.Destroy(tempLeftPhaseCoord);
+            GameObject.Destroy(tempRightPhaseCoord);
+        }
+        return false;
+    }
+
     private bool checkFluidity(float minSpeed, float maxSpeed)
     {
         float leftVelocityMagnitude = leftController.controllerVelocity.magnitude;

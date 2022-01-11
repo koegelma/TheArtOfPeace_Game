@@ -10,7 +10,7 @@ public class OrbMovement : MonoBehaviour
     private float mediumSpeed = 2f; // was 4.5
     private float fastSpeed = 4f; // was 8
     private float rotateSpeed = 200f;
-    private int orbDamage = 20;
+    private int orbDamage = 0;
     private Rigidbody rb;
     public Difficulty tier;
     [HideInInspector] public bool isMerged = false;
@@ -55,6 +55,7 @@ public class OrbMovement : MonoBehaviour
                 return;
             }
             targetIsNullTimer -= Time.deltaTime;
+            return;
         }
         CheckSpeed();
         UpdateSpeed();
@@ -136,7 +137,6 @@ public class OrbMovement : MonoBehaviour
                     return;
                 }
             }
-
             target = null;
             Debug.Log("last target reached!");
             return;
