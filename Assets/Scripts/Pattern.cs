@@ -39,9 +39,10 @@ public class Pattern : MonoBehaviour
     public GameObject[] helperPrefabs;
     GameObject tempLeft = null;
     GameObject tempRight = null;
+    private bool isMoving;
 
-    public GameObject leftPhaseObject;
-    public GameObject rightPhaseObject;
+    //public GameObject leftPhaseObject;
+    //public GameObject rightPhaseObject;
 
 
     private void TestPosition()
@@ -125,6 +126,7 @@ public class Pattern : MonoBehaviour
     {
         UpdateNextHelper();
         // check if not final phase
+        if (isMoving) return;
         if (stateManager.currentPhase < leftPhaseCoords.Length - 1)
         {
             if (phaseChecker.NextCheck(nextPhaseIndex))
@@ -161,6 +163,12 @@ public class Pattern : MonoBehaviour
         leftHelper.transform.eulerAngles = new Vector3(leftHelper.transform.eulerAngles.x, cameraTransform.eulerAngles.y, leftHelper.transform.eulerAngles.z);
         rightHelper.transform.eulerAngles = new Vector3(rightHelper.transform.eulerAngles.x, cameraTransform.eulerAngles.y, rightHelper.transform.eulerAngles.z);
 
+        phaseChecker.globalLeftPhaseCoord = leftChild.transform.position;
+        phaseChecker.globalRightPhaseCoord = rightChild.transform.position;
+
+        //phaseChecker.globalLeftControllerPosition = leftController.controllerPosition;
+        //phaseChecker.globalRightControllerPosition = rightController.controllerPosition;
+
         float tolerance = PhaseChecker.tolerance * 2;
         Vector3 newScale = new Vector3(tolerance, tolerance, tolerance);
         if (leftChild.transform.localScale != newScale && rightChild.transform.localScale != newScale)
@@ -170,6 +178,7 @@ public class Pattern : MonoBehaviour
             helperScaleIsZero = false;
         }
     }
+
     private void UpdateNextHelper()
     {
         if (stateManager.state == pattern && stateManager.currentPhase == leftPhaseCoords.Length - 1)
@@ -180,21 +189,28 @@ public class Pattern : MonoBehaviour
         leftHelper.transform.position = cameraTransform.position;
         rightHelper.transform.position = cameraTransform.position;
 
-        MoveChildToTarget(leftChild.transform, this.leftPhaseCoords[stateManager.currentPhase + 1]);
+        MoveChildToTarget(leftChild.transform, this.leftPhaseCoords[stateManager.currentPhase + 1]); // kein check während dem moven
         MoveChildToTarget(rightChild.transform, this.rightPhaseCoords[stateManager.currentPhase + 1]);
 
-        leftPhaseObject.transform.position = phaseChecker.tempLeftPosition + leftController.GetMainCamera().transform.position;
-        rightPhaseObject.transform.position = phaseChecker.tempRightPosition + leftController.GetMainCamera().transform.position;
+        //leftPhaseObject.transform.position = phaseChecker.tempLeftPosition + leftController.GetMainCamera().transform.position;
+        //rightPhaseObject.transform.position = phaseChecker.tempRightPosition + leftController.GetMainCamera().transform.position;
     }
 
     private void MoveChildToTarget(Transform childTransform, Vector3 phaseCoordPosition)
     {
         if (Vector3.Distance(childTransform.localPosition, phaseCoordPosition) > 0.05f)
         {
+            isMoving = true;
             childTransform.localPosition = Vector3.MoveTowards(childTransform.localPosition, phaseCoordPosition, Time.deltaTime * movementSpeed);
             return;
         }
         childTransform.localPosition = phaseCoordPosition;
+        phaseChecker.globalLeftPhaseCoord = leftChild.transform.position;
+        phaseChecker.globalRightPhaseCoord = rightChild.transform.position;
+
+        //phaseChecker.globalLeftControllerPosition = leftController.controllerPosition;
+        //phaseChecker.globalRightControllerPosition = rightController.controllerPosition;
+        isMoving = false;
     }
 
     private void SetHelperScaleToZero()
