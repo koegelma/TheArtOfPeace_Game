@@ -12,6 +12,7 @@ public class Pattern : MonoBehaviour
     public GameObject patternTargetPrefab;
     public float patternTargetsCountdownLength;
     public float movementSpeed;
+    public bool isTestPattern;
 
     [Header("Scene variables")]
     // same references for every pattern - get scene references through PatternReference
@@ -40,9 +41,8 @@ public class Pattern : MonoBehaviour
     GameObject tempLeft = null;
     GameObject tempRight = null;
     private bool isMoving;
-
-    //public GameObject leftPhaseObject;
-    //public GameObject rightPhaseObject;
+    private int phaseIndex = 0;
+    private bool isPrimaryButtonReady = true;
 
 
     private void TestPosition()
@@ -50,19 +50,46 @@ public class Pattern : MonoBehaviour
         if (leftController.isTrigger && rightController.isTrigger && isTriggerReady)
         {
             isTriggerReady = false;
-            Debug.Log("left: " + leftController.relativeTransform.position);
+            if (phaseIndex > 0) AddNewPhaseCoord(false);
+            else AddNewPhaseCoord(true);
+            //Debug.Log("left: " + leftController.relativeTransform.position);
             tempLeft = (GameObject)Instantiate(helperPrefabs[0], leftController.controllerPosition, Quaternion.identity);
-            Debug.Log("right: " + rightController.relativeTransform.position);
+            //Debug.Log("right: " + rightController.relativeTransform.position);
             tempRight = (GameObject)Instantiate(helperPrefabs[1], rightController.controllerPosition, Quaternion.identity);
+
+            Vector3 patternTargetPos = (leftController.controllerPosition + rightController.controllerPosition) / 2;
+            Debug.Log(phaseIndex-1 + ": " + patternTargetPos);
         }
         if (!isTriggerReady && !leftController.isTrigger && !rightController.isTrigger) isTriggerReady = true;
-        if (rightController.isPrimaryButton)
+        if (rightController.isPrimaryButton && isPrimaryButtonReady && phaseIndex > 0)
         {
+            isPrimaryButtonReady = false;
             Destroy(tempLeft);
             Destroy(tempRight);
+            leftPhaseCoords[phaseIndex] = Vector3.zero;
+            rightPhaseCoords[phaseIndex] = Vector3.zero;
+            phaseIndex--;
+
             Debug.Log("Destroyed");
         }
+        if (!rightController.isPrimaryButton && !isPrimaryButtonReady) isPrimaryButtonReady = true;
     }
+
+    private void AddNewPhaseCoord(bool isFirst)
+    {
+        if (isFirst)
+        {
+            leftPhaseCoords[phaseIndex] = leftController.relativeTransform.position;
+            rightPhaseCoords[phaseIndex] = rightController.relativeTransform.position;
+        }
+        else
+        {
+            leftPhaseCoords[phaseIndex] = leftController.nextRelativeTransform.position;
+            rightPhaseCoords[phaseIndex] = rightController.nextRelativeTransform.position;
+        }
+        phaseIndex++;
+    }
+
 
     private void Awake()
     {
@@ -83,7 +110,13 @@ public class Pattern : MonoBehaviour
     private void Update()
     {
         if (!isSelected) return;
+        if (isTestPattern)
+        {
+            TestPosition();
+            return;
+        }
         //TestPosition();
+        //return;
         if (isCountdown) HndDestroyCountdown();
         if (!orbManager.HasOrbs) return;
         if (targetsGameObject == null && stateManager.state == pattern && stateManager.currentPhase == leftPhaseCoords.Length - 1)
@@ -166,9 +199,6 @@ public class Pattern : MonoBehaviour
         phaseChecker.globalLeftPhaseCoord = leftChild.transform.position;
         phaseChecker.globalRightPhaseCoord = rightChild.transform.position;
 
-        //phaseChecker.globalLeftControllerPosition = leftController.controllerPosition;
-        //phaseChecker.globalRightControllerPosition = rightController.controllerPosition;
-
         float tolerance = PhaseChecker.tolerance * 2;
         Vector3 newScale = new Vector3(tolerance, tolerance, tolerance);
         if (leftChild.transform.localScale != newScale && rightChild.transform.localScale != newScale)
@@ -189,11 +219,8 @@ public class Pattern : MonoBehaviour
         leftHelper.transform.position = cameraTransform.position;
         rightHelper.transform.position = cameraTransform.position;
 
-        MoveChildToTarget(leftChild.transform, this.leftPhaseCoords[stateManager.currentPhase + 1]); // kein check während dem moven
+        MoveChildToTarget(leftChild.transform, this.leftPhaseCoords[stateManager.currentPhase + 1]);
         MoveChildToTarget(rightChild.transform, this.rightPhaseCoords[stateManager.currentPhase + 1]);
-
-        //leftPhaseObject.transform.position = phaseChecker.tempLeftPosition + leftController.GetMainCamera().transform.position;
-        //rightPhaseObject.transform.position = phaseChecker.tempRightPosition + leftController.GetMainCamera().transform.position;
     }
 
     private void MoveChildToTarget(Transform childTransform, Vector3 phaseCoordPosition)
@@ -207,9 +234,6 @@ public class Pattern : MonoBehaviour
         childTransform.localPosition = phaseCoordPosition;
         phaseChecker.globalLeftPhaseCoord = leftChild.transform.position;
         phaseChecker.globalRightPhaseCoord = rightChild.transform.position;
-
-        //phaseChecker.globalLeftControllerPosition = leftController.controllerPosition;
-        //phaseChecker.globalRightControllerPosition = rightController.controllerPosition;
         isMoving = false;
     }
 

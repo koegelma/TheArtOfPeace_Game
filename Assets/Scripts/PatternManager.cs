@@ -10,6 +10,7 @@ public class PatternManager : MonoBehaviour
     private int currentPatternIndex;
     private bool isLeftGripReady = true;
     private bool isRightGripReady = true;
+ 
 
     private void Awake()
     {

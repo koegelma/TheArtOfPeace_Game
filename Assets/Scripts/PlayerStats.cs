@@ -6,10 +6,9 @@ public class PlayerStats : MonoBehaviour
     public static int life;
     private int startLife = 100;
     public Text lifeText;
-    public static int targetIndex;
-    public Text targetIndexText;
     public static int phase;
     public Text phaseText;
+    public Text activePatternText;
 
 
     private void Start()
@@ -41,15 +40,7 @@ public class PlayerStats : MonoBehaviour
         phase = StateManager.instance.currentPhase;
         phaseText.text = phase.ToString();
 
-        if (!OrbManager.instance.IsAnyOrbDirectedAtPlayer())
-        {
-            targetIndexText.text = targetIndex.ToString();
-            return;
-        }
-
-        OrbMovement orbScript = OrbManager.instance.GetOrbDirectedAtPlayer().GetComponent<OrbMovement>();
-        targetIndex = orbScript.targetIndex;
-        targetIndexText.text = targetIndex.ToString();
+        activePatternText.text = PatternManager.instance.activePattern.name;
 
     }
 }

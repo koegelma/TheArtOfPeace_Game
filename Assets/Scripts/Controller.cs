@@ -89,13 +89,6 @@ public class Controller : MonoBehaviour
     public void UpdateNextRelativeControllerTransform()
     {
         nextRelativeTransform.position = controllerPosition - mainCamera.transform.position;
-
-        //Vector3 relativeAddedHeight = nextRelativeTransform.position + mainCamera.transform.position;
-
-        //nextRelativeTransformGO.transform.position = relativeAddedHeight;
-
-        //nextRelativeTransformGO.transform.position = new Vector3(nextRelativeTransformGO.transform.position.x, nextRelativeTransformGO.transform.position.y + mainCamera.transform.position.y, nextRelativeTransformGO.transform.position.z);
-
     }
 
     void CheckTrigger()

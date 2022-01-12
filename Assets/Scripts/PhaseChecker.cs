@@ -27,8 +27,6 @@ public class PhaseChecker
     {
         if (leftController.isTrigger && rightController.isTrigger)
         {
-            Debug.Log("LeftController: " + leftController.controllerPosition);
-            Debug.Log("LeftPhaseCoord: " + globalLeftPhaseCoord);
             if ((leftController.controllerPosition.x < globalLeftPhaseCoord.x + tolerance && leftController.controllerPosition.x > globalLeftPhaseCoord.x - tolerance
             && leftController.controllerPosition.y < globalLeftPhaseCoord.y + tolerance && leftController.controllerPosition.y > globalLeftPhaseCoord.y - tolerance
             && leftController.controllerPosition.z < globalLeftPhaseCoord.z + tolerance && leftController.controllerPosition.z > globalLeftPhaseCoord.z - tolerance)
@@ -45,25 +43,10 @@ public class PhaseChecker
         return false;
     }
 
-    public bool NextCheck(int phase) //, Vector3 leftCoord, Vector3 rightCoord
+    public bool NextCheck(int phase)
     {
-        // global controller positions benutzen
         if (leftController.isTrigger && rightController.isTrigger)
         {
-            /* GameObject tempLeftPhaseCoord = new GameObject("tempLeftPhaseCoord");
-            GameObject tempRightPhaseCoord = new GameObject("tempRightPhaseCoord");
-
-            tempLeftPhaseCoord.transform.position = leftPhaseCoords[phase];
-            tempRightPhaseCoord.transform.position = rightPhaseCoords[phase];
-
-
-            // point rotates around itself, not around camera, why? --> offset on xrrig and camera in z direction, but why this?
-            tempLeftPhaseCoord.transform.RotateAround(leftController.GetMainCamera().transform.position, Vector3.up, leftController.GetMainCamera().transform.eulerAngles.y);
-            tempRightPhaseCoord.transform.RotateAround(leftController.GetMainCamera().transform.position, Vector3.up, leftController.GetMainCamera().transform.eulerAngles.y);
-
-            tempLeftPosition = tempRightPhaseCoord.transform.position;
-            tempRightPosition = tempLeftPhaseCoord.transform.position; */
-
             Debug.Log("LeftController: " + leftController.controllerPosition);
             Debug.Log("LeftPhaseCoord: " + globalLeftPhaseCoord);
 
@@ -75,12 +58,8 @@ public class PhaseChecker
             && rightController.controllerPosition.y < globalRightPhaseCoord.y + tolerance && rightController.controllerPosition.y > globalRightPhaseCoord.y - tolerance
             && rightController.controllerPosition.z < globalRightPhaseCoord.z + tolerance && rightController.controllerPosition.z > globalRightPhaseCoord.z - tolerance))
             {
-                //GameObject.Destroy(tempLeftPhaseCoord);
-                //GameObject.Destroy(tempRightPhaseCoord);
                 return true;
             }
-            //GameObject.Destroy(tempLeftPhaseCoord);
-            //GameObject.Destroy(tempRightPhaseCoord);
         }
         return false;
     }

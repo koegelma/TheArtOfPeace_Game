@@ -31,6 +31,7 @@ public class Enemy : MonoBehaviour
 
     private void Update()
     {
+        //return;
         transform.LookAt(player);
         currentCooldownBar.transform.localScale = new Vector3(spawnOrbCountdown / timeBetweenOrbs, currentCooldownBar.transform.localScale.y, currentCooldownBar.transform.localScale.z);
 

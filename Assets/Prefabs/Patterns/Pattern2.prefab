@@ -1,0 +1,69 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6479602472521336675
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6479602472521336674}
+  - component: {fileID: 6479602472521336685}
+  m_Layer: 0
+  m_Name: Pattern2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6479602472521336674
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6479602472521336675}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6479602472521336685
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6479602472521336675}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 172541bac164f6b46849de550ccb9df3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pattern: 2
+  leftPhaseCoords:
+  - {x: -0.1, y: -0.25, z: 0.2}
+  - {x: -0.1, y: -0.25, z: 0.4}
+  - {x: -0.1, y: -0.25, z: 0.6}
+  rightPhaseCoords:
+  - {x: 0.1, y: -0.2, z: 0.6}
+  - {x: 0.1, y: -0.25, z: 0.4}
+  - {x: 0.1, y: -0.3, z: 0.2}
+  patternTargetPrefab: {fileID: 8994177345932533138, guid: c1b85af640b0c06478213ae08d87a262,
+    type: 3}
+  patternTargetsCountdownLength: 10
+  movementSpeed: 0.5
+  leftHelper: {fileID: 0}
+  rightHelper: {fileID: 0}
+  leftChild: {fileID: 0}
+  rightChild: {fileID: 0}
+  leftController: {fileID: 0}
+  rightController: {fileID: 0}
+  cameraTransform: {fileID: 0}
+  isSelected: 0
+  helperScaleIsZero: 1
+  orbsDirectedAtPlayer: []
+  helperPrefabs: []
