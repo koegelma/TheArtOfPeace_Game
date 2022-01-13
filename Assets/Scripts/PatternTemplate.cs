@@ -8,7 +8,7 @@ public class PatternTemplate : MonoBehaviour
     Vector3[] leftPhaseCoords;
     Vector3[] rightPhaseCoords;
     
-    void Start()
+    /* void Start()
     {
         leftPhaseCoords = new Vector3[3];
         rightPhaseCoords = new Vector3[3];
@@ -19,7 +19,7 @@ public class PatternTemplate : MonoBehaviour
         rightPhaseCoords[1] = new Vector3(1, 1, 1);
         rightPhaseCoords[2] = new Vector3(1, 1, 1);
         phaseChecker = new PhaseChecker(leftPhaseCoords, rightPhaseCoords);
-    }
+    } */
   /*   void Update()
     {
         if(StateManager.state == State.IDLE || StateManager.state == State.PATTERN1){

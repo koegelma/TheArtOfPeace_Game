@@ -7,20 +7,21 @@ public class PhaseChecker
     public Controller rightController;
     Vector3[] leftPhaseCoords;
     Vector3[] rightPhaseCoords;
-    public static float tolerance;
+    public float tolerance;
     public Vector3 globalRightPhaseCoord;
     public Vector3 globalLeftPhaseCoord;
     public Vector3 globalRightControllerPosition;
     public Vector3 globalLeftControllerPosition;
 
 
-    public PhaseChecker(Vector3[] leftPhaseCoords, Vector3[] rightPhaseCoords)
+    public PhaseChecker(Vector3[] leftPhaseCoords, Vector3[] rightPhaseCoords, float _tolerance)
     {
         this.leftPhaseCoords = leftPhaseCoords;
         this.rightPhaseCoords = rightPhaseCoords;
         this.leftController = GameObject.Find("Left Controller").GetComponent<Controller>();
         this.rightController = GameObject.Find("Right Controller").GetComponent<Controller>();
-        tolerance = 0.07f;
+        this.tolerance = _tolerance;
+        //tolerance = 0.07f;
     }
 
     public bool FirstCheck(int phase)
@@ -47,9 +48,6 @@ public class PhaseChecker
     {
         if (leftController.isTrigger && rightController.isTrigger)
         {
-            Debug.Log("LeftController: " + leftController.controllerPosition);
-            Debug.Log("LeftPhaseCoord: " + globalLeftPhaseCoord);
-
             if ((leftController.controllerPosition.x < globalLeftPhaseCoord.x + tolerance && leftController.controllerPosition.x > globalLeftPhaseCoord.x - tolerance
             && leftController.controllerPosition.y < globalLeftPhaseCoord.y + tolerance && leftController.controllerPosition.y > globalLeftPhaseCoord.y - tolerance
             && leftController.controllerPosition.z < globalLeftPhaseCoord.z + tolerance && leftController.controllerPosition.z > globalLeftPhaseCoord.z - tolerance)

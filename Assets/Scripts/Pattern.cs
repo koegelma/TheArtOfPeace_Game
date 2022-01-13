@@ -11,8 +11,10 @@ public class Pattern : MonoBehaviour
     public Vector3[] rightPhaseCoords;
     public GameObject patternTargetPrefab;
     public float patternTargetsCountdownLength;
+    public float countdownBetweenPhases = 5f;
     public float movementSpeed;
     public bool isTestPattern;
+    public float tolerance;
 
     [Header("Scene variables")]
     // same references for every pattern - get scene references through PatternReference
@@ -58,7 +60,7 @@ public class Pattern : MonoBehaviour
             tempRight = (GameObject)Instantiate(helperPrefabs[1], rightController.controllerPosition, Quaternion.identity);
 
             Vector3 patternTargetPos = (leftController.controllerPosition + rightController.controllerPosition) / 2;
-            Debug.Log(phaseIndex-1 + ": " + patternTargetPos);
+            Debug.Log(phaseIndex - 1 + ": " + patternTargetPos);
         }
         if (!isTriggerReady && !leftController.isTrigger && !rightController.isTrigger) isTriggerReady = true;
         if (rightController.isPrimaryButton && isPrimaryButtonReady && phaseIndex > 0)
@@ -95,7 +97,7 @@ public class Pattern : MonoBehaviour
     {
         leftPhaseCoords = GameData.CalcPlayerPhaseCoords(leftPhaseCoords);
         rightPhaseCoords = GameData.CalcPlayerPhaseCoords(rightPhaseCoords);
-        phaseChecker = new PhaseChecker(leftPhaseCoords, rightPhaseCoords);
+        phaseChecker = new PhaseChecker(leftPhaseCoords, rightPhaseCoords, tolerance);
     }
 
     private void Start()
@@ -149,7 +151,7 @@ public class Pattern : MonoBehaviour
         {
             StartCoroutine(SpawnPatternTargets());
             stateManager.state = pattern;
-            stateManager.switchPhase(0, 5f);
+            stateManager.switchPhase(0, countdownBetweenPhases);
             nextPhaseIndex = 1;
             isInPattern = true;
         }
@@ -164,7 +166,7 @@ public class Pattern : MonoBehaviour
         {
             if (phaseChecker.NextCheck(nextPhaseIndex))
             {
-                stateManager.switchPhase(nextPhaseIndex, 5f);
+                stateManager.switchPhase(nextPhaseIndex, countdownBetweenPhases);
                 nextPhaseIndex++;
             }
             return;
@@ -199,12 +201,13 @@ public class Pattern : MonoBehaviour
         phaseChecker.globalLeftPhaseCoord = leftChild.transform.position;
         phaseChecker.globalRightPhaseCoord = rightChild.transform.position;
 
-        float tolerance = PhaseChecker.tolerance * 2;
-        Vector3 newScale = new Vector3(tolerance, tolerance, tolerance);
+
+        float helperTolerance = tolerance * 2;
+        Vector3 newScale = new Vector3(helperTolerance, helperTolerance, helperTolerance);
         if (leftChild.transform.localScale != newScale && rightChild.transform.localScale != newScale)
         {
-            leftChild.transform.localScale = new Vector3(tolerance, tolerance, tolerance);
-            rightChild.transform.localScale = new Vector3(tolerance, tolerance, tolerance);
+            leftChild.transform.localScale = new Vector3(helperTolerance, helperTolerance, helperTolerance);
+            rightChild.transform.localScale = new Vector3(helperTolerance, helperTolerance, helperTolerance);
             helperScaleIsZero = false;
         }
     }

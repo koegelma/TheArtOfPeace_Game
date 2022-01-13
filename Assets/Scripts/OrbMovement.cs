@@ -6,9 +6,9 @@ public class OrbMovement : MonoBehaviour
     private float speed = 2f;
     private float newSpeed;
     private float t;
-    private float slowSpeed = 1f; // was 3.5
-    private float mediumSpeed = 2f; // was 4.5
-    private float fastSpeed = 4f; // was 8
+    private float slowSpeed = 3f; // was 3.5
+    private float mediumSpeed = 4f; // was 4.5
+    private float fastSpeed = 6f; // was 8
     private float rotateSpeed = 200f;
     private int orbDamage = 0;
     private Rigidbody rb;
