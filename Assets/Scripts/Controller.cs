@@ -28,7 +28,7 @@ public class Controller : MonoBehaviour
         registerDevice();
         CheckControllerInput();
         UpdateFirstRelativeControllerTransform();
-        UpdateNextRelativeControllerTransform();
+        if (nextRelativeTransform != null) UpdateNextRelativeControllerTransform();
     }
     public void registerDevice()
     {

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class Menu : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class Menu : MonoBehaviour
     private bool isLeftTriggerReady = true;
     private bool isRightTriggerReady = true;
     public string sceneToLoad = "Testing Scene";
+    public AudioSource uiClick;
     private void Start()
     {
         Time.timeScale = 1f;
@@ -30,12 +32,14 @@ public class Menu : MonoBehaviour
         {
             if (leftController.isTrigger && isLeftTriggerReady)
             {
+                uiClick.Play();
                 ToggleOptions();
                 ToggleMenu();
                 isLeftTriggerReady = false;
             }
             if (rightController.isTrigger && isRightTriggerReady)
             {
+                uiClick.Play();
                 ToggleOptions();
                 ToggleCalibration();
                 isRightTriggerReady = false;
@@ -44,15 +48,23 @@ public class Menu : MonoBehaviour
         }
         if (leftController.isTrigger && isLeftTriggerReady)
         {
+            uiClick.Play();
             ToggleMenu();
             ToggleOptions();
             isLeftTriggerReady = false;
         }
-        if (rightController.isTrigger) NewGame();
+        if (rightController.isTrigger) PrepareNewGame();
     }
 
-    private void NewGame()
+    private void PrepareNewGame()
     {
+        uiClick.Play();
+        StartCoroutine(NewGame());
+    }
+
+    private IEnumerator NewGame()
+    {
+        yield return new WaitUntil(() => !uiClick.isPlaying);
         SceneManager.LoadScene(sceneToLoad);
     }
 

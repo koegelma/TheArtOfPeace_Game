@@ -8,6 +8,8 @@ public class GameManager : MonoBehaviour
     public GameObject gameOverUI;
     public bool isGameOver;
     public GameObject pauseMenuUI;
+    public AudioSource gameOverSound;
+    public AudioSource uiClick;
     private bool isMenuButtonReady = true;
 
     private void Awake()
@@ -34,6 +36,7 @@ public class GameManager : MonoBehaviour
 
         if (leftController.isMenuButton && isMenuButtonReady)
         {
+            uiClick.Play();
             TogglePauseUI();
             isMenuButtonReady = false;
         }
@@ -50,6 +53,7 @@ public class GameManager : MonoBehaviour
 
     public void EndGame()
     {
+        gameOverSound.Play();
         isGameOver = true;
         gameOverUI.SetActive(true);
     }

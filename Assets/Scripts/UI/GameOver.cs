@@ -1,9 +1,11 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 public class GameOver : MonoBehaviour
 {
     private Controller leftController;
     private Controller rightController;
+    public AudioSource uiClick;
 
     private void OnEnable()
     {
@@ -14,17 +16,31 @@ public class GameOver : MonoBehaviour
 
     private void Update()
     {
-        if (leftController.isTrigger) Menu();
-        if (rightController.isTrigger) Retry();
+        if (leftController.isTrigger) PrepareMenu();
+        if (rightController.isTrigger) PrepareRetry();
     }
 
-    private void Retry()
+    private void PrepareRetry()
     {
+        uiClick.Play();
+        StartCoroutine(Retry());
+    }
+
+    private void PrepareMenu()
+    {
+        uiClick.Play();
+        StartCoroutine(Menu());
+    }
+
+    private IEnumerator Retry()
+    {
+        yield return new WaitUntil(() => !uiClick.isPlaying);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
-    private void Menu()
+    private IEnumerator Menu()
     {
+        yield return new WaitUntil(() => !uiClick.isPlaying);
         SceneManager.LoadScene("Menu Scene");
     }
 }
