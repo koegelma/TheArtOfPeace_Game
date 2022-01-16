@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &528269764013774225
+--- !u!1 &2279187253507098104
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,8 +8,8 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 528269764013774224}
-  - component: {fileID: 528269764013774227}
+  - component: {fileID: 2279187253507098105}
+  - component: {fileID: 2279187253507097991}
   m_Layer: 0
   m_Name: Waves
   m_TagString: Untagged
@@ -17,13 +17,13 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &528269764013774224
+--- !u!4 &2279187253507098105
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 528269764013774225}
+  m_GameObject: {fileID: 2279187253507098104}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -31,13 +31,13 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &528269764013774227
+--- !u!114 &2279187253507097991
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 528269764013774225}
+  m_GameObject: {fileID: 2279187253507098104}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 172541bac164f6b46849de550ccb9df3, type: 3}
@@ -45,53 +45,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pattern: 3
   leftPhaseCoords:
-  - {x: -0.1, y: -0.4, z: 0.4}
-  - {x: -0.2, y: -0.5, z: 0.4}
-  - {x: -0.1, y: -0.4, z: 0.5}
-  - {x: -0.2, y: -0.5, z: 0.4}
-  - {x: 0.1, y: -0.6, z: 0.1}
-  - {x: 0.1, y: -0.5, z: 0.2}
-  - {x: 0.2, y: -0.4, z: 0.2}
-  - {x: 0.1, y: -0.5, z: 0.2}
-  - {x: 0.1, y: -0.6, z: 0.1}
-  - {x: -0.1, y: -0.7, z: 0.1}
-  - {x: -0.2, y: -0.7, z: 0.1}
-  - {x: -0.3, y: -0.7, z: 0.1}
-  - {x: -0.5, y: -0.6, z: 0.2}
-  - {x: -0.5, y: -0.4, z: 0.4}
-  - {x: -0.5, y: -0.1, z: 0.5}
-  - {x: -0.6, y: -0.2, z: 0.4}
-  - {x: -0.6, y: -0.4, z: 0.3}
-  - {x: -0.5, y: -0.6, z: 0.2}
-  - {x: -0.3, y: -0.7, z: 0.1}
-  - {x: -0.1, y: -0.6, z: 0.4}
-  - {x: -0.1, y: -0.4, z: 0.5}
+  - {x: -0.09860281, y: -0.43150234, z: 0.43861163}
+  - {x: 0.17493565, y: -0.6533625, z: 0.2417345}
+  - {x: 0.35571146, y: -0.060071945, z: -0.23980859}
+  - {x: 0.321473, y: -0.38304484, z: -0.03740189}
+  - {x: -0.03002907, y: -0.62208927, z: 0.14521094}
+  - {x: -0.46055156, y: -0.44504434, z: -0.11844882}
+  - {x: -0.49703535, y: 0.11508894, z: -0.37643042}
+  - {x: -0.67047364, y: -0.1607014, z: -0.008509763}
+  - {x: -0.041504197, y: -0.29952693, z: 0.49749961}
   rightPhaseCoords:
-  - {x: 0.1, y: -0.4, z: 0.4}
-  - {x: 0.1, y: -0.5, z: 0.4}
-  - {x: 0.1, y: -0.4, z: 0.4}
-  - {x: 0.1, y: -0.5, z: 0.3}
-  - {x: 0.3, y: -0.6, z: 0.3}
-  - {x: 0.4, y: -0.4, z: 0.4}
-  - {x: 0.4, y: -0.2, z: 0.4}
-  - {x: 0.4, y: -0.4, z: 0.4}
-  - {x: 0.4, y: -0.5, z: 0.3}
-  - {x: 0.3, y: -0.7, z: 0.2}
-  - {x: 0.1, y: -0.7, z: 0.2}
-  - {x: 0, y: -0.7, z: 0.1}
-  - {x: -0.1, y: -0.6, z: 0.2}
-  - {x: -0.2, y: -0.4, z: 0.3}
-  - {x: -0.2, y: -0.2, z: 0.3}
-  - {x: -0.2, y: -0.4, z: 0.3}
-  - {x: -0.2, y: -0.5, z: 0.2}
-  - {x: -0.1, y: -0.6, z: 0.2}
-  - {x: 0, y: -0.6, z: 0.2}
-  - {x: 0.1, y: -0.5, z: 0.4}
-  - {x: 0.2, y: -0.4, z: 0.5}
-  patternTargetPrefab: {fileID: 5093675512830751724, guid: 26046e7b2ce7c1c4a987de558ecd7123,
+  - {x: 0.01728266, y: -0.4633162, z: 0.19019125}
+  - {x: 0.12310894, y: -0.63256764, z: -0.028444253}
+  - {x: 0.32387054, y: -0.024825692, z: -0.47738856}
+  - {x: 0.3237576, y: -0.4123839, z: -0.25584206}
+  - {x: 0.05995566, y: -0.6509347, z: -0.0022091419}
+  - {x: -0.21982855, y: -0.46482432, z: -0.10605209}
+  - {x: -0.23771046, y: -0.12574041, z: -0.1896115}
+  - {x: -0.31971356, y: -0.28955996, z: 0.099864304}
+  - {x: 0.15666875, y: -0.25782, z: 0.4712985}
+  patternTargetPrefab: {fileID: 5359157042448815323, guid: dd6d9c0eac3237a4cbf9ad9b205732d6,
     type: 3}
-  patternTargetsCountdownLength: 10
-  movementSpeed: 0.5
+  patternTargetsCountdownLength: 30
+  countdownBetweenPhases: 5
+  movementSpeed: 1
+  isTestPattern: 0
+  tolerance: 0.1
   leftHelper: {fileID: 0}
   rightHelper: {fileID: 0}
   leftChild: {fileID: 0}
@@ -99,7 +78,9 @@ MonoBehaviour:
   leftController: {fileID: 0}
   rightController: {fileID: 0}
   cameraTransform: {fileID: 0}
-  isSelected: 0
+  isSelected: 1
   helperScaleIsZero: 1
   orbsDirectedAtPlayer: []
-  helperPrefabs: []
+  helperPrefabs:
+  - {fileID: 8251866741688810290, guid: 30ec30ecc783cd244a6e11278dcee402, type: 3}
+  - {fileID: 3959021028517119277, guid: f41e1971ea4c60b45afedc96491d59b5, type: 3}
