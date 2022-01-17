@@ -64,7 +64,7 @@ Material:
     - _SHADEsoft: 0
     - _SHADEsoftness: 15.2
     m_Colors:
-    - _LIGHTdirect: {r: -0.3213938, g: -0.76604444, b: 0.5566705, a: 0}
+    - _LIGHTdirect: {r: 0, g: -1, b: 0, a: 0}
     - _MASfogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
     - _MASrenderMainColor: {r: 0.5613208, g: 0.8630899, b: 1, a: 1}
     - _MASrenderSecondColor: {r: 1, g: 0.5, b: 0, a: 1}
