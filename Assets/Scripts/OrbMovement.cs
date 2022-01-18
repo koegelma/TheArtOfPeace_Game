@@ -27,7 +27,6 @@ public class OrbMovement : MonoBehaviour
     public bool isFinalPlayerTargetPassed = false;
     public bool hasTarget { get { return target != null; } }
     public bool targetIsPlayer { get { return target == playerTarget; } }
-    private float targetIsNullTimer = 0.1f;
     private Controller rightController;
 
     void Start()
@@ -57,19 +56,8 @@ public class OrbMovement : MonoBehaviour
             return;
         }
 
-
         if (!hasTarget) DestroyOrb();
 
-        /* if (!hasTarget)
-        {
-            if (targetIsNullTimer <= 0)
-            {
-                DestroyOrb();
-                return;
-            }
-            targetIsNullTimer -= Time.deltaTime;
-            return;
-        } */
         CheckSpeed();
         UpdateSpeed();
         TranslateOrbToTarget();
@@ -89,17 +77,16 @@ public class OrbMovement : MonoBehaviour
             newSpeed = 1;
             t = 0;
         }
-        if (distance < 0.5 && distance > 0.3 && newSpeed != 0.5f)
+        if (distance < 0.5 && distance > 0.25 && newSpeed != 0.5f)
         {
             newSpeed = 0.5f;
             t = 0;
         }
-        if (distance < 0.3 && newSpeed != 0)
+        if (distance < 0.25 && newSpeed != 0)
         {
             newSpeed = 0;
             t = 0;
         }
-
         UpdateSpeed();
         Translate();
     }
@@ -111,15 +98,6 @@ public class OrbMovement : MonoBehaviour
         Vector3 rotateAmount = Vector3.Cross(direction, transform.forward);
         rb.angularVelocity = -rotateAmount * rotateSpeed;
         rb.velocity = transform.forward * speed;
-    }
-
-    private void DestroyOrb()
-    {
-        PlayerStats.life -= orbDamage;
-        orbManager.RemoveOrb(gameObject);
-        //TODO: add destroy orb particle effect
-        Destroy(gameObject);
-        Debug.Log("Orb has no target!");
     }
 
     public void SetTargetArrayToPlayer()
@@ -135,6 +113,15 @@ public class OrbMovement : MonoBehaviour
         target = targets[targetIndex];
     }
 
+    private void DestroyOrb()
+    {
+        PlayerStats.life -= orbDamage;
+        orbManager.RemoveOrb(gameObject);
+        //TODO: add destroy orb particle effect
+        Destroy(gameObject);
+        Debug.Log("Orb has no target!");
+    }
+
     private void TranslateOrbToTarget()
     {
         Vector3 direction = target.position - rb.position;
@@ -148,48 +135,11 @@ public class OrbMovement : MonoBehaviour
 
     private void GetNextTarget()
     {
-        //check if target is PatternTarget
-        if (targets[targetIndex].parent.gameObject.GetComponent<PatternTarget>())
-        {
-            if (!targets[targetIndex].parent.gameObject.GetComponent<PatternTarget>().isEnemyPattern)
-            {
-                //check if pattern phase for next target has already been checked successfully
-                // TODO: check if Difficulty of Pattern and Orb match via AssertDifficulty()
-                if (targetIndex > StateManager.instance.currentPhase || !AssertDifficulty())
-                {
-                    Debug.Log("phase does not match targetIndex or difficulty does not match");
-                    target = null;
-                    return;
-                }
-            }
-
-            if (targets[targetIndex].parent.gameObject.GetComponent<PatternTarget>().isEnemyPattern)
-            {
-                if (targetIndex >= targets.Length - 1)
-                {
-                    SetTargetArrayToPlayer();
-                    isFinalEnemyTargetPassed = true;
-                    return;
-                }
-            }
-        }
-
+        //if (targets[targetIndex].parent.gameObject.GetComponent<PatternTarget>() && targets[targetIndex].parent.gameObject.GetComponent<PatternTarget>().isEnemyPattern)
         if (targetIndex >= targets.Length - 1)
         {
-            if (targets[targetIndex].parent.gameObject.GetComponent<PatternTarget>())
-            {
-                if (!targets[targetIndex].parent.gameObject.GetComponent<PatternTarget>().isEnemyPattern)
-                {
-                    Transform mostReachableEnemy = GetMostReachableEnemy();
-                    Transform[] enemyArray = new Transform[] { mostReachableEnemy };
-                    SetTargetArray(enemyArray);
-                    StartCoroutine(mostReachableEnemy.GetComponent<Enemy>().ReceiveOrb(this.gameObject));
-                    isFinalPlayerTargetPassed = true;
-                    return;
-                }
-            }
-            target = null;
-            Debug.Log("last target reached!");
+            SetTargetArrayToPlayer();
+            isFinalEnemyTargetPassed = true;
             return;
         }
         targetIndex++;
@@ -206,22 +156,15 @@ public class OrbMovement : MonoBehaviour
             return;
         }
 
-        // This is for debugging purposes - remove on build
-        /* if (!targets[targetIndex].parent.GetComponent<PatternTarget>())
-        {
-            //Debug.Log("Targets Parent has no PatternTarget script!");
-            return;
-        } */
-
         // case 2: target is first target in PatternTarget[]
-        if ((!targets[targetIndex].parent.gameObject.GetComponent<PatternTarget>().isEnemyPattern && targetIndex == 0 || targets[targetIndex].parent.gameObject.GetComponent<PatternTarget>().isEnemyPattern && targetIndex == 0) && newSpeed != fastSpeed)
+        if (targetIndex == 0 && newSpeed != fastSpeed)
         {
             newSpeed = fastSpeed;
             t = 0;
         }
 
         // case 3: target is second, or higher target in PatternTarget[]
-        if ((!targets[targetIndex].parent.gameObject.GetComponent<PatternTarget>().isEnemyPattern && targetIndex > 0 || targets[targetIndex].parent.gameObject.GetComponent<PatternTarget>().isEnemyPattern && targetIndex > 0) && newSpeed != slowSpeed)
+        if (targetIndex > 0 && newSpeed != slowSpeed)
         {
             newSpeed = slowSpeed;
             t = 0;
@@ -238,24 +181,6 @@ public class OrbMovement : MonoBehaviour
     {
         float distance = Vector3.Distance(rb.position, target.position);
         return distance;
-    }
-
-    public Transform GetMostReachableEnemy()
-    {
-        float maxAngle = Mathf.Infinity;
-        Transform mostReachableEnemy = null;
-        for (var i = 0; i < enemyContainer.transform.childCount; i++)
-        {
-            Vector3 targetDirection = enemyContainer.transform.GetChild(i).position - playerTarget.position;
-            float enemyAngle = Vector3.Angle(targetDirection, playerTarget.forward);
-            //Debug.Log("Enemy: " + enemyContainer.transform.GetChild(i).GetSiblingIndex() + ", Angle: " + enemyAngle);
-            if (maxAngle > enemyAngle) // could implement something like  - && enemyAngle < x - to only assist aim if enemy is within x-degrees
-            {
-                mostReachableEnemy = enemyContainer.transform.GetChild(i);
-                maxAngle = enemyAngle;
-            }
-        }
-        return mostReachableEnemy;
     }
 
     public void SendOrbToEnemy()
