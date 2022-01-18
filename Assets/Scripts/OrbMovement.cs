@@ -13,6 +13,7 @@ public class OrbMovement : MonoBehaviour
     private int orbDamage = 0;
     private Rigidbody rb;
     public Difficulty tier;
+    public bool targetIsController;
     [HideInInspector] public bool isMerged = false;
 
     [Header("Target Setup")]
@@ -27,6 +28,7 @@ public class OrbMovement : MonoBehaviour
     public bool hasTarget { get { return target != null; } }
     public bool targetIsPlayer { get { return target == playerTarget; } }
     private float targetIsNullTimer = 0.1f;
+    private Controller rightController;
 
     void Start()
     {
@@ -38,6 +40,7 @@ public class OrbMovement : MonoBehaviour
 
         playerTarget = GameObject.Find("Main Camera").transform;
         enemyContainer = GameObject.Find("Enemy Container");
+        rightController = PatternManager.instance.rightController;
         if (tier == Difficulty.EASY)
         {
             SetTargetArrayToPlayer(); //temporary fix - ideal would be to have this in Enemy imo
@@ -47,7 +50,17 @@ public class OrbMovement : MonoBehaviour
     void FixedUpdate()
     {
         if (!isMerged && (tier == Difficulty.MEDIUM || tier == Difficulty.HARD)) return;
-        if (!hasTarget)
+
+        if (targetIsController)
+        {
+            FollowController();
+            return;
+        }
+
+
+        if (!hasTarget) DestroyOrb();
+
+        /* if (!hasTarget)
         {
             if (targetIsNullTimer <= 0)
             {
@@ -56,10 +69,48 @@ public class OrbMovement : MonoBehaviour
             }
             targetIsNullTimer -= Time.deltaTime;
             return;
-        }
+        } */
         CheckSpeed();
         UpdateSpeed();
-        TranslateOrb();
+        TranslateOrbToTarget();
+    }
+
+    private void FollowController()
+    {
+        float distance = Vector3.Distance(rb.position, rightController.controllerPosition);
+
+        if (distance > 1 && newSpeed != 8)
+        {
+            newSpeed = 8;
+            t = 0;
+        }
+        if (distance < 1 && distance > 0.5 && newSpeed != 1)
+        {
+            newSpeed = 1;
+            t = 0;
+        }
+        if (distance < 0.5 && distance > 0.3 && newSpeed != 0.5f)
+        {
+            newSpeed = 0.5f;
+            t = 0;
+        }
+        if (distance < 0.3 && newSpeed != 0)
+        {
+            newSpeed = 0;
+            t = 0;
+        }
+
+        UpdateSpeed();
+        Translate();
+    }
+
+    private void Translate()
+    {
+        Vector3 direction = rightController.controllerPosition - rb.position;
+        direction.Normalize();
+        Vector3 rotateAmount = Vector3.Cross(direction, transform.forward);
+        rb.angularVelocity = -rotateAmount * rotateSpeed;
+        rb.velocity = transform.forward * speed;
     }
 
     private void DestroyOrb()
@@ -84,7 +135,7 @@ public class OrbMovement : MonoBehaviour
         target = targets[targetIndex];
     }
 
-    private void TranslateOrb()
+    private void TranslateOrbToTarget()
     {
         Vector3 direction = target.position - rb.position;
         direction.Normalize();
@@ -156,11 +207,11 @@ public class OrbMovement : MonoBehaviour
         }
 
         // This is for debugging purposes - remove on build
-        if (!targets[targetIndex].parent.GetComponent<PatternTarget>())
+        /* if (!targets[targetIndex].parent.GetComponent<PatternTarget>())
         {
             //Debug.Log("Targets Parent has no PatternTarget script!");
             return;
-        }
+        } */
 
         // case 2: target is first target in PatternTarget[]
         if ((!targets[targetIndex].parent.gameObject.GetComponent<PatternTarget>().isEnemyPattern && targetIndex == 0 || targets[targetIndex].parent.gameObject.GetComponent<PatternTarget>().isEnemyPattern && targetIndex == 0) && newSpeed != fastSpeed)
@@ -205,6 +256,28 @@ public class OrbMovement : MonoBehaviour
             }
         }
         return mostReachableEnemy;
+    }
+
+    public void SendOrbToEnemy()
+    {
+        float maxAngle = Mathf.Infinity;
+        Transform mostReachableEnemy = null;
+        for (var i = 0; i < enemyContainer.transform.childCount; i++)
+        {
+            Vector3 enemyDirection = enemyContainer.transform.GetChild(i).position - rightController.controllerPosition;
+            float enemyAngle = Vector3.Angle(rightController.controllerVelocity, enemyDirection);
+            //Debug.Log("Enemy: " + enemyContainer.transform.GetChild(i).GetSiblingIndex() + ", Angle: " + enemyAngle);
+            if (maxAngle > enemyAngle) // could implement something like  - && enemyAngle < x - to only assist aim if enemy is within x-degrees
+            {
+                mostReachableEnemy = enemyContainer.transform.GetChild(i);
+                maxAngle = enemyAngle;
+            }
+        }
+        Transform[] enemyArray = new Transform[] { mostReachableEnemy };
+        SetTargetArray(enemyArray);
+        StartCoroutine(mostReachableEnemy.GetComponent<Enemy>().ReceiveOrb(this.gameObject));
+        isFinalPlayerTargetPassed = true;
+        targetIsController = false;
     }
 
     private bool AssertDifficulty()

@@ -25,9 +25,10 @@ public class Pattern : MonoBehaviour
     [HideInInspector] public Controller leftController;
     [HideInInspector] public Controller rightController;
     [HideInInspector] public Transform cameraTransform;
-    [HideInInspector] public bool isSelected = false;
+    public bool isSelected = false;
     [HideInInspector] public bool helperScaleIsZero = true;
     [HideInInspector] public List<GameObject> orbsDirectedAtPlayer;
+    [HideInInspector] public List<GameObject> orbsDirectedAtController;
     private StateManager stateManager;
     private PhaseChecker phaseChecker;
     private OrbManager orbManager;
@@ -111,6 +112,7 @@ public class Pattern : MonoBehaviour
     }
     private void Update()
     {
+        //Debug.Log(rightController.controllerVelocity);
         if (!isSelected) return;
         if (isTestPattern)
         {
@@ -149,7 +151,13 @@ public class Pattern : MonoBehaviour
         UpdateFirstHelper(); // update behaviour for multiple patterns
         if (phaseChecker.FirstCheck(0))
         {
-            StartCoroutine(SpawnPatternTargets());
+            // StartCoroutine(SpawnPatternTargets());
+
+            orbsDirectedAtPlayer = orbManager.GetAllOrbsDirectedAtPlayer(); //
+            foreach (GameObject orb in orbsDirectedAtPlayer)                // 
+            {                                                               //
+                orb.GetComponent<OrbMovement>().targetIsController = true;  //
+            }                                                                  //
             stateManager.state = pattern;
             stateManager.switchPhase(0, countdownBetweenPhases);
             nextPhaseIndex = 1;
@@ -160,9 +168,8 @@ public class Pattern : MonoBehaviour
     private void CheckForPhase()
     {
         UpdateNextHelper();
-        // check if not final phase
         if (isMoving) return;
-        if (stateManager.currentPhase < leftPhaseCoords.Length - 1)
+        if (stateManager.currentPhase < leftPhaseCoords.Length - 2)
         {
             if (phaseChecker.NextCheck(nextPhaseIndex))
             {
@@ -171,8 +178,22 @@ public class Pattern : MonoBehaviour
             }
             return;
         }
+
         // final phase
-        stateManager.isFinalPhase = true;
+        if (phaseChecker.NextCheck(nextPhaseIndex))
+        {
+            stateManager.switchPhase(nextPhaseIndex, countdownBetweenPhases);
+            nextPhaseIndex++;
+            stateManager.isFinalPhase = true;
+            Debug.Log("Final Phase!");
+            orbsDirectedAtController = orbManager.GetAllOrbsDirectedAtController();
+            foreach (GameObject orb in orbsDirectedAtController)
+            {
+                //rightController.controllerVelocity
+                //get enemy in controller direction (movement) and set target of orbsDirectedAtController to this enemy
+                orb.GetComponent<OrbMovement>().SendOrbToEnemy();
+            }
+        }
     }
 
     public void TogglePattern()

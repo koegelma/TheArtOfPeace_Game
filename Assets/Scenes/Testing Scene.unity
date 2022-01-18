@@ -4582,6 +4582,11 @@ PrefabInstance:
       objectReference: {fileID: 1585035860}
     - target: {fileID: 2279187253507097991, guid: c606bf5476c38bd4bb4df362008b21f2,
         type: 3}
+      propertyPath: isSelected
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2279187253507097991, guid: c606bf5476c38bd4bb4df362008b21f2,
+        type: 3}
       propertyPath: leftHelper
       value: 
       objectReference: {fileID: 1079031280}

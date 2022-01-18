@@ -143,6 +143,7 @@ public class OrbGravity : MonoBehaviour
             merged.targetIndex = original.targetIndex;
             merged.isFinalEnemyTargetPassed = original.isFinalEnemyTargetPassed;
             merged.isFinalPlayerTargetPassed = original.isFinalPlayerTargetPassed;
+            merged.targetIsController = original.targetIsController;
             merged.isMerged = true;
         }
     }

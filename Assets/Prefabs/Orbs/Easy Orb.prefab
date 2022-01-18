@@ -112,6 +112,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tier: 0
+  targetIsController: 0
   isMerged: 0
   targets: []
   target: {fileID: 0}
@@ -3933,7 +3934,7 @@ ParticleSystem:
       properties: 0
       emitProbability: 1
   LightsModule:
-    enabled: 1
+    enabled: 0
     ratio: 1
     light: {fileID: 617968078635160075, guid: bfb7058d05fe02a4faf49746e5d778d0, type: 3}
     randomDistribution: 1
