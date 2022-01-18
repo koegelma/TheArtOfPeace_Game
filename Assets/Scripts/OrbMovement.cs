@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections;
 
 public class OrbMovement : MonoBehaviour
 {
@@ -203,6 +204,12 @@ public class OrbMovement : MonoBehaviour
         StartCoroutine(mostReachableEnemy.GetComponent<Enemy>().ReceiveOrb(this.gameObject));
         isFinalPlayerTargetPassed = true;
         targetIsController = false;
+    }
+
+    public IEnumerator PrepareDestroyingOrb()
+    {
+        yield return new WaitForSeconds(0.1f);
+        DestroyOrb();
     }
 
     private bool AssertDifficulty()

@@ -52,10 +52,9 @@ MonoBehaviour:
   - {x: 0.1, y: -0.25, z: 0.2}
   - {x: 0.1, y: -0.25, z: 0.4}
   - {x: 0.1, y: -0.25, z: 0.6}
-  patternTargetPrefab: {fileID: 41544210357274716, guid: b45b49504e3a84d429c4e12017242502,
-    type: 3}
-  patternTargetsCountdownLength: 10
+  countdownBetweenPhases: 5
   movementSpeed: 0.5
+  tolerance: 0.1
   leftHelper: {fileID: 0}
   rightHelper: {fileID: 0}
   leftChild: {fileID: 0}
@@ -66,6 +65,8 @@ MonoBehaviour:
   isSelected: 0
   helperScaleIsZero: 1
   orbsDirectedAtPlayer: []
+  orbsDirectedAtController: []
   helperPrefabs:
   - {fileID: 8251866741688810290, guid: 30ec30ecc783cd244a6e11278dcee402, type: 3}
   - {fileID: 3959021028517119277, guid: f41e1971ea4c60b45afedc96491d59b5, type: 3}
+  isRecordingPattern: 0

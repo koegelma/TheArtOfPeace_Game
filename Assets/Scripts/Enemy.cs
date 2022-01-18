@@ -15,6 +15,7 @@ public class Enemy : MonoBehaviour
     private GameObject recievedOrb;
     private float destroyCountdown;
     public GameObject currentCooldownBar;
+    public bool isUpdating = true;
     //private float timeToDestroy = 10f;
     //private bool isDestroyCountdown = false;
 
@@ -31,7 +32,8 @@ public class Enemy : MonoBehaviour
 
     private void Update()
     {
-        //return;
+        if (!isUpdating) return;
+
         transform.LookAt(player);
         currentCooldownBar.transform.localScale = new Vector3(spawnOrbCountdown / timeBetweenOrbs, currentCooldownBar.transform.localScale.y, currentCooldownBar.transform.localScale.z);
 
