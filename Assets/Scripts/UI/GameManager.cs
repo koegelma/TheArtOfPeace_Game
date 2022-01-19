@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     public AudioSource gameOverSound;
     public AudioSource uiClick;
     private bool isMenuButtonReady = true;
+    public AudioSource playerDamageSound;
 
     private void Awake()
     {
@@ -56,5 +57,10 @@ public class GameManager : MonoBehaviour
         gameOverSound.Play();
         isGameOver = true;
         gameOverUI.SetActive(true);
+    }
+
+    public void PlayPlayerDamageSound()
+    {
+        playerDamageSound.Play();
     }
 }

@@ -42,14 +42,7 @@ public class OrbGravity : MonoBehaviour
             Vector3 sumGravityVector = new Vector3(0, 0, 0);
             foreach (GameObject gravOrb in tempOrbList)
             {
-                if (gravOrb.transform.parent == transform.parent)
-                {
-                    sumGravityVector += (gravOrb.transform.position - transform.position) * 2;
-                }
-                else
-                {
-                    sumGravityVector += (gravOrb.transform.position - transform.position);
-                }
+                sumGravityVector += (gravOrb.transform.position - transform.position);
             }
             if (tempOrbList.Count > 0)
             {
@@ -65,23 +58,23 @@ public class OrbGravity : MonoBehaviour
     {
         if (orbMovement.tier != Difficulty.HARD)
         {
-            List<GameObject> groupList = new List<GameObject>();
+            List<GameObject> mergeList = new List<GameObject>();
             foreach (GameObject orb in tempOrbList)
             {
-                if (((orb.transform.position - transform.position).magnitude < 0.7) && orb.transform.parent == null && orb.name != name)
+                if (((orb.transform.position - transform.position).magnitude < 0.7) && orb.transform.parent == null && orb.name != name && orb.GetComponent<OrbMovement>().tier == Difficulty.EASY)
                 {
-                    groupList.Add(orb);
+                    mergeList.Add(orb);
                 }
             }
-            if (groupList.Count > 0)
+            if (mergeList.Count > 0)
             {
                 GameObject newOrb = null;
-                if (groupList.Count == 1)
+                if (mergeList.Count == 1)
                 {
                     orbManager.RemoveOrb(gameObject);
                     Destroy(gameObject);
-                    orbManager.RemoveOrb(groupList[0]);
-                    Destroy(groupList[0]);
+                    orbManager.RemoveOrb(mergeList[0]);
+                    Destroy(mergeList[0]);
 
                     if (orbMovement.tier == Difficulty.EASY)
                     {
@@ -99,23 +92,22 @@ public class OrbGravity : MonoBehaviour
                         newOrb = Instantiate(hardOrbPrefab, transform.position, transform.rotation);
                         orbManager.RemoveOrb(gameObject);
                         Destroy(gameObject);
-                        orbManager.RemoveOrb(groupList[0]);
-                        Destroy(groupList[0]);
-                        orbManager.RemoveOrb(groupList[1]);
+                        orbManager.RemoveOrb(mergeList[0]);
+                        Destroy(mergeList[0]);
+                        orbManager.RemoveOrb(mergeList[1]);
                         //UpdatePatternOrbList(groupList, newOrb);
-                        Destroy(groupList[1]);
+                        Destroy(mergeList[1]);
                     }
                     else if (orbMovement.tier == Difficulty.MEDIUM)
                     {
                         newOrb = Instantiate(hardOrbPrefab, transform.position, transform.rotation);
                         orbManager.RemoveOrb(gameObject);
                         Destroy(gameObject);
-                        orbManager.RemoveOrb(groupList[0]);
+                        orbManager.RemoveOrb(mergeList[0]);
                         //UpdatePatternOrbList(groupList, newOrb);
-                        Destroy(groupList[0]);
+                        Destroy(mergeList[0]);
                     }
                 }
-
                 MergeMovement(orbMovement, newOrb.GetComponent<OrbMovement>());
             }
         }

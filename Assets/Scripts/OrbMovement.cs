@@ -120,7 +120,6 @@ public class OrbMovement : MonoBehaviour
         orbManager.RemoveOrb(gameObject);
         //TODO: add destroy orb particle effect
         Destroy(gameObject);
-        Debug.Log("Orb has no target!");
     }
 
     private void TranslateOrbToTarget()
@@ -139,6 +138,11 @@ public class OrbMovement : MonoBehaviour
         //if (targets[targetIndex].parent.gameObject.GetComponent<PatternTarget>() && targets[targetIndex].parent.gameObject.GetComponent<PatternTarget>().isEnemyPattern)
         if (targetIndex >= targets.Length - 1)
         {
+            if (targetIsPlayer)
+            {
+                GameManager.instance.PlayPlayerDamageSound();
+                DestroyOrb();
+            }
             SetTargetArrayToPlayer();
             isFinalEnemyTargetPassed = true;
             return;
@@ -191,7 +195,8 @@ public class OrbMovement : MonoBehaviour
         for (var i = 0; i < enemyContainer.transform.childCount; i++)
         {
             Vector3 enemyDirection = enemyContainer.transform.GetChild(i).position - rightController.controllerPosition;
-            float enemyAngle = Vector3.Angle(rightController.controllerVelocity, enemyDirection);
+            // add velocity vectors over time
+            float enemyAngle = Vector3.Angle(rightController.controllerVelocity.normalized, enemyDirection);
             //Debug.Log("Enemy: " + enemyContainer.transform.GetChild(i).GetSiblingIndex() + ", Angle: " + enemyAngle);
             if (maxAngle > enemyAngle) // could implement something like  - && enemyAngle < x - to only assist aim if enemy is within x-degrees
             {
@@ -210,25 +215,6 @@ public class OrbMovement : MonoBehaviour
     {
         yield return new WaitForSeconds(0.1f);
         DestroyOrb();
-    }
-
-    private bool AssertDifficulty()
-    {
-        Difficulty patternDifficulty = targets[targetIndex].parent.gameObject.GetComponent<PatternTarget>().difficulty;
-        switch (patternDifficulty)
-        {
-            case Difficulty.EASY:
-                if (this.tier == Difficulty.EASY) return true;
-                break;
-            case Difficulty.MEDIUM:
-                if (this.tier == Difficulty.EASY || this.tier == Difficulty.MEDIUM) return true;
-                break;
-            case Difficulty.HARD:
-                if (this.tier == Difficulty.EASY || this.tier == Difficulty.MEDIUM || this.tier == Difficulty.HARD) return true;
-                break;
-        }
-        Debug.Log("Difficulty does not match");
-        return false;
     }
 }
 

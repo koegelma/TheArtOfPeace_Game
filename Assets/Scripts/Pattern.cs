@@ -146,6 +146,7 @@ public class Pattern : MonoBehaviour
             }
             return;
         }
+        // second to last check: start recording velocity vectors of right controller
 
         // final phase
         if (phaseChecker.NextCheck(nextPhaseIndex))
@@ -153,7 +154,6 @@ public class Pattern : MonoBehaviour
             stateManager.switchPhase(nextPhaseIndex, countdownBetweenPhases);
             nextPhaseIndex++;
             stateManager.isFinalPhase = true;
-            Debug.Log("Final Phase!");
             orbsDirectedAtController = orbManager.GetAllOrbsDirectedAtController();
             foreach (GameObject orb in orbsDirectedAtController)
             {

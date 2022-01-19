@@ -16,6 +16,7 @@ public class Enemy : MonoBehaviour
     private float destroyCountdown;
     public GameObject currentCooldownBar;
     public bool isUpdating = true;
+    public AudioSource huhSpawnSound;
     //private float timeToDestroy = 10f;
     //private bool isDestroyCountdown = false;
 
@@ -32,6 +33,7 @@ public class Enemy : MonoBehaviour
 
     private void Update()
     {
+        //if (orbManager.HasOrbs) return;
         if (!isUpdating) return;
 
         transform.LookAt(player);
@@ -63,19 +65,22 @@ public class Enemy : MonoBehaviour
     private void ShootOrb()
     {
         Instantiate(orbPrefab, firePosition.position, transform.rotation);
+        huhSpawnSound.Play();
     }
 
     public IEnumerator ReceiveOrb(GameObject _orb)
     {
+        Debug.Log(gameObject.name + " recieved " + _orb.name);
         recievedOrb = _orb;
         OrbMovement orbScript = _orb.GetComponent<OrbMovement>();
         targetNodes = (GameObject)Instantiate(targetNodesPrefab, transform.position, transform.rotation);
-        Debug.Log("Enemy Target Nodes Spawned!");
         targetNodes.transform.parent = transform;
         //isDestroyCountdown = true;
         PatternTarget targetsScript = targetNodes.GetComponent<PatternTarget>();
         //targetsScript.SetEnemyTransform(this.transform);
+        Debug.Log(gameObject.name + " waiting for " + _orb.name);
         yield return new WaitUntil(() => targetsScript.isInitialized);
+        Debug.Log("targetscript initialized for " + _orb.name);
         orbScript.SetTargetArray(targetsScript.targets);
     }
 
