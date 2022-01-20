@@ -11,7 +11,7 @@ public class PhaseChecker
     public Vector3 globalRightPhaseCoord;
     public Vector3 globalLeftPhaseCoord;
     public Vector3 globalRightControllerPosition;
-    public Vector3 globalLeftControllerPosition;
+    public Vector3 globalLeftControllerPosition; 
 
 
     public PhaseChecker(Vector3[] leftPhaseCoords, Vector3[] rightPhaseCoords, float _tolerance)
