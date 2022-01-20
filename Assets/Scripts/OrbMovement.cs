@@ -10,7 +10,7 @@ public class OrbMovement : MonoBehaviour
     private float slowSpeed = 3f; // was 3.5
     private float mediumSpeed = 4f; // was 4.5
     private float fastSpeed = 6f; // was 8
-    private float rotateSpeed = 200f;
+    private float rotateSpeed = 500f;
     private int orbDamage = 0;
     private Rigidbody rb;
     public Difficulty tier;
@@ -195,7 +195,6 @@ public class OrbMovement : MonoBehaviour
         for (var i = 0; i < enemyContainer.transform.childCount; i++)
         {
             Vector3 enemyDirection = enemyContainer.transform.GetChild(i).position - rightController.controllerPosition;
-            // add velocity vectors over time
             float enemyAngle = Vector3.Angle(controllerVelocityOverTime.normalized, enemyDirection);
             //Debug.Log("Enemy: " + enemyContainer.transform.GetChild(i).GetSiblingIndex() + ", Angle: " + enemyAngle);
             if (maxAngle > enemyAngle) // could implement something like  - && enemyAngle < x - to only assist aim if enemy is within x-degrees
@@ -206,8 +205,7 @@ public class OrbMovement : MonoBehaviour
         }
         Transform[] enemyArray = new Transform[] { mostReachableEnemy };
         SetTargetArray(enemyArray);
-        StartCoroutine(mostReachableEnemy.GetComponent<Enemy>().ReceiveOrb(this.gameObject));
-        //isFinalPlayerTargetPassed = true;
+        mostReachableEnemy.GetComponent<Enemy>().ReceiveOrb(this.gameObject);
         targetIsController = false;
     }
 

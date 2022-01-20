@@ -33,7 +33,6 @@ public class Pattern : MonoBehaviour
     private PhaseChecker phaseChecker;
     private OrbManager orbManager;
     private PatternReference patternReference;
-    private GameObject targetsGameObject;
     private Transform[] targets;
     //private float patternTargetsCountdown;
     //private bool isCountdown;
@@ -53,7 +52,6 @@ public class Pattern : MonoBehaviour
     private float recordingPeriod = 0.5f;
     private Vector3 controllerVelocityOverTime;
     private bool recordControllerVelocity = false;
-    //private bool isPrimaryButtonReady = true;
 
     private void Awake()
     {
@@ -67,10 +65,6 @@ public class Pattern : MonoBehaviour
         PatternReference.instance.GetSceneReferences(this);
         orbManager = OrbManager.instance;
         stateManager = StateManager.instance;
-        //patternTargetsCountdown = patternTargetsCountdownLength;
-        //isCountdown = false;
-
-        targetsGameObject = null;
 
         if (isRecordingPattern)
         {
@@ -95,7 +89,7 @@ public class Pattern : MonoBehaviour
 
         //if (isCountdown) HndDestroyCountdown();
         if (!orbManager.HasOrbs) return;
-        if (targetsGameObject == null && stateManager.state == pattern && stateManager.currentPhase == leftPhaseCoords.Length - 1)
+        if (stateManager.state == pattern && stateManager.currentPhase == leftPhaseCoords.Length - 1)
         {
             SetHelperScaleToZero();
             stateManager.resetState();
@@ -123,13 +117,11 @@ public class Pattern : MonoBehaviour
         UpdateFirstHelper(); // update behaviour for multiple patterns
         if (phaseChecker.FirstCheck(0))
         {
-            // StartCoroutine(SpawnPatternTargets());
-
-            orbsDirectedAtPlayer = orbManager.GetAllOrbsDirectedAtPlayer(); //
-            foreach (GameObject orb in orbsDirectedAtPlayer)                // 
-            {                                                               //
-                orb.GetComponent<OrbMovement>().targetIsController = true;  //
-            }                                                                  //
+            orbsDirectedAtPlayer = orbManager.GetAllOrbsDirectedAtPlayer();
+            foreach (GameObject orb in orbsDirectedAtPlayer)
+            {
+                orb.GetComponent<OrbMovement>().targetIsController = true;
+            }
             stateManager.state = pattern;
             stateManager.switchPhase(0, countdownBetweenPhases);
             nextPhaseIndex = 1;
@@ -172,8 +164,6 @@ public class Pattern : MonoBehaviour
             orbsDirectedAtController = orbManager.GetAllOrbsDirectedAtController();
             foreach (GameObject orb in orbsDirectedAtController)
             {
-                //rightController.controllerVelocity
-                //get enemy in controller direction (movement) and set target of orbsDirectedAtController to this enemy
                 if (AssertDifficulty(orb)) orb.GetComponent<OrbMovement>().SendOrbToEnemy(controllerVelocityOverTime);
                 else orb.GetComponent<OrbMovement>().PrepareDestroyingOrb();
             }
@@ -187,7 +177,6 @@ public class Pattern : MonoBehaviour
             recordControllerVelocity = false;
             return;
         }
-
         controllerVelocityOverTime += rightController.controllerVelocity;
     }
 
