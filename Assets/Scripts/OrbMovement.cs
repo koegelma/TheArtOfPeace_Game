@@ -188,7 +188,7 @@ public class OrbMovement : MonoBehaviour
         return distance;
     }
 
-    public void SendOrbToEnemy()
+    public void SendOrbToEnemy(Vector3 controllerVelocityOverTime)
     {
         float maxAngle = Mathf.Infinity;
         Transform mostReachableEnemy = null;
@@ -196,7 +196,7 @@ public class OrbMovement : MonoBehaviour
         {
             Vector3 enemyDirection = enemyContainer.transform.GetChild(i).position - rightController.controllerPosition;
             // add velocity vectors over time
-            float enemyAngle = Vector3.Angle(rightController.controllerVelocity.normalized, enemyDirection);
+            float enemyAngle = Vector3.Angle(controllerVelocityOverTime.normalized, enemyDirection);
             //Debug.Log("Enemy: " + enemyContainer.transform.GetChild(i).GetSiblingIndex() + ", Angle: " + enemyAngle);
             if (maxAngle > enemyAngle) // could implement something like  - && enemyAngle < x - to only assist aim if enemy is within x-degrees
             {
@@ -207,7 +207,7 @@ public class OrbMovement : MonoBehaviour
         Transform[] enemyArray = new Transform[] { mostReachableEnemy };
         SetTargetArray(enemyArray);
         StartCoroutine(mostReachableEnemy.GetComponent<Enemy>().ReceiveOrb(this.gameObject));
-        isFinalPlayerTargetPassed = true;
+        //isFinalPlayerTargetPassed = true;
         targetIsController = false;
     }
 

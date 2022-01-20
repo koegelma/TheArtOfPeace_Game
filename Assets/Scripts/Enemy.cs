@@ -17,15 +17,15 @@ public class Enemy : MonoBehaviour
     public GameObject currentCooldownBar;
     public bool isUpdating = true;
     public AudioSource huhSpawnSound;
-    //private float timeToDestroy = 10f;
-    //private bool isDestroyCountdown = false;
+    private float timeToDestroy = 10f;
+    private bool isDestroyCountdown = false;
 
     private void Start()
     {
         orbManager = OrbManager.instance;
         timeBetweenOrbs = Random.Range(8f, 20f);//remove - only for testing
         spawnOrbCountdown = timeBetweenOrbs;//remove - only for testing
-        //destroyCountdown = timeToDestroy;
+        destroyCountdown = timeToDestroy;
         player = GameObject.Find("Main Camera").transform;
         recievedOrb = null;
         //InvokeRepeating("ShootOrb", 0f, 5f);
@@ -39,9 +39,9 @@ public class Enemy : MonoBehaviour
         transform.LookAt(player);
         currentCooldownBar.transform.localScale = new Vector3(spawnOrbCountdown / timeBetweenOrbs, currentCooldownBar.transform.localScale.y, currentCooldownBar.transform.localScale.z);
 
-        if (recievedOrb != null) CheckRecievedOrbStatus();
+        //if (recievedOrb != null) CheckRecievedOrbStatus();
 
-        //if (isDestroyCountdown) DestroyCountdown();
+        if (isDestroyCountdown) DestroyCountdown();
 
         //if (orbManager.HasOrbs) return; //remove - only for testing
 
@@ -70,17 +70,17 @@ public class Enemy : MonoBehaviour
 
     public IEnumerator ReceiveOrb(GameObject _orb)
     {
-        Debug.Log(gameObject.name + " recieved " + _orb.name);
+        //Debug.Log(gameObject.name + " recieved " + _orb.name);
         recievedOrb = _orb;
         OrbMovement orbScript = _orb.GetComponent<OrbMovement>();
         targetNodes = (GameObject)Instantiate(targetNodesPrefab, transform.position, transform.rotation);
         targetNodes.transform.parent = transform;
-        //isDestroyCountdown = true;
+        isDestroyCountdown = true;
         PatternTarget targetsScript = targetNodes.GetComponent<PatternTarget>();
         //targetsScript.SetEnemyTransform(this.transform);
-        Debug.Log(gameObject.name + " waiting for " + _orb.name);
+        //Debug.Log(gameObject.name + " waiting for " + _orb.name);
         yield return new WaitUntil(() => targetsScript.isInitialized);
-        Debug.Log("targetscript initialized for " + _orb.name);
+        //Debug.Log("targetscript initialized for " + _orb.name);
         orbScript.SetTargetArray(targetsScript.targets);
     }
 
@@ -106,10 +106,10 @@ public class Enemy : MonoBehaviour
 
     private void DestroyTargetNodes()
     {
-        //isDestroyCountdown = false;
+        isDestroyCountdown = false;
         Destroy(targetNodes);
         //Debug.Log("Enemy Target Nodes destroyed");
-        //destroyCountdown = timeToDestroy;
+        destroyCountdown = timeToDestroy;
         recievedOrb = null;
     }
 }

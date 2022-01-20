@@ -13,7 +13,7 @@ public class PlayerStats : MonoBehaviour
 
     private void Start()
     {
-        life = startLife;
+        life = startLife; 
     }
 
     private void Update()

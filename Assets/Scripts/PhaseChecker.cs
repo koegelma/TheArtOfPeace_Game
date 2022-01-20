@@ -39,7 +39,7 @@ public class PhaseChecker
                 //TODO: checkFluidity was da los?
                 //if (checkFluidity(0.1f, 1)) return false;
                 return true;
-            }
+            } 
         }
         return false;
     }

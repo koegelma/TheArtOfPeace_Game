@@ -51,6 +51,8 @@ public class Pattern : MonoBehaviour
     private bool isRecording = false;
     private float nextRecordingTime = 0;
     private float recordingPeriod = 0.5f;
+    private Vector3 controllerVelocityOverTime;
+    private bool recordControllerVelocity = false;
     //private bool isPrimaryButtonReady = true;
 
     private void Awake()
@@ -88,6 +90,8 @@ public class Pattern : MonoBehaviour
             RecordPosition();
             return;
         }
+
+        if (recordControllerVelocity) RecordControllerVelocity();
 
         //if (isCountdown) HndDestroyCountdown();
         if (!orbManager.HasOrbs) return;
@@ -137,7 +141,7 @@ public class Pattern : MonoBehaviour
     {
         UpdateNextHelper();
         if (isMoving) return;
-        if (stateManager.currentPhase < leftPhaseCoords.Length - 2)
+        if (stateManager.currentPhase < leftPhaseCoords.Length - 3)
         {
             if (phaseChecker.NextCheck(nextPhaseIndex))
             {
@@ -146,8 +150,19 @@ public class Pattern : MonoBehaviour
             }
             return;
         }
-        // second to last check: start recording velocity vectors of right controller
 
+        // second to last check: start recording velocity vectors of right controller
+        if (stateManager.currentPhase < leftPhaseCoords.Length - 2)
+        {
+            if (phaseChecker.NextCheck(nextPhaseIndex))
+            {
+                stateManager.switchPhase(nextPhaseIndex, countdownBetweenPhases);
+                nextPhaseIndex++;
+                controllerVelocityOverTime = Vector3.zero;
+                recordControllerVelocity = true;
+            }
+            return;
+        }
         // final phase
         if (phaseChecker.NextCheck(nextPhaseIndex))
         {
@@ -159,10 +174,21 @@ public class Pattern : MonoBehaviour
             {
                 //rightController.controllerVelocity
                 //get enemy in controller direction (movement) and set target of orbsDirectedAtController to this enemy
-                if (AssertDifficulty(orb)) orb.GetComponent<OrbMovement>().SendOrbToEnemy();
+                if (AssertDifficulty(orb)) orb.GetComponent<OrbMovement>().SendOrbToEnemy(controllerVelocityOverTime);
                 else orb.GetComponent<OrbMovement>().PrepareDestroyingOrb();
             }
         }
+    }
+
+    private void RecordControllerVelocity()
+    {
+        if (stateManager.state == State.IDLE)
+        {
+            recordControllerVelocity = false;
+            return;
+        }
+
+        controllerVelocityOverTime += rightController.controllerVelocity;
     }
 
     public void TogglePattern()
