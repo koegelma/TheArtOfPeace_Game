@@ -15,10 +15,10 @@ public class PlayerStats : MonoBehaviour
     {
         life = startLife; 
     }
-
+ 
     private void Update()
     {
-        HndLife();
+        HndLife(); 
         DisplayDevText();
     }
 
