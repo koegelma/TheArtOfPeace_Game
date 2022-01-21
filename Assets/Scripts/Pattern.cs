@@ -10,8 +10,6 @@ public class Pattern : MonoBehaviour
     public Difficulty difficulty;
     public Vector3[] leftPhaseCoords;
     public Vector3[] rightPhaseCoords;
-    //public GameObject patternTargetPrefab;
-    //public float patternTargetsCountdownLength;
     public float countdownBetweenPhases = 5f;
     public float movementSpeed;
     public float tolerance;
@@ -34,8 +32,6 @@ public class Pattern : MonoBehaviour
     private OrbManager orbManager;
     private PatternReference patternReference;
     private Transform[] targets;
-    //private float patternTargetsCountdown;
-    //private bool isCountdown;
     private bool isTriggerReady = true;
     private bool isInPattern = false;
     private int nextPhaseIndex = 0;
@@ -70,10 +66,6 @@ public class Pattern : MonoBehaviour
 
         secondNextRightPhaseCoord.transform.parent = leftHelper.transform;
         secondNextLeftPhaseCoord.transform.parent = leftHelper.transform;
-        //GameObject secondNextRightPhaseCoord = new GameObject("");
-        //GameObject secondNextLeftPhaseCoord = new GameObject("");
-        //secondNextRightPhaseCoord.transform.parent = leftHelper.transform;
-        //secondNextLeftPhaseCoord.transform.parent = leftHelper.transform;
 
         if (isRecordingPattern)
         {
@@ -174,7 +166,7 @@ public class Pattern : MonoBehaviour
             foreach (GameObject orb in orbsDirectedAtController)
             {
                 if (AssertDifficulty(orb)) orb.GetComponent<OrbMovement>().SendOrbToEnemy(controllerVelocityOverTime);
-                else orb.GetComponent<OrbMovement>().PrepareDestroyingOrb();
+                else StartCoroutine(orb.GetComponent<OrbMovement>().PrepareDestroyingOrb());
             }
         }
     }

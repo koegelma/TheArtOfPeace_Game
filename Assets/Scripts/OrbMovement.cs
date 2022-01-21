@@ -116,6 +116,7 @@ public class OrbMovement : MonoBehaviour
 
     private void DestroyOrb()
     {
+        GameManager.instance.PlayPlayerDamageSound();
         PlayerStats.life -= orbDamage;
         orbManager.RemoveOrb(gameObject);
         //TODO: add destroy orb particle effect
