@@ -12,6 +12,8 @@ public class PatternReference : MonoBehaviour
     public Controller leftController;
     public Controller rightController;
     public Transform cameraTransform;
+    public GameObject secondNextRightPhaseCoord;
+    public GameObject secondNextLeftPhaseCoord;
 
     private void Awake()
     {
@@ -32,5 +34,7 @@ public class PatternReference : MonoBehaviour
         _pattern.leftController = this.leftController;
         _pattern.rightController = this.rightController;
         _pattern.cameraTransform = this.cameraTransform;
+        _pattern.secondNextLeftPhaseCoord = this.secondNextLeftPhaseCoord;
+        _pattern.secondNextRightPhaseCoord = this.secondNextRightPhaseCoord;
     }
 }

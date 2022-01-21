@@ -52,6 +52,8 @@ public class Pattern : MonoBehaviour
     private float recordingPeriod = 0.5f;
     private Vector3 controllerVelocityOverTime;
     private bool recordControllerVelocity = false;
+    [HideInInspector] public GameObject secondNextRightPhaseCoord;
+    [HideInInspector] public GameObject secondNextLeftPhaseCoord;
 
     private void Awake()
     {
@@ -65,6 +67,13 @@ public class Pattern : MonoBehaviour
         PatternReference.instance.GetSceneReferences(this);
         orbManager = OrbManager.instance;
         stateManager = StateManager.instance;
+
+        secondNextRightPhaseCoord.transform.parent = leftHelper.transform;
+        secondNextLeftPhaseCoord.transform.parent = leftHelper.transform;
+        //GameObject secondNextRightPhaseCoord = new GameObject("");
+        //GameObject secondNextLeftPhaseCoord = new GameObject("");
+        //secondNextRightPhaseCoord.transform.parent = leftHelper.transform;
+        //secondNextLeftPhaseCoord.transform.parent = leftHelper.transform;
 
         if (isRecordingPattern)
         {
@@ -194,6 +203,13 @@ public class Pattern : MonoBehaviour
             SetHelperScaleToZero();
             return;
         }
+
+        if (!rightChild.transform.GetChild(0).gameObject.activeSelf && !leftChild.transform.GetChild(0).gameObject.activeSelf)
+        {
+            rightChild.transform.GetChild(0).gameObject.SetActive(true);
+            leftChild.transform.GetChild(0).gameObject.SetActive(true);
+        }
+
         leftHelper.transform.position = cameraTransform.position;
         rightHelper.transform.position = cameraTransform.position;
 
@@ -206,6 +222,10 @@ public class Pattern : MonoBehaviour
         phaseChecker.globalLeftPhaseCoord = leftChild.transform.position;
         phaseChecker.globalRightPhaseCoord = rightChild.transform.position;
 
+        secondNextRightPhaseCoord.transform.localPosition = rightPhaseCoords[stateManager.currentPhase + 2];
+        secondNextLeftPhaseCoord.transform.localPosition = leftPhaseCoords[stateManager.currentPhase + 2];
+        rightChild.transform.LookAt(secondNextRightPhaseCoord.transform);
+        leftChild.transform.LookAt(secondNextLeftPhaseCoord.transform);
 
         float helperTolerance = tolerance * 2;
         Vector3 newScale = new Vector3(helperTolerance, helperTolerance, helperTolerance);
@@ -229,6 +249,19 @@ public class Pattern : MonoBehaviour
 
         MoveChildToTarget(leftChild.transform, this.leftPhaseCoords[stateManager.currentPhase + 1]);
         MoveChildToTarget(rightChild.transform, this.rightPhaseCoords[stateManager.currentPhase + 1]);
+
+        if (stateManager.currentPhase < leftPhaseCoords.Length - 2)
+        {
+            secondNextRightPhaseCoord.transform.localPosition = rightPhaseCoords[stateManager.currentPhase + 2];
+            secondNextLeftPhaseCoord.transform.localPosition = leftPhaseCoords[stateManager.currentPhase + 2];
+            rightChild.transform.LookAt(secondNextRightPhaseCoord.transform);
+            leftChild.transform.LookAt(secondNextLeftPhaseCoord.transform);
+        }
+        else
+        {
+            rightChild.transform.GetChild(0).gameObject.SetActive(false);
+            leftChild.transform.GetChild(0).gameObject.SetActive(false);
+        }
     }
 
     private void MoveChildToTarget(Transform childTransform, Vector3 phaseCoordPosition)
