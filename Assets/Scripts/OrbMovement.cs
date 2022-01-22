@@ -10,8 +10,8 @@ public class OrbMovement : MonoBehaviour
     private float slowSpeed = 3f; // was 3.5
     private float mediumSpeed = 4f; // was 4.5
     private float fastSpeed = 6f; // was 8
-    private float rotateSpeed = 500f;
-    private int orbDamage = 0;
+    private float rotateSpeed = 300f;
+    private int orbDamage;
     private Rigidbody rb;
     public Difficulty tier;
     public bool targetIsController;
@@ -41,6 +41,9 @@ public class OrbMovement : MonoBehaviour
         playerTarget = GameObject.Find("Main Camera").transform;
         enemyContainer = GameObject.Find("Enemy Container");
         rightController = PatternManager.instance.rightController;
+
+        GetOrbDamage();
+
         if (tier == Difficulty.EASY)
         {
             SetTargetArrayToPlayer(); //temporary fix - ideal would be to have this in Enemy imo
@@ -68,22 +71,22 @@ public class OrbMovement : MonoBehaviour
     {
         float distance = Vector3.Distance(rb.position, rightController.controllerPosition);
 
-        if (distance > 1 && newSpeed != 8)
+        if (distance > 1 && newSpeed != 12)
         {
-            newSpeed = 8;
+            newSpeed = 12;
             t = 0;
         }
-        if (distance < 1 && distance > 0.5 && newSpeed != 1)
+        if (distance < 2 && distance > 0.5 && newSpeed != 4)
         {
-            newSpeed = 1;
+            newSpeed = 4;
             t = 0;
         }
-        if (distance < 0.5 && distance > 0.25 && newSpeed != 0.5f)
+        if (distance < 0.5 && distance > 0.05 && newSpeed != 0.5f)
         {
             newSpeed = 0.5f;
             t = 0;
         }
-        if (distance < 0.25 && newSpeed != 0)
+        if (distance < 0.05 && newSpeed != 0)
         {
             newSpeed = 0;
             t = 0;
@@ -119,7 +122,7 @@ public class OrbMovement : MonoBehaviour
         GameManager.instance.PlayPlayerDamageSound();
         PlayerStats.life -= orbDamage;
         orbManager.RemoveOrb(gameObject);
-        //TODO: add destroy orb particle effect
+        GameManager.instance.PlayDestroyOrbParticleEffect(transform.position);
         Destroy(gameObject);
     }
 
@@ -141,8 +144,8 @@ public class OrbMovement : MonoBehaviour
         {
             if (targetIsPlayer)
             {
-                GameManager.instance.PlayPlayerDamageSound();
                 DestroyOrb();
+                return;
             }
             SetTargetArrayToPlayer();
             isFinalEnemyTargetPassed = true;
@@ -214,6 +217,22 @@ public class OrbMovement : MonoBehaviour
     {
         yield return new WaitForSeconds(0.1f);
         DestroyOrb();
+    }
+
+    private void GetOrbDamage()
+    {
+        switch (tier)
+        {
+            case Difficulty.EASY:
+                orbDamage = 10;
+                break;
+            case Difficulty.MEDIUM:
+                orbDamage = 20;
+                break;
+            case Difficulty.HARD:
+                orbDamage = 30;
+                break;
+        }
     }
 }
 
