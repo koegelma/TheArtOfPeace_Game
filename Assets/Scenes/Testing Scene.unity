@@ -8640,6 +8640,54 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 948f4100a11a5c24981795d21301da5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  volumeTrigger: {fileID: 963194228}
+  volumeLayer:
+    serializedVersion: 2
+    m_Bits: 256
+  stopNaNPropagation: 1
+  finalBlitToCameraTarget: 0
+  antialiasingMode: 0
+  temporalAntialiasing:
+    jitterSpread: 0.75
+    sharpness: 0.25
+    stationaryBlending: 0.95
+    motionBlending: 0.85
+  subpixelMorphologicalAntialiasing:
+    quality: 2
+  fastApproximateAntialiasing:
+    fastMode: 0
+    keepAlpha: 0
+  fog:
+    enabled: 1
+    excludeSkybox: 1
+  debugLayer:
+    lightMeter:
+      width: 512
+      height: 256
+      showCurves: 1
+    histogram:
+      width: 512
+      height: 256
+      channel: 3
+    waveform:
+      exposure: 0.12
+      height: 256
+    vectorscope:
+      size: 256
+      exposure: 0.12
+    overlaySettings:
+      linearDepth: 0
+      motionColorIntensity: 4
+      motionGridSize: 64
+      colorBlindnessType: 0
+      colorBlindnessStrength: 1
+  m_Resources: {fileID: 11400000, guid: d82512f9c8e5d4a4d938b575d47f88d4, type: 2}
+  m_ShowToolkit: 0
+  m_ShowCustomSorter: 0
+  breakBeforeColorGrading: 0
+  m_BeforeTransparentBundles: []
+  m_BeforeStackBundles: []
+  m_AfterStackBundles: []
 --- !u!1 &973108457
 GameObject:
   m_ObjectHideFlags: 0
@@ -16246,6 +16294,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1921458978}
     m_Modifications:
+    - target: {fileID: 1092150304995846438, guid: 3d9353e890e0e4744a94c2fac9093ea0,
+        type: 3}
+      propertyPath: m_Materials.Array.data[5]
+      value: 
+      objectReference: {fileID: 2100000, guid: 3d2e36aacd7dc084b96e0755f1af4137, type: 2}
+    - target: {fileID: 1092150304995846438, guid: 3d9353e890e0e4744a94c2fac9093ea0,
+        type: 3}
+      propertyPath: m_Materials.Array.data[6]
+      value: 
+      objectReference: {fileID: 2100000, guid: 3d391382212436c47ad935408b4d4c21, type: 2}
     - target: {fileID: 1533702553431656741, guid: 3d9353e890e0e4744a94c2fac9093ea0,
         type: 3}
       propertyPath: m_Name
@@ -16306,6 +16364,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5105730376552852805, guid: 3d9353e890e0e4744a94c2fac9093ea0,
+        type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 3d2e36aacd7dc084b96e0755f1af4137, type: 2}
+    - target: {fileID: 5105730376552852805, guid: 3d9353e890e0e4744a94c2fac9093ea0,
+        type: 3}
+      propertyPath: m_Materials.Array.data[4]
+      value: 
+      objectReference: {fileID: 2100000, guid: 487fce76408bbe44ba67d34c7ab20d54, type: 2}
+    - target: {fileID: 5105730376552852805, guid: 3d9353e890e0e4744a94c2fac9093ea0,
+        type: 3}
+      propertyPath: m_Materials.Array.data[5]
+      value: 
+      objectReference: {fileID: 2100000, guid: 3d2e36aacd7dc084b96e0755f1af4137, type: 2}
+    - target: {fileID: 5105730376552852805, guid: 3d9353e890e0e4744a94c2fac9093ea0,
+        type: 3}
+      propertyPath: m_Materials.Array.data[6]
+      value: 
+      objectReference: {fileID: 2100000, guid: 876e50c0413f0fb4686f06aebff7e537, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3d9353e890e0e4744a94c2fac9093ea0, type: 3}
 --- !u!1 &1327376281
@@ -16719,7 +16797,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[1]
       value: 
-      objectReference: {fileID: 2100000, guid: 900d09cf3fb7d3c4da21a264f3cd122d, type: 2}
+      objectReference: {fileID: 2100000, guid: bff83f5d7915bda44823ecbf092a318d, type: 2}
     - target: {fileID: 329019996452532016, guid: d56b211b041bb4f44aa7a43438d31b97,
         type: 3}
       propertyPath: m_Materials.Array.data[3]
@@ -16739,7 +16817,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[6]
       value: 
-      objectReference: {fileID: 2100000, guid: bff83f5d7915bda44823ecbf092a318d, type: 2}
+      objectReference: {fileID: 2100000, guid: 876e50c0413f0fb4686f06aebff7e537, type: 2}
     - target: {fileID: 329019996452532016, guid: d56b211b041bb4f44aa7a43438d31b97,
         type: 3}
       propertyPath: m_Materials.Array.data[7]
@@ -24973,6 +25051,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ca34a6148db2d54493f84f379293f33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  GroupID: 0
 --- !u!1 &339139674443681998
 GameObject:
   m_ObjectHideFlags: 0
