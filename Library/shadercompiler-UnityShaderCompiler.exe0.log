@@ -1,4 +1,10 @@
-Base path: 'C:/Program Files/Unity/Hub/Editor/2019.4.21f1/Editor/Data', plugins path 'C:/Program Files/Unity/Hub/Editor/2019.4.21f1/Editor/Data/PlaybackEngines'
+Base path: 'D:/Unity/Editors/2019.4.21f1/Editor/Data', plugins path 'D:/Unity/Editors/2019.4.21f1/Editor/Data/PlaybackEngines'
 Cmd: initializeCompiler
-
-Quitting shader compiler process
+Cmd: preprocess
+  insize=6470 outsize=1875 ok=1
+Cmd: preprocess
+  insize=1254 outsize=379 ok=1
+Cmd: preprocess
+  insize=1617 outsize=408 ok=1
+Cmd: preprocess
+  insize=1045 outsize=253 ok=1

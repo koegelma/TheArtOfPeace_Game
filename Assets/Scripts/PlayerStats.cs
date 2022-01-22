@@ -8,7 +8,7 @@ public class PlayerStats : MonoBehaviour
     public Text lifeText;
     public static int phase;
     public Text phaseText; 
-    public Text activePatternText;
+    public Text activePatternText; 
 
 
     private void Start()

@@ -17,6 +17,7 @@ public class Enemy : MonoBehaviour
     public bool isUpdating = true;
     public AudioSource huhSpawnSound;
     Animator animator;
+    
 
     private void Start()
     {
@@ -38,6 +39,11 @@ public class Enemy : MonoBehaviour
 
         Vector3 targetPostition = new Vector3(player.position.x, transform.position.y, player.position.z);
         transform.LookAt(targetPostition);
+        int stateHash = animator.GetCurrentAnimatorStateInfo(0).fullPathHash;
+        if(stateHash == Animator.StringToHash("Base Layer.Mma Idle") || stateHash == Animator.StringToHash("Base Layer.Fight Idle")){
+            transform.RotateAround(transform.position, Vector3.up, 20);
+        }
+        transform.GetChild(0).transform.LookAt(targetPostition);
         currentCooldownBar.transform.localScale = new Vector3(spawnOrbCountdown / timeBetweenOrbs, currentCooldownBar.transform.localScale.y, currentCooldownBar.transform.localScale.z);
 
         if (spawnOrbCountdown <= 0f)
@@ -58,7 +64,7 @@ public class Enemy : MonoBehaviour
     private void ShootOrb()
     {
         Instantiate(orbPrefab, firePosition.position, transform.rotation);
-        animator.SetTrigger("Punch Trigger");
+        animator.SetTrigger("Attack Trigger");
         huhSpawnSound.Play();
     }
 
