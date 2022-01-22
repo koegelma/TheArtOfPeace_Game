@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 public class PlayerStats : MonoBehaviour
 {
-    public static int life;
+    public static int life; 
     private int startLife = 100;
     public Text lifeText;
     public static int phase;

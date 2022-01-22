@@ -24,7 +24,7 @@ public class PhaseChecker
         //tolerance = 0.07f;
     }
 
-    public bool FirstCheck(int phase)
+    public bool FirstCheck(int phase) 
     {
         if (leftController.isTrigger && rightController.isTrigger)
         {

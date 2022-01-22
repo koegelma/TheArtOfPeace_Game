@@ -12,19 +12,10 @@ public class PatternTarget : MonoBehaviour
 
     private void Start()
     {
-        if (!isEnemyPattern)
-        {
-            // TODO: change parenting when instantiated in pattern script
-            // change transform to parent transform
-            playerTransform = GameObject.Find("Main Camera").transform;
-            SetPosition(playerTransform, true);
-            Vector3 angles = new Vector3(transform.rotation.x, playerTransform.rotation.eulerAngles.y, transform.rotation.z);
-            transform.rotation = Quaternion.Euler(angles);
-        }
         if (isEnemyPattern)
         {
             enemyTransform = gameObject.transform.parent.transform;
-            SetPosition(enemyTransform, false);
+            SetPosition(enemyTransform);
         }
         SetTargets();
         isInitialized = true;
@@ -32,14 +23,12 @@ public class PatternTarget : MonoBehaviour
 
     private void Update()
     {
-        if (!isEnemyPattern) SetPosition(playerTransform, true);
-        if (isEnemyPattern) SetPosition(enemyTransform, false);
+        if (isEnemyPattern) SetPosition(enemyTransform);
     }
 
-    private void SetPosition(Transform givenTransform, bool parentIsPlayer)
+    private void SetPosition(Transform givenTransform)
     {
-        if (parentIsPlayer) transform.position = new Vector3(givenTransform.position.x, transform.position.y, givenTransform.position.z);
-        else transform.position = new Vector3(givenTransform.position.x, givenTransform.position.y, givenTransform.position.z); //transform.y - givenTransform.y/2;
+        transform.position = new Vector3(givenTransform.position.x, givenTransform.position.y + 1, givenTransform.position.z); //transform.y - givenTransform.y/2;
         //else transform.position = Vector3.zero;
     }
 

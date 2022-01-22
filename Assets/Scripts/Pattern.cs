@@ -213,11 +213,8 @@ public class Pattern : MonoBehaviour
 
         phaseChecker.globalLeftPhaseCoord = leftChild.transform.position;
         phaseChecker.globalRightPhaseCoord = rightChild.transform.position;
-
-        secondNextRightPhaseCoord.transform.localPosition = rightPhaseCoords[stateManager.currentPhase + 2];
-        secondNextLeftPhaseCoord.transform.localPosition = leftPhaseCoords[stateManager.currentPhase + 2];
-        rightChild.transform.LookAt(secondNextRightPhaseCoord.transform);
-        leftChild.transform.LookAt(secondNextLeftPhaseCoord.transform);
+        
+        UpdateArrow();
 
         float helperTolerance = tolerance * 2;
         Vector3 newScale = new Vector3(helperTolerance, helperTolerance, helperTolerance);
@@ -242,18 +239,20 @@ public class Pattern : MonoBehaviour
         MoveChildToTarget(leftChild.transform, this.leftPhaseCoords[stateManager.currentPhase + 1]);
         MoveChildToTarget(rightChild.transform, this.rightPhaseCoords[stateManager.currentPhase + 1]);
 
-        if (stateManager.currentPhase < leftPhaseCoords.Length - 2)
-        {
-            secondNextRightPhaseCoord.transform.localPosition = rightPhaseCoords[stateManager.currentPhase + 2];
-            secondNextLeftPhaseCoord.transform.localPosition = leftPhaseCoords[stateManager.currentPhase + 2];
-            rightChild.transform.LookAt(secondNextRightPhaseCoord.transform);
-            leftChild.transform.LookAt(secondNextLeftPhaseCoord.transform);
-        }
+        if (stateManager.currentPhase < leftPhaseCoords.Length - 2) UpdateArrow();
         else
         {
             rightChild.transform.GetChild(0).gameObject.SetActive(false);
             leftChild.transform.GetChild(0).gameObject.SetActive(false);
         }
+    }
+
+    private void UpdateArrow()
+    {
+        secondNextRightPhaseCoord.transform.localPosition = rightPhaseCoords[stateManager.currentPhase + 2];
+        secondNextLeftPhaseCoord.transform.localPosition = leftPhaseCoords[stateManager.currentPhase + 2];
+        rightChild.transform.LookAt(secondNextRightPhaseCoord.transform);
+        leftChild.transform.LookAt(secondNextLeftPhaseCoord.transform);
     }
 
     private void MoveChildToTarget(Transform childTransform, Vector3 phaseCoordPosition)
