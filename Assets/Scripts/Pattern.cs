@@ -45,7 +45,7 @@ public class Pattern : MonoBehaviour
     private int phaseIndex = 0;
     private bool isRecording = false;
     private float nextRecordingTime = 0;
-    private float recordingPeriod = 0.5f;
+    private float recordingPeriod = 0.2f;
     private Vector3 controllerVelocityOverTime;
     private bool recordControllerVelocity = false;
     [HideInInspector] public GameObject secondNextRightPhaseCoord;

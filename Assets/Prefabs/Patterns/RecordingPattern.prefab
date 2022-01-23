@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pattern: 0
+  difficulty: 0
   leftPhaseCoords:
   - {x: 1, y: 1, z: 1}
   - {x: 0, y: 0, z: 0}
@@ -111,6 +112,8 @@ MonoBehaviour:
   orbsDirectedAtPlayer: []
   orbsDirectedAtController: []
   helperPrefabs:
-  - {fileID: 8251866741688810290, guid: 30ec30ecc783cd244a6e11278dcee402, type: 3}
-  - {fileID: 3959021028517119277, guid: f41e1971ea4c60b45afedc96491d59b5, type: 3}
+  - {fileID: 5041647827127536041, guid: 30ec30ecc783cd244a6e11278dcee402, type: 3}
+  - {fileID: 7280958528651535419, guid: f41e1971ea4c60b45afedc96491d59b5, type: 3}
   isRecordingPattern: 1
+  secondNextRightPhaseCoord: {fileID: 0}
+  secondNextLeftPhaseCoord: {fileID: 0}

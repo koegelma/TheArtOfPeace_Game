@@ -1,0 +1,93 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3961401197421284104
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3961401197421284105}
+  - component: {fileID: 3961401197421284110}
+  m_Layer: 0
+  m_Name: Turn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3961401197421284105
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3961401197421284104}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3961401197421284110
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3961401197421284104}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 172541bac164f6b46849de550ccb9df3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pattern: 2
+  difficulty: 2
+  leftPhaseCoords:
+  - {x: -0.15022482, y: -0.14582074, z: 0.5845326}
+  - {x: -0.0505874, y: -0.22655535, z: 0.57770926}
+  - {x: 0.012621261, y: -0.37294424, z: 0.40799558}
+  - {x: 0.13762094, y: -0.40552902, z: 0.16953161}
+  - {x: 0.23455787, y: -0.30644798, z: -0.044017047}
+  - {x: 0.26646984, y: -0.15752816, z: -0.1120047}
+  - {x: 0.23793142, y: -0.098207235, z: -0.12287626}
+  - {x: 0.19419858, y: -0.10277259, z: -0.037391573}
+  - {x: 0.08605574, y: -0.20335972, z: 0.050437152}
+  - {x: -0.11209329, y: -0.3198551, z: -0.04467377}
+  - {x: -0.22840497, y: -0.35201758, z: -0.49975085}
+  - {x: -0.022597924, y: -0.18956089, z: -0.89247286}
+  rightPhaseCoords:
+  - {x: 0.31500024, y: -0.24623048, z: -0.8137448}
+  - {x: 0.21982154, y: -0.20281446, z: -0.77424115}
+  - {x: 0.23328263, y: -0.22721791, z: -0.5988767}
+  - {x: 0.23523296, y: -0.2662716, z: -0.4025305}
+  - {x: 0.26067135, y: -0.26770544, z: -0.2443302}
+  - {x: 0.27706978, y: -0.15652108, z: -0.2169078}
+  - {x: 0.29047108, y: -0.09205961, z: -0.22508028}
+  - {x: 0.31525376, y: -0.09110165, z: -0.10083559}
+  - {x: 0.24231419, y: -0.16405737, z: 0.08704154}
+  - {x: 0.11744253, y: -0.26946747, z: 0.19457641}
+  - {x: 0.021948278, y: -0.2252307, z: 0.4145932}
+  - {x: 0.06040129, y: -0.07013965, z: 0.64364195}
+  countdownBetweenPhases: 5
+  movementSpeed: 1.3
+  tolerance: 0.12
+  leftHelper: {fileID: 0}
+  rightHelper: {fileID: 0}
+  leftChild: {fileID: 0}
+  rightChild: {fileID: 0}
+  leftController: {fileID: 0}
+  rightController: {fileID: 0}
+  cameraTransform: {fileID: 0}
+  isSelected: 0
+  helperScaleIsZero: 1
+  orbsDirectedAtPlayer: []
+  orbsDirectedAtController: []
+  helperPrefabs:
+  - {fileID: 5041647827127536041, guid: 30ec30ecc783cd244a6e11278dcee402, type: 3}
+  - {fileID: 7280958528651535419, guid: f41e1971ea4c60b45afedc96491d59b5, type: 3}
+  isRecordingPattern: 0
+  secondNextRightPhaseCoord: {fileID: 0}
+  secondNextLeftPhaseCoord: {fileID: 0}

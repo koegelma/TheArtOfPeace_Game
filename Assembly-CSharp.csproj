@@ -62,6 +62,8 @@
      <Compile Include="Assets\Scripts\PatternManager.cs" />
      <Compile Include="Assets\Scripts\PatternReference.cs" />
      <Compile Include="Assets\Scripts\PatternTarget.cs" />
+     <Compile Include="Assets\Scripts\PhaseChecker.cs" />
+     <Compile Include="Assets\Scripts\PlayerStats.cs" />
      <Compile Include="Assets\Scripts\StartMenu\PlayerCalibration.cs" />
      <Compile Include="Assets\Scripts\StartMenu\PlayerSettings.cs" />
      <Compile Include="Assets\Scripts\StateManager.cs" />

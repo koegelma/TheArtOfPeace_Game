@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerCalibration : MonoBehaviour
 {
-    private float standardArmLength = 1.6f;
+    private float standardArmLength = 1.55f;
     private float playerArmLength;
     private Controller leftController;
     private Controller rightController;
