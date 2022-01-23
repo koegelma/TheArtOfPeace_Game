@@ -44,11 +44,8 @@ public class PatternManager : MonoBehaviour
             if (currentPatternIndex > 0)
             {
                 patterns[currentPatternIndex].TogglePattern();
-                //patterns[currentPatternIndex].isSelected = false;
                 currentPatternIndex--;
                 patterns[currentPatternIndex].TogglePattern();
-                //patterns[currentPatternIndex].helperScaleIsZero = true;
-                //patterns[currentPatternIndex].isSelected = true;
             }
             isLeftGripReady = false;
         }
@@ -56,11 +53,9 @@ public class PatternManager : MonoBehaviour
         {
             if (currentPatternIndex < patterns.Length - 1)
             {
-                //patterns[currentPatternIndex].isSelected = false;
                 patterns[currentPatternIndex].TogglePattern();
                 currentPatternIndex++;
                 patterns[currentPatternIndex].TogglePattern();
-                //patterns[currentPatternIndex].isSelected = true;
             }
             isRightGripReady = false;
         }

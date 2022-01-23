@@ -21,6 +21,7 @@ public class Controller : MonoBehaviour
     public bool isMenuButton;
     public bool isPrimaryButton;
     public Transform nextRelativeTransform;
+    public bool isSendingHapticFeedback = false;
     //public GameObject nextRelativeTransformGO;
 
     void Update()
@@ -100,5 +101,18 @@ public class Controller : MonoBehaviour
     {
         if (gripValue >= 0.1) isGrip = true;
         else isGrip = false;
+    }
+
+    public void HapticImpulse(float amplitude, float duration)
+    {
+        isSendingHapticFeedback = true;
+        device.SendHapticImpulse(0, amplitude, duration);
+        StartCoroutine(UpdateIsSendingFeedback(duration));
+    }
+
+    private IEnumerator UpdateIsSendingFeedback(float duration)
+    {
+        yield return new WaitForSeconds(duration);
+        isSendingHapticFeedback = false;
     }
 }

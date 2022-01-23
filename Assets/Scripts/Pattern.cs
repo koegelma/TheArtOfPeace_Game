@@ -115,7 +115,12 @@ public class Pattern : MonoBehaviour
 
     private void CheckForPattern()
     {
-        UpdateFirstHelper(); // update behaviour for multiple patterns
+        UpdateFirstHelper();
+        if (phaseChecker.CheckForRightPosition(0) && !rightController.isSendingHapticFeedback && !leftController.isSendingHapticFeedback)
+        {
+            leftController.HapticImpulse(0.1f, 0.05f);
+            rightController.HapticImpulse(0.1f, 0.05f);
+        }
         if (phaseChecker.FirstCheck(0))
         {
             orbsDirectedAtPlayer = orbManager.GetAllOrbsDirectedAtPlayer();
@@ -132,6 +137,7 @@ public class Pattern : MonoBehaviour
 
     private void CheckForPhase()
     {
+        if (!leftController.isTrigger && !rightController.isTrigger) CancelPattern();
         UpdateNextHelper();
         if (isMoving) return;
         if (stateManager.currentPhase < leftPhaseCoords.Length - 3)
@@ -169,6 +175,18 @@ public class Pattern : MonoBehaviour
                 else StartCoroutine(orb.GetComponent<OrbMovement>().PrepareDestroyingOrb());
             }
         }
+    }
+
+    private void CancelPattern()
+    {
+        SetHelperScaleToZero();
+        stateManager.resetState();
+        isInPattern = false;
+        nextPhaseIndex = 0;
+
+        leftController.HapticImpulse(0.4f, 0.5f);
+        rightController.HapticImpulse(0.4f, 0.5f);
+        GameManager.instance.PlayNegativeUISound();
     }
 
     private void RecordControllerVelocity()
@@ -213,7 +231,7 @@ public class Pattern : MonoBehaviour
 
         phaseChecker.globalLeftPhaseCoord = leftChild.transform.position;
         phaseChecker.globalRightPhaseCoord = rightChild.transform.position;
-        
+
         UpdateArrow();
 
         float helperTolerance = tolerance * 2;

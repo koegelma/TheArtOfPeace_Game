@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     private bool isMenuButtonReady = true;
     public AudioSource playerDamageSound;
     public ParticleSystem orbDestroyEffect;
+    public AudioSource negativeUISound;
 
     private void Awake()
     {
@@ -69,5 +70,10 @@ public class GameManager : MonoBehaviour
     {
         orbDestroyEffect.gameObject.transform.position = position;
         orbDestroyEffect.Play();
+    }
+
+    public void PlayNegativeUISound()
+    {
+        negativeUISound.Play();
     }
 }
