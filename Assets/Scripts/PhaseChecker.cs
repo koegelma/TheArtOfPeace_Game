@@ -1,7 +1,7 @@
 
 using UnityEngine;
 
-public class PhaseChecker
+public class PhaseChecker 
 {
     public Controller leftController;
     public Controller rightController;
