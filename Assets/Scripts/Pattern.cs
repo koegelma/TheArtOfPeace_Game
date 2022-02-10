@@ -45,11 +45,14 @@ public class Pattern : MonoBehaviour
     private int phaseIndex = 0;
     private bool isRecording = false;
     private float nextRecordingTime = 0;
-    private float recordingPeriod = 0.2f;
+    private float recordingPeriod = 0.25f;
     private Vector3 controllerVelocityOverTime;
     private bool recordControllerVelocity = false;
     [HideInInspector] public GameObject secondNextRightPhaseCoord;
     [HideInInspector] public GameObject secondNextLeftPhaseCoord;
+    public GameObject recordedPatternContainerLeft;
+    public GameObject recordedPatternContainerRight;
+    private int recordedPhases = 0;
 
     private void Awake()
     {
@@ -67,14 +70,14 @@ public class Pattern : MonoBehaviour
         secondNextRightPhaseCoord.transform.parent = leftHelper.transform;
         secondNextLeftPhaseCoord.transform.parent = leftHelper.transform;
 
-        if (isRecordingPattern)
+        /* if (isRecordingPattern)
         {
             enemyContainer = GameObject.Find("Enemy Container").transform;
             foreach (Transform child in enemyContainer)
             {
                 child.GetComponent<Enemy>().isUpdating = false;
             }
-        }
+        } */
     }
     private void Update()
     {
@@ -341,6 +344,7 @@ public class Pattern : MonoBehaviour
 
     private void RecordPosition()
     {
+        if (!isTriggerReady && !leftController.isTrigger && !rightController.isTrigger) isTriggerReady = true;
         if (leftController.isTrigger && rightController.isTrigger && isTriggerReady)
         {
             isTriggerReady = false;
@@ -348,38 +352,51 @@ public class Pattern : MonoBehaviour
             if (isRecording)
             {
                 nextRecordingTime = Time.time + recordingPeriod;
-                AddNewPhaseCoord(true);
                 //Debug.Log("left: " + leftController.relativeTransform.position);
                 tempLeft = (GameObject)Instantiate(helperPrefabs[0], leftController.controllerPosition, Quaternion.identity);
+                tempLeft.transform.parent = recordedPatternContainerLeft.transform;
                 //Debug.Log("right: " + rightController.relativeTransform.position);
                 tempRight = (GameObject)Instantiate(helperPrefabs[1], rightController.controllerPosition, Quaternion.identity);
+                tempRight.transform.parent = recordedPatternContainerRight.transform;
+                recordedPhases++;
                 return;
             }
+            Destroy(recordedPatternContainerLeft.transform.GetChild(0).GetChild(0).gameObject);
+            Destroy(recordedPatternContainerLeft.transform.GetChild(0).GetChild(0).gameObject);
+            Destroy(recordedPatternContainerRight.transform.GetChild(0).GetChild(0).gameObject);
+            Destroy(recordedPatternContainerRight.transform.GetChild(0).GetChild(0).gameObject);
+            // Stop Recording: Rotate and shit
+
+            /* recordedPatternContainerLeft.transform.GetChild(0).position = Vector3.zero;
+            recordedPatternContainerRight.transform.GetChild(0).position = Vector3.zero;
+            recordedPatternContainerLeft.transform.LookAt(Vector3.forward);
+            recordedPatternContainerRight.transform.LookAt(Vector3.forward);
+
+            float rightLength = Vector3.Distance()
+
+            recordedPatternContainerLeft.transform.GetChild(1).position = Vector3.zero;
+            recordedPatternContainerRight.transform.GetChild(1).position = Vector3.zero; */
+
         }
-        if (!isTriggerReady && !leftController.isTrigger && !rightController.isTrigger) isTriggerReady = true;
         if (!isRecording) return;
 
         if (Time.time > nextRecordingTime)
         {
             nextRecordingTime += recordingPeriod;
-            AddNewPhaseCoord(false);
             tempLeft = (GameObject)Instantiate(helperPrefabs[0], leftController.controllerPosition, Quaternion.identity);
+            //tempLeft.transform.parent = recordedPatternContainerLeft.transform;
             tempRight = (GameObject)Instantiate(helperPrefabs[1], rightController.controllerPosition, Quaternion.identity);
-        }
-    }
+            //tempRight.transform.parent = recordedPatternContainerRight.transform;
+            recordedPhases++;
 
-    private void AddNewPhaseCoord(bool isFirstCoord)
-    {
-        if (isFirstCoord)
-        {
-            leftPhaseCoords[phaseIndex] = leftController.relativeTransform.position;
-            rightPhaseCoords[phaseIndex] = rightController.relativeTransform.position;
+            if (recordedPhases > 4)
+            {
+                tempLeft.transform.parent = recordedPatternContainerLeft.transform.GetChild(0).GetChild(1);
+                tempRight.transform.parent = recordedPatternContainerLeft.transform.GetChild(0).GetChild(1);
+                return;
+            }
+            tempLeft.transform.parent = recordedPatternContainerLeft.transform.GetChild(0);
+            tempRight.transform.parent = recordedPatternContainerRight.transform.GetChild(0);
         }
-        else
-        {
-            leftPhaseCoords[phaseIndex] = leftController.nextRelativeTransform.position;
-            rightPhaseCoords[phaseIndex] = rightController.nextRelativeTransform.position;
-        }
-        phaseIndex++;
     }
 }
