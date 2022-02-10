@@ -35,7 +35,7 @@ public class GameOver : MonoBehaviour
     private IEnumerator Retry()
     {
         yield return new WaitUntil(() => !uiClick.isPlaying);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        SceneManager.LoadScene("Testing Scene");
     }
 
     private IEnumerator Menu()

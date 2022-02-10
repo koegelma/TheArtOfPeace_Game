@@ -5,7 +5,6 @@ using UnityEngine;
 public class StateVisualizer : MonoBehaviour
 {
     public GameObject smallCube;
-    // Update is called once per frame
 
     void Update()
     {
@@ -17,7 +16,7 @@ public class StateVisualizer : MonoBehaviour
             case State.PATTERN1:
                 this.GetComponent<Renderer>().material.SetColor("_Color", Color.blue);
                 break;
-            case State.PATTERN2:
+            case State.TURN:
                 this.GetComponent<Renderer>().material.SetColor("_Color", Color.yellow);
                 break;
         }

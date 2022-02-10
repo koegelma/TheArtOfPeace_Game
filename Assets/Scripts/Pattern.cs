@@ -55,7 +55,7 @@ public class Pattern : MonoBehaviour
     {
         leftPhaseCoords = GameData.CalcPlayerPhaseCoords(leftPhaseCoords);
         rightPhaseCoords = GameData.CalcPlayerPhaseCoords(rightPhaseCoords);
-        phaseChecker = new PhaseChecker(leftPhaseCoords, rightPhaseCoords, tolerance);
+        phaseChecker = new PhaseChecker(leftPhaseCoords, rightPhaseCoords, tolerance, pattern);
     }
 
     private void Start()
@@ -115,13 +115,14 @@ public class Pattern : MonoBehaviour
 
     private void CheckForPattern()
     {
+        if (!isTriggerReady && !leftController.isTrigger && !rightController.isTrigger) isTriggerReady = true;
         UpdateFirstHelper();
         if (phaseChecker.CheckForRightPosition(0) && !rightController.isSendingHapticFeedback && !leftController.isSendingHapticFeedback)
         {
             leftController.HapticImpulse(0.1f, 0.05f);
             rightController.HapticImpulse(0.1f, 0.05f);
         }
-        if (phaseChecker.FirstCheck(0))
+        if (phaseChecker.FirstCheck(0) && isTriggerReady)
         {
             orbsDirectedAtPlayer = orbManager.GetAllOrbsDirectedAtPlayer();
             foreach (GameObject orb in orbsDirectedAtPlayer)
@@ -132,6 +133,7 @@ public class Pattern : MonoBehaviour
             stateManager.switchPhase(0, countdownBetweenPhases);
             nextPhaseIndex = 1;
             isInPattern = true;
+            isTriggerReady = false;
         }
     }
 
@@ -140,6 +142,22 @@ public class Pattern : MonoBehaviour
         if (!leftController.isTrigger && !rightController.isTrigger) CancelPattern();
         UpdateNextHelper();
         if (isMoving) return;
+
+        ///////DELETE ME
+
+        if ((pattern == State.WAVES && (stateManager.currentPhase == 7 || stateManager.currentPhase == 17)) || (pattern == State.TURN && (stateManager.currentPhase == 6)))
+        {
+            if (phaseChecker.NextCheck(nextPhaseIndex))
+            {
+                StartCoroutine(WaitForPhaseSwitch());
+                isSelected = false;
+                return;
+            }
+        }
+
+
+        /////////////
+
         if (stateManager.currentPhase < leftPhaseCoords.Length - 3)
         {
             if (phaseChecker.NextCheck(nextPhaseIndex))
@@ -175,6 +193,14 @@ public class Pattern : MonoBehaviour
                 else StartCoroutine(orb.GetComponent<OrbMovement>().PrepareDestroyingOrb());
             }
         }
+    }
+
+    private IEnumerator WaitForPhaseSwitch()
+    {
+        yield return new WaitForSeconds(0.25f);
+        stateManager.switchPhase(nextPhaseIndex, countdownBetweenPhases);
+        nextPhaseIndex++;
+        isSelected = true;
     }
 
     private void CancelPattern()

@@ -12,15 +12,17 @@ public class PhaseChecker
     public Vector3 globalLeftPhaseCoord;
     public Vector3 globalRightControllerPosition;
     public Vector3 globalLeftControllerPosition;
+    private State pattern;
 
 
-    public PhaseChecker(Vector3[] leftPhaseCoords, Vector3[] rightPhaseCoords, float _tolerance)
+    public PhaseChecker(Vector3[] leftPhaseCoords, Vector3[] rightPhaseCoords, float _tolerance, State _pattern)
     {
         this.leftPhaseCoords = leftPhaseCoords;
         this.rightPhaseCoords = rightPhaseCoords;
         this.leftController = GameObject.Find("Left Controller").GetComponent<Controller>();
         this.rightController = GameObject.Find("Right Controller").GetComponent<Controller>();
         this.tolerance = _tolerance;
+        this.pattern = _pattern;
         //tolerance = 0.07f;
     }
 
@@ -77,7 +79,7 @@ public class PhaseChecker
                 return true;
             }
         }
-        return false;
+        return false; 
     }
 
     private bool checkFluidity(float minSpeed, float maxSpeed)

@@ -3,7 +3,7 @@ using UnityEngine.XR;
 
 public enum State
 {
-    IDLE, PATTERN1, PATTERN2, WAVES
+    IDLE, PATTERN1, TURN, WAVES
 }
 public class StateManager : MonoBehaviour
 {
